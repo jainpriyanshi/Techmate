@@ -1,0 +1,48 @@
+img{
+    max-width: 100%;
+    height: auto;
+    opacity: 0.6; 
+}
+
+.container1 {
+    position: relative;
+}
+  
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+}
+
+.step{
+    margin: 50px auto;
+    padding: 20px ;
+    text-justify:inter-word;
+    
+}
+
+
+
+
+.content{
+    width: 60%;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    text-justify:inter-word;
+
+    
+}
+
+.icon{
+    height: 100px;
+    width: 100px;
+}
+
+.gap{
+    height: 2em;
+    width: inherit;
+}
+

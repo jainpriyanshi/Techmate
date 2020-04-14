@@ -100,19 +100,18 @@ function ProductCategories(props) {
     },
     {
       name: 'Priyanshi Jain',
-      description : 'hey , I am a Sophomore at IIT Jodhpur',
+      description : 'Hey , I am a Sophomore at IIT Jodhpur',
       url: avatar,
       mail: "mailto:jain.23@iitj.ac.in",
       github: "https://github.com/jainpriyanshi",
       linkidin: "https://www.linkedin.com/in/priyanshi-jain-a3262a188"
     },
     {
-      name: 'Priyanshi Jain',
-      description : 'hey , I am a Sophomore at IIT Jodhpur',
+      name: 'Shreya Das',
+      description : 'Hey there! I am a Sophomore at IIT Jodhpur',
       url: avatar,
-      mail: "mailto:jain.23@iitj.ac.in",
-      github: "https://github.com/jainpriyanshi",
-      linkidin: "https://www.linkedin.com/in/priyanshi-jain-a3262a188"
+      mail: "mailto:das.6@iitj.ac.in",
+      github: "https://github.com/shreya0505",
     },
   ]
 
