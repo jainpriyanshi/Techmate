@@ -99,12 +99,12 @@ function ProductCategories(props) {
       linkidin: "https://www.linkedin.com/in/priyanshi-jain-a3262a188"
     },
     {
-      name: 'Priyanshi Jain',
+      name: 'Parul Jain',
       description : 'Hey , I am a Sophomore at IIT Jodhpur',
       url: avatar,
-      mail: "mailto:jain.23@iitj.ac.in",
-      github: "https://github.com/jainpriyanshi",
-      linkidin: "https://www.linkedin.com/in/priyanshi-jain-a3262a188"
+      mail: "mailto:jain.26@iitj.ac.in",
+      github: "https://github.com/jparul26",
+      linkidin: "https://www.linkedin.com/in/parul-jain-2b958a17b/"
     },
     {
       name: 'Shreya Das',

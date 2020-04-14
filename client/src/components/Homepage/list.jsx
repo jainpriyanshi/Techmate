@@ -16,7 +16,7 @@ const styles = (theme) => ({
     marginBottom: theme.spacing(4),
   },
   images: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(70),
     display: 'flex',
     flexWrap: 'wrap',
   },
