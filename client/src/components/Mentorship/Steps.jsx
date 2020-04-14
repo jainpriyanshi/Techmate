@@ -13,9 +13,9 @@ class Steps extends React.Component {
       <div class="container content" >
    
 
-    <div class="step">
+    <div class="step1">
       <Zoom>
-      <div class="center"> <h1> <b>STEPS TO SEEK MENTORSHIP</b></h1></div>
+       <h1> <b>STEPS TO SEEK MENTORSHIP</b></h1>
       <hr></hr>
       </Zoom>
     </div>
@@ -24,7 +24,7 @@ class Steps extends React.Component {
     <div class=" step">
     <img src={user} class="icon "/>
       <Fade left>
-          <h1> Sign Up</h1>
+          <h1> Register</h1>
           <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis iure molestias nam rerum fuga, nostrum error magni harum dolorem labore commodi! Quasi, repudiandae? Perferendis veniam voluptates error vero voluptate tenetur!</p>
          
         </Fade>

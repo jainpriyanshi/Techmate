@@ -19,22 +19,50 @@ img{
 .step{
     margin: 50px auto;
     padding: 20px ;
-    text-justify:inter-word;
     
 }
 
 
 
-
-.content{
-    width: 60%;
+.step1{
     margin: 50px auto;
-    padding: 20px;
+    padding: 20px ;
     text-align: center;
-    text-justify:inter-word;
-
-    
 }
+
+
+@media screen and (max-width: 540px) {
+    .content{
+        width: 100%;
+        margin: 50px auto;
+        padding: 20px;
+        text-align: center;
+        
+    }
+}
+
+
+@media screen and (min-width: 540px) and (max-width: 780px) {
+    .content{
+        width: 80%;
+        margin: 50px auto;
+        padding: 20px;
+        text-align: center;
+        
+    }
+}
+
+@media screen and (min-width: 780px)  {
+    .content{
+        width: 50%;
+        margin: 50px auto;
+        padding: 20px;
+        text-align: center;
+        
+    }
+}
+
+
 
 .icon{
     height: 100px;
