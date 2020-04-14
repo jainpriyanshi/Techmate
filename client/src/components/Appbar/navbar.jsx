@@ -22,7 +22,9 @@ function Navbar() {
     <div className={classes.root} style={{position: "relative"}} >
        <AppBar  style={{backgroundColor:"white",width:"100%", align:"left"}}>
         <Toolbar>
-         <img style={{width:"8%"}}src={process.env.PUBLIC_URL + '/logo.png'} /> 
+          <Link to ="/">
+         <img style={{width:"15%"}}src={process.env.PUBLIC_URL + '/logo.png'} /> 
+         </Link>
         </Toolbar>
       </AppBar>
     </div>
