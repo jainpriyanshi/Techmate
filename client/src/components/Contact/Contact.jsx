@@ -148,8 +148,8 @@ function ProductCategories(props) {
         ))}
       </div>
       <div style={{marginTop: "20px"}} >
-       <h1 style={{fontFamily: "Roboto" , textAlign : "center" , color: "teal" ,  marginTop: "10px", marginBottom: "10px"}} class="auto center"> Our Team </h1> 
-       <div class="row mx-auto center container">
+       <h1 style={{fontFamily: "Roboto" , textAlign : "center" , color: "teal" ,  marginTop: "10px", marginBottom: "10px"}} > Our Team </h1> 
+       <div class="row mx-auto ">
        {team.map((t) => (
           <div class="flip-card col-lg-4 ">
           <div class="flip-card-inner">

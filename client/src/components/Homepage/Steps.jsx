@@ -1,18 +1,20 @@
 import React from 'react';
 import Fade from 'react-reveal/Fade';
 import './Mentorship.css'
-import user from './Images/user.png'
-import meet from './Images/meet.png'
-import data from './Images/data.png'
-import cup from './Images/cup.png'
-import Typography from '@material-ui/core/Typography';
+import user from '../Images/user.png'
+import meet from '../Images/meet.png'
+import data from '../Images/data.png'
+import cup from '../Images/cup.png'
 import Zoom from 'react-reveal/Zoom';
+
 class Steps extends React.Component {
   render() {
     return (
-      <div class="container content" >
-   
-
+      <div>
+        
+     
+      <div class="content">
+     
     <div class="step1">
       <Zoom>
        <h1> <b>STEPS TO SEEK MENTORSHIP</b></h1>
@@ -59,6 +61,7 @@ class Steps extends React.Component {
          
         </Fade>
         </div>
+      </div>
       </div>
     );
   }

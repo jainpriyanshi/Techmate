@@ -1,9 +1,8 @@
 img{
     max-width: 100%;
     height: auto;
-    opacity: 0.6; 
+    opacity: 0.8; 
 }
-
 .container1 {
     position: relative;
 }
@@ -17,15 +16,12 @@ img{
 }
 
 .step{
-    margin: 50px auto;
+    margin: 5px auto;
     padding: 20px ;
     
 }
-
-
-
 .step1{
-    margin: 50px auto;
+    margin: 350px 5px 5px 5px;
     padding: 20px ;
     text-align: center;
 }
@@ -68,9 +64,3 @@ img{
     height: 100px;
     width: 100px;
 }
-
-.gap{
-    height: 2em;
-    width: inherit;
-}
-
