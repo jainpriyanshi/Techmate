@@ -10,6 +10,9 @@ import AI from '../Images/AI.jpg';
 import web from '../Images/web.jpg';
 import app from '../Images/app.jpg';
 import competitive from '../Images/competitive.jpg';
+import ml from'../Images/ml.jpeg';
+import ip from '../Images/ip.jpg';
+import cc from '../Images/cc.jpg';
 const styles = (theme) => ({
   root: {
     marginTop: theme.spacing(8),
@@ -123,7 +126,21 @@ function ProductCategories(props) {
       title: 'Artifical Intelligence',
       width: '24%',
     },
-   
+    {
+      url:ml,
+      title: 'Machine Learning',
+      width: '35%',
+    },
+    {
+      url:cc,
+      title: 'Cloud Computing',
+      width: '34%',
+    },
+    {
+      url:ip,
+      title: 'Image Processing',
+      width: '31%',
+    }
   ];
 
   return (

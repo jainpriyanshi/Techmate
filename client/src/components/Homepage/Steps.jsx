@@ -6,16 +6,51 @@ import meet from '../Images/meet.png'
 import data from '../Images/data.png'
 import cup from '../Images/cup.png'
 import Zoom from 'react-reveal/Zoom';
+import ParticlesBg from "particles-bg";
 
 class Steps extends React.Component {
   render() {
+    let config = {
+      num: [4, 7],
+      rps: 0.1,
+      radius: [5, 40],
+      life: [1.5, 3],
+      v: [2, 3],
+      tha: [-40, 40],
+      alpha: [0.6, 0],
+      scale: [.1, 0.4],
+      position: "all",
+      color: ["random", "#ff0000"],
+      cross: "dead",
+      // emitter: "follow",
+      random: 15
+    };
+
+    if (Math.random() > 0.85) {
+      config = Object.assign(config, {
+        onParticleUpdate: (ctx, particle) => {
+          ctx.beginPath();
+          ctx.rect(
+            particle.p.x,
+            particle.p.y,
+            particle.radius * 2,
+            particle.radius * 2
+          );
+          ctx.fillStyle = particle.color;
+          ctx.fill();
+          ctx.closePath();
+        }
+      });
+    }
     return (
-      <div>
-        
-     
+      <div class="overlay">
+         <div class="bgrd">
+              <ParticlesBg  type="custom" config={config} bg={true} />
+          </div>
+
       <div class="content">
      
-    <div class="step1">
+    <div class="step1">     
       <Zoom>
        <h1> <b>STEPS TO SEEK MENTORSHIP</b></h1>
       <hr></hr>
@@ -24,7 +59,7 @@ class Steps extends React.Component {
     
 
     <div class=" step">
-    <img src={user} class="icon "/>
+    <img src={user} class="icon1 "/>
       <Fade left>
           <h1> Register</h1>
           <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis iure molestias nam rerum fuga, nostrum error magni harum dolorem labore commodi! Quasi, repudiandae? Perferendis veniam voluptates error vero voluptate tenetur!</p>
@@ -33,7 +68,7 @@ class Steps extends React.Component {
         </div>
         <div class="gap"></div>
         <div class=" step">
-        <img src={meet} class="icon "/>
+        <img src={meet} class="icon1"/>
         <Fade right>
            
           <h1>Meet Mentors</h1>
@@ -43,7 +78,7 @@ class Steps extends React.Component {
         </div>
         <div class="gap"></div>
         <div class=" step">
-        <img src={data} class="icon "/>
+        <img src={data} class="icon1 "/>
         <Fade left>
             
           <h1>Code</h1>
@@ -53,7 +88,7 @@ class Steps extends React.Component {
         </div>
         <div class="gap"></div>
         <div class=" step">
-        <img src={cup} class="icon "/>
+        <img src={cup} class="icon1 "/>
         <Fade right>
             
           <h1>Excel</h1>

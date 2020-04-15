@@ -1,27 +1,15 @@
-img{
-    max-width: 100%;
-    height: auto;
-    opacity: 0.8; 
-}
+
 .container1 {
     position: relative;
 }
   
-  .center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 18px;
-}
-
 .step{
     margin: 5px auto;
     padding: 20px ;
     
 }
 .step1{
-    margin: 350px 5px 5px 5px;
+    margin: 10px 5px 5px 5px;
     padding: 20px ;
     text-align: center;
 }
@@ -30,7 +18,7 @@ img{
 @media screen and (max-width: 540px) {
     .content{
         width: 100%;
-        margin: 50px auto;
+        margin: 10px auto;
         padding: 20px;
         text-align: center;
         
@@ -41,7 +29,7 @@ img{
 @media screen and (min-width: 540px) and (max-width: 780px) {
     .content{
         width: 80%;
-        margin: 50px auto;
+        margin: 10px auto;
         padding: 20px;
         text-align: center;
         
@@ -51,7 +39,7 @@ img{
 @media screen and (min-width: 780px)  {
     .content{
         width: 50%;
-        margin: 50px auto;
+        margin: 10px auto;
         padding: 20px;
         text-align: center;
         
@@ -60,7 +48,36 @@ img{
 
 
 
-.icon{
+.icon1{
     height: 100px;
     width: 100px;
+}
+
+.overlay{
+    position: relative;
+}
+    .bgrd{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 2;
+      
+    }
+
+
+
+
+img{
+    opacity: 0.7;
+
+    
+}
+
+
+  .main-text
+{
+    position: absolute;
+    top: 30%;
+    width: 96.66666666666666%;
+    color:black;
 }
