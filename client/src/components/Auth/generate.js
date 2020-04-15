@@ -2,23 +2,22 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { verifyUser } from "../../actions/authActions";
+import { GenerateOtp } from "../../actions/authActions";
 import classnames from "classnames";
 
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import "./Login.css"
 
-
-class Verify extends Component {
-  constructor() {
+class Generate extends Component {
+  constructor() { 
     super();
     this.state = {
-      otp: "",
       email: "",
       errors: {}
     };
   }
-  componentDidMount() {
+  componentDidMount() { 
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
@@ -40,11 +39,10 @@ class Verify extends Component {
     e.preventDefault();
 
     const newUser = {
-      otp: this.state.otp,
       email: this.state.email,
     };
 
-    this.props.verifyUser(newUser, this.props.history);
+    this.props.GenerateOtp(newUser, this.props.history);
   };
 
   render() {
@@ -68,7 +66,7 @@ class Verify extends Component {
                       <div class="conainer">
                     <div >
                     <h4 style={{ margin: "50px 50px "  }}>
-                    <b>Verify</b>
+                    <b>Forgot Password</b>
                     </h4>
                     </div>
                       <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
@@ -86,22 +84,6 @@ class Verify extends Component {
                 <label htmlFor="email">Email</label>
                 <span className="red-text">{errors.email}</span>
                         </div>
-                        <div className="input-field col s12">
-                        
-                <input
-                  onChange={this.onChange}
-                  value={this.state.otp}
-                  error={errors.otp}
-                  id="otp"
-                  type="number"
-                  className={classnames("", {
-                    invalid: errors.otp
-                  })}
-                />
-                <label htmlFor="otp">Enter OTP</label>
-                <span className="red-text">{errors.otp}</span>
-              </div>
-                      
                       <br/>
                       <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                         <button
@@ -110,15 +92,14 @@ class Verify extends Component {
                             borderRadius: "3px",
                             letterSpacing: "1.5px",
                             marginTop: "1rem"
-                            
                           }}
                           type="submit"
                           className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                         >
-                          Verify
+                          Send OTP
                         </button>
                         <p className="grey-text text-darken-1 mt-2 mb-2">
-                        Already Verfied? <Link to="/login">Log in</Link>
+                         <Link to="/login">Log in</Link>
                       </p>
                       </div>
                     </form>
@@ -134,8 +115,8 @@ class Verify extends Component {
   }
 }
 
-Verify.propTypes = {
-  verifyUser: PropTypes.func.isRequired,
+Generate.propTypes = {
+  GenerateOtp: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -147,5 +128,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { verifyUser }
-)(withRouter(Verify));
+  { GenerateOtp }
+)(withRouter(Generate));
