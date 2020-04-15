@@ -8,11 +8,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Appbar/navbar"
 import Homepage from "./components/Homepage/Homepage"
 import Contact from "./components/Contact/Contact"
-import Register from "./components/auth/Register"
-import Verify from "./components/auth/Verify";
-import Generate from "./components/auth/generate";
-import Changepass from "./components/auth/changepass";
-import Login from "./components/auth/Login";
+import Register from "./components/Auth/Register"
+import Verify from "./components/Auth/Verify";
+import Generate from "./components/Auth/generate";
+import Changepass from "./components/Auth/changepass";
+import Login from "./components/Auth/Login";
 
 if (localStorage.jwtToken) {
 
@@ -40,7 +40,7 @@ function App() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />            
             <Route exact path="/verify" component={Verify} /> 
-            <Route exact path="/Generate" component={Generate} /> 
+            <Route exact path="/generate" component={Generate} /> 
             <Route exact path="/update" component={Changepass} />
         </Router>
     </div>
