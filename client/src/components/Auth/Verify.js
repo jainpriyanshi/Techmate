@@ -38,8 +38,13 @@ class Verify extends Component {
   }
   render() {
     return (
-      <div >
-           <Spinner />
+      <div class="deadcentre">
+        <h1>Please &nbsp; &nbsp; &nbsp; &nbsp; wait....</h1>
+        <div class="deadcentre">
+        <Spinner />
+        </div>
+            
+           
       </div>
     );
   }

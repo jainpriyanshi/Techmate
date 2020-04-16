@@ -4,9 +4,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 
+import { Typography,  TextField } from '@material-ui/core';
+import { AccountCircle} from '@material-ui/icons';
+import './Auth.css';
+import ParticlesBg from "particles-bg";
 
   class Login extends Component {
     constructor() {
@@ -52,29 +54,35 @@ import Box from '@material-ui/core/Box';
       render() {
         const { errors } = this.state;
         return (
-          
-          <div>
-            <br></br>
-        <br></br>
-            <div class="container">
-                <div class="row">
-                <div class="col-md-6 col-sm-12 my">
-                   
-                    </div>
-                    <div class="col-md-5 col-sm-12">
-                      
-                    <Box width ="100%" height="100%"  item xs={12} sm={8} md={5} component={Paper} elevation={6} className="card" >
-                    
-                    
-                      <div class="conainer">
-                    <div >
-                    <h4 style={{ margin: "50px 50px "}}>
-                    <b>Sign In</b>
-                    </h4>
-                    </div>
-                      <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
-                        <div className="input-field col s12">
-                          <input
+
+        <div>
+          <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
+          <div class="container outer">
+            
+             
+                <div  class="inner">
+                < h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Login </b></h3>
+                
+                
+                 <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
+                 <span className="text-danger">
+                            {errors.email}
+                            {errors.emailnotfound}
+                          </span>
+
+
+                          <span className="text-danger">
+                          {errors.password}
+                          {errors.passwordincorrect}
+                        </span>
+
+
+                         <div className="field">
+                           <TextField
+                           required
+                            variant="outlined"
+                           label="Email"
+                           fullWidth
                           onChange={this.onChange}
                           value={this.state.email}
                           error={errors.email}
@@ -84,14 +92,17 @@ import Box from '@material-ui/core/Box';
                             invalid: errors.email || errors.emailnotfound
                           })}
                         />
-                          <label htmlFor="email">Email</label>
-                          <span className="red-text">
-                            {errors.email}
-                            {errors.emailnotfound}
-                          </span>
+                          
+                         
+
                         </div>
-                        <div className="input-field col s12">
-                        <input
+
+                        <div className="field">
+                        <TextField
+                          required
+                          variant="outlined"
+                          label="Password"
+                          fullWidth
                           onChange={this.onChange}
                           value={this.state.password}
                           error={errors.password}
@@ -101,43 +112,41 @@ import Box from '@material-ui/core/Box';
                             invalid: errors.password || errors.passwordincorrect
                           })}
                         />
-                        <label htmlFor="password">Password</label>
-                        <span className="red-text">
-                          {errors.password}
-                          {errors.passwordincorrect}
-                        </span>
+                      
+                       
+
                       </div>
-                      <br/>
-                      <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                        <button
-                          style={{
-                            width: "150px",
+                   
+                        <button type="button" class="btn btn-primary btn-lg btn-block card-1" type="submit" style={{
+                            
                             borderRadius: "3px",
                             letterSpacing: "1.5px",
                             marginTop: "1rem"
-                          }}
-                          type="submit"
-                          className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                        >
-                          Login
-                        </button>
-                        <p className="grey-text text-darken-1 mt-2 mb-2">
+                            
+
+
+                          }}>Login</button>
+                            <br></br>
+                            <br></br>
+
+                        <p className="text-secondary">
                         Don't have an account? <Link to="/register">Register</Link>
                       </p>
-                      <p className="grey-text text-darken-1 mt-2 mb-2">
+                      <p className="text-secondary">
                          <Link to="/generate">Forgot password</Link>
                       </p>
-                      </div>
+  
                     </form>
-                    </div>
+                </div>
+                  
+              
                 
-                    </Box>
-                    </div>
-                    
-                  </div>
-            </div>   
-            </div> 
-            );
+          </div>
+        </div>
+
+
+
+      );
     
     }
 }

@@ -5,8 +5,12 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
+import { Typography,  TextField } from '@material-ui/core';
+import { AccountCircle} from '@material-ui/icons';
+import './Auth.css';
+import ParticlesBg from "particles-bg";
+
+
 
 
 class Register extends Component {
@@ -54,28 +58,23 @@ class Register extends Component {
     const { errors } = this.state;
 
     return (
-      <div>
-        <br></br>
-        
-      <div class="container">
-          <div class="row">
-          <div class="col-md-6 col-sm-12 my">
-              
-              </div>
-              <div class="col-md-5 col-sm-12">
-              
-              <Box width ="100%" height="100%"  item xs={12} sm={8} md={5} component={Paper} elevation={6} className="card" >
-              
-              
-                <div class="conainer">
-              <div >
-              <h4 style={{ margin: "50px 50px "  }}>
-              <b>Sign In</b>
-              </h4>
-              </div>
-                <form noValidate onSubmit={this.onSubmit} style={{ margin: "40px 40px "  }}>
-                  <div className="input-field col s12">
-                  <input
+            <div>
+                <div>
+                <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" /></div>
+                <div class="container">
+         
+          
+             <div  class="inner">
+             <h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Register </b></h3>
+          <br></br>
+          
+                <form noValidate onSubmit={this.onSubmit}>
+                  <div className="field">
+                  <TextField
+                  required
+                  variant="outlined"
+                  label="Name"
+                  fullWidth
                   onChange={this.onChange}
                   value={this.state.name}
                   error={errors.name}
@@ -85,12 +84,16 @@ class Register extends Component {
                     invalid: errors.name
                   })}
                 />
-                <label htmlFor="name">Name</label>
-                <span className="red-text">{errors.name}</span>
+                
+                <span className="text-danger">{errors.name}</span>
 
                   </div>
-                  <div className="input-field col s12">
-                  <input
+                  <div className="field">
+                  <TextField
+                  required
+                  variant="outlined"
+                  label="Email"
+                  fullWidth
                   onChange={this.onChange}
                   value={this.state.email}
                   error={errors.email}
@@ -100,11 +103,16 @@ class Register extends Component {
                     invalid: errors.email
                   })}
                 />
-                <label htmlFor="email">Email</label>
-                <span className="red-text">{errors.email}</span>
+                
+                <span className="text-danger">{errors.email}</span>
                 </div>
-                <div className="input-field col s12">
-                <input
+
+                <div className="field">
+                <TextField
+                  required
+                  variant="outlined"
+                  label="Password"
+                  fullWidth
                   onChange={this.onChange}
                   value={this.state.password}
                   error={errors.password}
@@ -114,12 +122,16 @@ class Register extends Component {
                     invalid: errors.password
                   })}
                 />
-                <label htmlFor="password">Password</label>
-                <span className="red-text">{errors.password}</span>
+                
+                <span className="text-danger">{errors.password}</span>
                 </div>
            
-                <div className="input-field col s12">
-                <input
+                <div className="field">
+                <TextField
+                  required
+                  variant="outlined"
+                  label="Re-enter Password"
+                  fullWidth
                   onChange={this.onChange}
                   value={this.state.password2}
                   error={errors.password2}
@@ -129,36 +141,32 @@ class Register extends Component {
                     invalid: errors.password2
                   })}
                 />
-                <label htmlFor="password2">Confirm Password</label>
-                <span className="red-text">{errors.password2}</span>
+                
+                <span className="text-danger">{errors.password2}</span>
               </div>
-                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                  <button
-                    style={{
-                      width: "150px",
-                      borderRadius: "3px",
-                      letterSpacing: "1.5px",
-                      marginTop: "1rem"
-                    }}
-                    type="submit"
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                  >
-                      Register
-                  </button>
-                  <p className="grey-text text-darken-1 mt-2 mb-2">
-                  Already have an account? <Link to="/login">Log in</Link>
-                </p>
-                </div>
-              </form>
-              </div>
-          
-              </Box>
-              </div>
-              
-            </div>
-      </div>   
-      </div>
+                        <button type="button" class="btn btn-primary btn-lg btn-block card-1" type="submit" style={{
+                            
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px",
+                            marginTop: "1rem"
+                            
 
+
+                          }}>Register</button>
+                            <br></br>
+                            <br></br>
+
+                        <p className="text-secondary">
+                        Already have an account? <Link to="/login">Login</Link>
+                      </p>
+                      <p className="text-secondary">
+                         <Link to="/generate">Forgot password</Link>
+                      </p>
+                </form>
+              </div>
+            </div>
+          </div>
+              
     );
   }
 }
