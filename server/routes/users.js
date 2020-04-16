@@ -212,7 +212,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
       }
     });
   });
-});
+  });
   });
 
   router.post("/login", (req, res) => {
@@ -261,6 +261,16 @@ const ValidateLoginInput = function validateLoginInput(data) {
       });
     });
   });
-
-
+  router.get('/getdata', function(req, res){
+      Member.find({}).then(docs => {
+      res.send(docs);
+    })
+    
+  });
+  router.post('/updateprofile',(req,res)=>{
+    console.log(req.body);
+    Member.findOneAndUpdate({ email: req.body.email},req.body).then(user => {
+    });
+  });
+  
   module.exports = router;

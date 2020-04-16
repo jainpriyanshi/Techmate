@@ -21,7 +21,53 @@ const MemberSchema = new Schema({
     isVerified: {
         type : Boolean,
         required: true
-    }
+    },
+    codechef: {
+        type: String,
+        default: "",
+    },
+    codeforces: {
+        type: String,
+        default: ""
+    },
+    spoj: {
+        type: String,
+        default: ""
+    },
+    github: {
+        type: String,
+        default: ""
+    },
+    linkedin: {
+        type: String,
+        default: ""
+    },
+    bio: {
+        type: String,
+        default: ""
+    },
+    college: {
+        type: String,
+        default: "",
+    },
+    year: {
+        type: String,
+        default: "",
+    },
+    degree: {
+        type: String,
+        default: "",
+    },
+    skills: [
+        {
+            type: String,
+        }
+    ],
+    achievement: [
+        {
+        type: String,
+    }]
+
 });
 
 module.exports = Member = mongoose.model("members",MemberSchema);
