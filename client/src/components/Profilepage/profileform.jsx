@@ -5,10 +5,13 @@ import { connect } from "react-redux";
 import { TextField } from '@material-ui/core';
 import ParticlesBg from "particles-bg";
 import axios from "axios";
-import {IconButton, Grid,Tooltip , Fab} from '@material-ui/core';
-import CloseIcon from "@material-ui/icons/Close";
-import AddIcon from "@material-ui/icons/Add";
+import {Button, Grid,Tooltip , IconButton, Fab} from '@material-ui/core';
+import { AccountCircle, Add,Delete, GitHub} from '@material-ui/icons';
 
+import CC from '../Images/codechef.jpg';
+import CF from '../Images/codeforces.png';
+import SPOJ from "../Images/spoj.jpeg";
+import IN from "../Images/linkedin.png";
 class ProfileForm extends Component {
   constructor() { 
     super();
@@ -98,25 +101,27 @@ class ProfileForm extends Component {
   }
   render() {
     return (
-      <div>
+        <div>
           <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
-          <div class="container outer">
+           <div class="container">
                 <div  class="inner">
+                <h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Your Profile </b></h3>
+                  <br></br>
                     <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
+                        
+                    <h6>  <b>About You </b></h6>
                         <div className="field">
                         <TextField
-                        disabled
                          variant="outlined"
                          label="Email"
                          halfWidth
                          value={this.state.email}
                          id="email"
                          type="email"
+                         style={{width: "47%"}}
                         />
-                        </div>
-                        <div className="field">
-                        <TextField
-                        disabled
+
+                        <TextField    
 
                          variant="outlined"
                          label="Name"
@@ -124,20 +129,11 @@ class ProfileForm extends Component {
                          value={this.state.name}
                          id="name"
                          type="text"
+                         style={{width: "47%", marginLeft:"6%"}}
                         />
                         </div>
+
                         <div className="field">
-                        <TextField
-                          variant="outlined"
-                          label="codechef Link"
-                          fullWidth
-                          onChange={this.onChange}
-                          value={this.state.codechef}
-                          id="codechef"
-                          type="text"
-                        />
-                      </div>
-                      <div className="field">
                         <TextField
                           variant="outlined"
                           label="Bio"
@@ -148,40 +144,9 @@ class ProfileForm extends Component {
                           type="text"
                         />
                       </div>
+
                       <div className="field">
-                        <TextField
-                          variant="outlined"
-                          label="gihtub Link"
-                          fullWidth
-                          onChange={this.onChange}
-                          value={this.state.github}
-                          id="github"
-                          type="text"
-                        />
-                      </div>
-                      <div className="field">
-                        <TextField
-                          variant="outlined"
-                          label="codeforces Link"
-                          fullWidth
-                          onChange={this.onChange}
-                          value={this.state.codeforces}
-                          id="codeforces"
-                          type="text"
-                        />
-                      </div>
-                      <div className="field">
-                        <TextField
-                          variant="outlined"
-                          label="Spoj Link"
-                          fullWidth
-                          onChange={this.onChange}
-                          value={this.state.spoj}
-                          id="spoj"
-                          type="text"
-                        />
-                      </div>
-                      <div className="field">
+                      <img style={{width:"60px"}}src={IN} alt="Techmate" />
                         <TextField
                           variant="outlined"
                           label="Linkedin Link"
@@ -190,8 +155,13 @@ class ProfileForm extends Component {
                           value={this.state.linkedin}
                           id="linkedin"
                           type="text"
+                          style={{width: "70%", marginLeft:"10%"}}
                         />
                       </div>
+
+                      <br></br>
+                      <h6>  <b>Higher Education</b></h6>
+
                       <div className="field">
                         <TextField
                           variant="outlined"
@@ -206,25 +176,29 @@ class ProfileForm extends Component {
                       <div className="field">
                         <TextField
                           variant="outlined"
-                          label="Degree pursuing"
+                          label="Major"
                           fullWidth
                           onChange={this.onChange}
                           value={this.state.degree}
                           id="degree"
                           type="text"
+                          style={{width: "47%"}}
                         />
-                      </div>
-                      <div className="field">
+                     
                         <TextField
                           variant="outlined"
-                          label="Year Of Passing"
+                          label="Year"
                           fullWidth
                           onChange={this.onChange}
                           value={this.state.year}
                           id="year"
                           type="text"
+                          style={{width: "47%", marginLeft:"6%"}}
                         />
                       </div>
+                      <br></br>
+                      <h6>  <b>Skills and Achievements</b></h6>
+                      
                       <div className="field">
                         <TextField
                           variant="outlined"
@@ -236,43 +210,139 @@ class ProfileForm extends Component {
                           type="text"
                         />
                       </div>
+
+                      
                       {this.state.achievement.map((option, index) => {
                     return (
-                        <Grid item>
+                        <Grid item key="index">
                         <div class="input-root">
-                        <Tooltip title="Edit Achievement">
+                        <Tooltip title="Edit Achievement">    
                             <TextField
                             variant="outlined"
-                            label="achievement"
+                            label="Achievement"
                             fullWidth
                             onChange={this._handleAchievementChange}
                             value={this.state.achievement[index]}
                             id={index}
                             type="text"
+                            style={{width:"75%", marginTop:"20px", marginBottom:"20px"}}
                             />
+                            
+
                         </Tooltip>
                         <Tooltip title="Delete Achievement">
-                            <IconButton
-                            onClick={() => this._deleteAchievement(index)}
-                            visible="false"
-                            >
-                            <CloseIcon />
+                           
+
+                          <IconButton aria-label="delete" onClick={() => this._deleteAchievement(index)}
+                            visible="flase" style={{size:"10%", marginTop:"20px", marginBottom:"20px"}}>
+                              <Delete />
                             </IconButton>
                         </Tooltip>
                         </div>
                         </Grid>
                         );
                      })}
+                     
                     <Tooltip title="Add Achievement">
-                        <Fab
-                          size="small"
+                        {/* <Button
+                          
+                          size="medium"
                           onClick={this.addTextField}
-                          color="secondary"
+                          style={{ width:"100%", marginTop:"20px", marginBottom:"20px"}}
                         >
-                          <AddIcon />
-                        </Fab>
+                          <p>
+                          <Add/>
+                          &nbsp; Add Achievement</p>
+                        </Button> */}
+
+
+                        <Button 
+                         
+                        size="large"
+                        onClick={this.addTextField}
+                        style={{
+                            width:"100%",
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px",
+                            marginBottom: "20px",
+                            marginTop: "20px"
+                          }}>
+                              
+                          <Add/>
+                          &nbsp; Add Achievement
+                        </Button>
+
                         </Tooltip>
-                        <button 
+
+
+
+                      <br></br>
+                      <br></br>
+                      <h6>  <b>Competitive Programming </b></h6>
+
+                        <div className="field">
+                        <img style={{width:"60px"}}src={CC} alt="Techmate" />
+                        <TextField
+                          variant="outlined"
+                          label="Codechef Link"
+                          fullWidth
+                          onChange={this.onChange}
+                          value={this.state.codechef}
+                          id="codechef"
+                          type="text"
+                          style={{width: "70%", marginLeft:"10%"}}
+                        />
+                      </div>
+                      
+                      
+
+                      <div className="field">
+                      <img style={{width:"60px"}}src={CF} alt="Techmate" />
+                        <TextField
+                          variant="outlined"
+                          label="Codeforces Link"
+                          fullWidth
+                          onChange={this.onChange}
+                          value={this.state.codeforces}
+                          id="codeforces"
+                          type="text"
+                          style={{width: "70%", marginLeft:"10%"}}
+                        />
+                      </div>
+                      <div className="field">
+                        
+                      <img style={{width:"60px"}}src={SPOJ} alt="Techmate" />
+                        <TextField
+                          variant="outlined"
+                          label="Spoj Link"
+                          fullWidth
+                          onChange={this.onChange}
+                          value={this.state.spoj}
+                          id="spoj"
+                          type="text"
+                          style={{width: "70%", marginLeft:"10%"}}
+                        />
+                       
+                      </div>
+                     
+                      <br></br>
+                      <h6>  <b>Development Profile</b></h6>
+
+                      <div className="field">
+                        <GitHub style={{ fontSize: 60 }}/>
+                        <TextField
+                          variant="outlined"
+                          label="Gihtub Link"
+                          fullWidth
+                          onChange={this.onChange}
+                          value={this.state.github}
+                          id="github"
+                          type="text"
+                          style={{width: "70%", marginLeft:"10%"}}
+                        />
+                      </div>
+
+                      <button 
                         type="button" 
                         class="btn btn-primary btn-lg btn-block card-1" 
                         type="submit" 
@@ -283,6 +353,8 @@ class ProfileForm extends Component {
                           }}>
                               Save
                         </button>
+
+
                     </form>
                 </div>
                   
