@@ -1,0 +1,85 @@
+
+.deadcentre{
+    position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        background: white;        
+}
+
+
+
+
+
+.heading {
+    color: black;
+    font-size: 8vmin;
+    line-height: 1;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    padding: 40px 40px;
+    letter-spacing: 3px;
+  }
+
+  @media screen and (max-width: 540px) {
+    .inner{
+        width: 90%;
+        margin: 100px auto;
+        padding: 50px 50px;
+        text-align: center;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        background: white;
+        letter-spacing: 1.5px;
+    }
+}
+
+
+@media screen and (min-width: 540px) and (max-width: 780px) {
+    .inner{
+        width: 80%;
+        margin: 100px auto;
+        padding: 50px 50px;
+        text-align: center;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        background: white;
+        letter-spacing: 1.5px;
+    }
+}
+
+@media screen and (min-width: 780px)  {
+    .inner{
+        width: 60%;
+        margin: 100px auto;
+        text-align: center;
+        padding: 50px 100px;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        background: white;
+        letter-spacing: 1.5px;
+      }
+}
+
+
+  .field{
+    padding-top: 20px ;
+    padding-bottom: 20px;
+    
+  }
+
+  .card-1{
+    margin-top: 20px;
+  }
+ 
+  .card-1:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+  
+  .label{
+    width: "150px";
+    border-Radius: "3px";
+    letter-Spacing: "1.5px";
+    margin-Top: "1rem";
+  }
+
