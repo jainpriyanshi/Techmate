@@ -146,6 +146,9 @@ const ValidateLoginInput = function validateLoginInput(data) {
   router.post("/register", (req, res) => {
     
     const { errors, isValid } = ValidateRegisterInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
    
     console.log(errors);
     Member.findOne({ email: req.body.email }).then(user => {
