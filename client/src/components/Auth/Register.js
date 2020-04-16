@@ -68,7 +68,8 @@ class Register extends Component {
              <h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Register </b></h3>
           <br></br>
           
-                <form noValidate onSubmit={this.onSubmit}>
+                <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
+                  
                   <div className="field">
                   <TextField
                   required

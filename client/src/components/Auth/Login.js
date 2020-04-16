@@ -57,7 +57,7 @@ import ParticlesBg from "particles-bg";
 
         <div>
           <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
-          <div class="container outer">
+          <div class="container">
             
              
                 <div  class="inner">

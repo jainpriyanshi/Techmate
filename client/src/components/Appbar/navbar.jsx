@@ -6,9 +6,12 @@ import { logoutUser } from "../../actions/authActions";
 import axios from "axios";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import {Divider, Drawer, Fab , TextField, Avatar , Card } from '@material-ui/core';
+import {Divider, Drawer, Fab , TextField, Avatar , Paper, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import Search from '../Images/search.png'
+import Woman from '../Images/woman.png'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 
 function searchingfor(searchstring) {
@@ -47,12 +50,19 @@ class Navbar extends Component {
         this.setState({ searchstring: '' })
     }
   }
+
   sideList = side => (
-       <div style={{float: "right"}} >
-         <Avatar style={{float: "right"}}>
-         <ArrowBackIosIcon style={{float: "right"}}onClick={this.toggleDrawer(side, false)} />
-         </Avatar>
-       
+    <div class="container">
+       <div class="text-dec" style={{paddingTop:"5%"}}>
+         <IconButton onClick={this.toggleDrawer(side, false)} >
+       <h5>Back &nbsp;<ArrowForwardIosIcon  />   
+          </h5>
+          </IconButton>
+        </div>
+         <hr></hr>
+        
+        <div style={{   paddingTop:"10px", textAlign: "center"}}>
+        <img style={{width:"40px",   marginTop: "10px", marginBottom: "10px"}}src={Search} alt="Techmate" />
         <TextField
           variant="outlined"
           label="Search User"
@@ -61,25 +71,37 @@ class Navbar extends Component {
           value={this.state.searchstring}
           id="searchInput"
           type="text"
+          style={{width: "70%", marginLeft:"10%"}}
         />
+        </div>
+        <hr></hr>
         <br/>
-        <br />
-        {this.state.Data.filter(searchingfor(this.state.searchstring)).map(user => (
+        <div style={{letterSpacing:"3.5px" ,textAlign:"center"}}>
+        <h6>  <b>TOP RESULTS </b></h6>
+        </div>
+        <br/>
+        <div>
+        {this.state.Data.filter(searchingfor(this.state.searchstring)).map((user)=> (
+          
           <div>
             <Link to = {`/profile/${user._id}`}>
-            <Card  >
-              <Avatar style={{float: "left" , marginTop: "10px" , marginLeft: "3px"}} />
-              <div style={{ float: "left" , marginTop: "3px" }}>
-               <b style={{marginLeft: "30px" }}> {user.name} </b> 
-               <p style={{marginLeft: "30px", color: "grey"}}> {user.college }</p>
+            <Paper elevation={4} style={{padding: "6% 7%" ,margin:"5% 5%" }}>
+              
+              <div style={{ textAlign:"left", letterSpacing:"1.5px"}}>
+              <img style={{float:"left", width:"70px", padding: "1% 1%"}}src={Woman} alt="Techmate" />
+               <h6 style={{ marginLeft:"auto"}}> {user.name} </h6>  
+               <p style={{color: "grey"}}> IIt Jodhpur{user.college }</p>
               </div>
-            </Card>
+
+            </Paper>
             </Link>
             <br />
             </div>
         ))}
-    </div>
+      </div>
+      </div>
   );
+
   render() {
   return (
     <div  >
@@ -88,31 +110,37 @@ class Navbar extends Component {
           <Link to ="/">
           <img style={{width:"50px"}}src={process.env.PUBLIC_URL + '/logo2.png'} alt="Techmate" />
           </Link>
+          <div style={{ marginLeft: "auto"}}>
+          
           <button
             style={{
-                marginLeft: "5px",
-                borderRadius: "3px"
+                borderRadius: "3px",
+                letterSpacing: "2px"
                 }}
               onClick={this.onLogoutClick}
-              class="btn btn-primary">
-          >
-          Logout
+              class="btn btn-lg">
+          
+            Logout
           </button>
-          <Fab  style={{
-              float: "right"
-            }}
-            onClick={this.toggleDrawer('right', true)}><SearchIcon /></Fab>
+
+          <IconButton
+           
+            onClick={this.toggleDrawer('right', true)}> <ArrowBackIosIcon/> &nbsp;<SearchIcon />
+          </IconButton>
+
+           
+          
           <Drawer
+            anchor={'right'}
             variant="persistent"  
             open={this.state.right}
             onClose={this.toggleDrawer('right', false)}
             onOpen={this.toggleDrawer('right', true)}
-            style={{
-              float: "right"
-            }}
+           
           >
           {this.sideList('right')}
           </Drawer>
+          </div>
         </Toolbar>
       </AppBar>
     </div>
