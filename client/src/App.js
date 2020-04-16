@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Appbar/navbar"
 import Homepage from "./components/Homepage/Homepage"
 import Contact from "./components/Contact/Contact"
+
+import Profile from "./components/Profilepage/profile"
 function App() {
   return (
     <div>
@@ -11,6 +13,7 @@ function App() {
             <Navbar />
             <Route exact path="/" component={Homepage} />
             <Route exact path="/contact" component={Contact} />
+            <Route exact path="/profile" component={Profile} />
         </Router>
     </div>
   );
