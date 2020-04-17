@@ -58,11 +58,12 @@ const MemberSchema = new Schema({
         type: String,
         default: "",
     },
-    skills: [
+    skills: 
         {
             type: String,
+             default: "",
         }
-    ],
+    ,
     achievement: [
         {
         type: String,

@@ -1,117 +1,119 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from "prop-types";
+import {Link} from "react-router-dom"; 
+import { connect } from "react-redux";
 import { withStyles } from '@material-ui/core/styles';
+import axios from "axios"
 import MailIcon from '@material-ui/icons/Mail';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Container from '@material-ui/core/Container';
+import Card from'@material-ui/core/Card';
 import Typography from  '@material-ui/core/Typography';
 import hello from '../Images/cc.jpg';
 import avatar from '../Images/avatar.jpg';
 import Paper from '@material-ui/core/Paper';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import Images4 from '../Images/c4.jpeg';
+import Images4 from '../Images/c4.png';
 import ParticlesBg from "particles-bg";
+import Code from'@material-ui/icons/Code'
+import Achievem from'@material-ui/icons/EmojiEvents';
 
-const styles = (theme) => ({
-  root: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(4),
-  },
-  images: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  imageWrapper: {
-    position: 'relative',
-    display: 'block',
-    padding: 0,
-    borderRadius: 0,
-    height: '60vh',
-    [theme.breakpoints.down('sm')]: {
-      width: '100% !important',
-      height: 100,
-    },
-    '&:hover': {
-      zIndex: 1,
-    },
-    '&:hover $imageBackdrop': {
-      opacity: 0.15,
-    },
-    '&:hover $imageMarked': {
-      opacity: 0,
-    },
-    '&:hover $imageTitle': {
-      border: '4px solid currentColor',
-    },
-  },
-  imageButton: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: theme.palette.common.white,
-  },
-  imageSrc: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center 40%',
-  },
-  imageBackdrop: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    background: theme.palette.common.black,
-    opacity: 0.5,
-    transition: theme.transitions.create('opacity'),
-  },
-  imageTitle: {
-    position: 'relative',
-    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px 14px`,
-  },
-  
-});
 
-function ProductCategories(props) {
-    
-    
-  const { classes } = props;
 
-  const images = [
+class profilebyid extends Component {
+    constructor()
     {
-      url: hello,
-      title: '</>',
-      width: '100%',
-    },
-  ];
-  const Profile =[
-   
-    {
-      name: 'Parul Jain',
-      description : 'Hey , I am a Sophomore at IIT Jodhpur',
-      url: avatar,
-      mail: "mailto:jain.26@iitj.ac.in",
-      github: "https://github.com/jparul26",
-      linkidin: "https://www.linkedin.com/in/parul-jain-2b958a17b/",
-      intro :'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-      skill1:"lorem ipssum",
-       skill2:"lorem ipssum",
-        skill3:"lorem ipssum"
+        super();
+        this.state = {
+           users:[]
+    };
+    }
+    componentDidMount(){
+        console.log("hey");
+        axios.get('/users/getdata')
+        .then((response)=>{
+            console.log(response.data)
+            this.setState({users : response.data});
+        });
+    }
+   fetch_users() 
+   {
+        var badgelist="";
+            var badgeItems=[];
+            
+        return this.state.users.map(users =>{
 
-    },
-    
-  ]
-  let config = {
+              badgelist = users.skills.split(",");
+                badgeItems = badgelist.map((badge) =>
+                  <p > {badge}</p>
+                );
+            if(users._id===this.props.match.params.id)
+            return (
+                <div>    
+               
+               <div class="avatar" style={{width:"300px",marginLeft:"40%",opacity:"500"}}>
+                <img src={Images4} alt="Circle Image"  class="img-raised rounded-circle img-fluid"style={{marginTop:"40px"}}/>
+               </div>
+               <div>
+                 <h4 style={{marginTop:"50px",textAlign:"center",color:"grey"}}>Hey There!</h4>
+                 <h1 style={{marginTop:"10px",textAlign:"center"}}><b>I am {users.name}</b> </h1>
+                  {!!(users.college)?<p style={{marginTop:"10px",textAlign:"center",color:"grey"}}>Institute: {users.college} </p>:users.college}
+                   {!!(users.degree)?<p style={{textAlign:"center",color:"grey"}}>{users.degree}</p>:users.degree }
+                   {!!(users.bio)?<p style={{marginTop:"10px",color:"grey",marginLeft:"200px",marginRight:"200px",fontSize:"14px",fontFamily:"Inherit"}}>{users.bio} </p>:users.bio}
+               </div>
+               <div class="card container col-lg-4"  >
+                   <br/>
+                   <p><b> Contact : </b></p>
+                   <hr/>
+                    {!!(users.linkedin)?
+                    <div>
+                   <a href={users.linkedin} >
+                    <p>LinkedIn : </p>
+                    <LinkedInIcon style={{ color: "black",marginTop:"-1.5rem" }}/>
+                    <p> {users.linkedin}</p>
+                  </a>
+                  <hr/>
+                  </div>:users.linkedin
+                  }
+                  {!!(users.email)?
+                    <div>
+                   <a href={users.email} >
+                    <p>Email : </p>
+                    <MailIcon style={{ color: "black",marginTop:"-1.5rem" }}/>
+                    <p> {users.email}</p>
+                  </a>
+                  <hr/>
+                  </div>:users.email
+                  }
+
+               </div>
+                <div style={{marginTop:"20px"}} >
+                <Card class="card container col-lg-3" style={{float:"left",marginLeft:"200px"}}>
+                <p><b>Achievement:               </b></p>
+                      {users.achievement.map((achievement,index)=>(
+                      achievement!== null?<p> {achievement}</p>:null
+                     ))}
+
+                     </Card> 
+
+                       <Card class="card container col-lg-3" style={{float:"right",marginRight:"200px"}}>
+                        <p><b>Skills: </b></p>
+                       <p style={{fontFamily:"Roboto"}}>   {badgeItems}
+                          </p>
+                        
+
+                     </Card> 
+            </div> 
+        
+              </div>
+      
+            
+        
+            
+            )});
+    }
+    render(){
+    let config = {
       num: [4, 7],
       rps: 0.1,
       radius: [5, 40],
@@ -142,132 +144,33 @@ function ProductCategories(props) {
           ctx.closePath();
         }
       });
-    }
-
-  return (
-    <Container className={classes.root} component="section" >
-      <div className={classes.images}>
-
-        {images.map((image) => (
-          <div
-            key={image.title}
-            className={classes.imageWrapper}
-            style={{
-              width: image.width,
-            }}
-          >
-            <div
-              className={classes.imageSrc}
-              style={{
-                backgroundImage: `url(${image.url})`,
-              }}
-            />
-            <div className={classes.imageBackdrop} />
-            <div className={classes.imageButton}>
-              <Typography
-                component="h1"
-                variant="h1"
-                color="inherit"
-                className={classes.imageTitle}
-              >
-                {image.title}
-               
-              </Typography>
-            </div>
+    } {
+        return (
+          <div>
+          <div>
+          <img src={hello} style={{width:"90%",height:"500px",marginLeft:"5%",marginRight:"5%"}}/>
           </div>
-        ))}
-    </div>
-    <div style={{marginTop: "20px"}} >
-     <div class="bgrd">
-              <ParticlesBg  type="custom" config={config} bg={true} />
-          </div>
-
-       <h1 style={{fontFamily: "Roboto"  , color: "teal" , textAlign : "center", marginTop: "10px", marginBottom: "10px"}} >  </h1> 
-        <div class="avatar" style={{width:"300px",marginLeft:"35%",opacity:"500"}}>
-                <img src={Images4} alt="Circle Image"  class="img-raised rounded-circle img-fluid"style={{marginTop:"40px"}}/>
-              
-       <div class="row mx-auto " >
-          <div class="bgrd">
-              <ParticlesBg  type="custom" config={config} bg={true} />
-          </div>
-          
-          {Profile.map((t) => (
-          
-           
-           <div >
-                 <h2 style={{marginTop:"50px", fontFamily: "Roboto",marginLeft: "50px"}}> {t.name} </h2>
-                  <p style={{marginLeft: "20px"}}>{t.description}</p>
-                  
-                  <a href={t.linkidin} >
-                    <LinkedInIcon style={{ color: "black",marginLeft: "50px" }}/>
-                  </a>
-                  <a href={t.github} style ={{marginLeft: "10px"}} >
-                    <GitHubIcon style={{ color: "black" }}/>
-                  </a>
-                  <a href={t.mail} style ={{marginLeft: "10px"}} >
-                    <MailIcon style={{ color: "black" }}/>
-                  </a>
-                 
-                 
-                 
-            </div>
-           
-           
-      
-           
-        ))} 
-          
-        
-        </div>
-
-         <div >
-      
            <div class="bgrd">
               <ParticlesBg  type="custom" config={config} bg={true} />
           </div>
-          {Profile.map((t) => (
-          
-           
-           <div style={{marginTop:"50px", fontFamily: "Roboto",marginLeft:"-400px",fontSize:"15px",color:"grey",marginRight:"-400px"}}  >
-                
-                   <p  > {t.intro} </p>  
+
+            <div style={{marginTop: "10px"}}>
+                {this.fetch_users()}
             </div>
-            
-        ))} 
-        </div>
-         <div >
-          
-          
-          {Profile.map((t) => (
-           <div  >
-                <Paper>
-                <b style={{marginLeft:"15px",fontFamily: "Roboto",fontSize:"20px"}}>Skills and Endorsement:</b>
-                   <p style={{marginLeft:"15px",marginTop:"20px"}} > 1.{t.skill1} </p>  
-                    <p style={{marginLeft:"15px"}} >2.{t.skill2} </p>  
-                     <p style={{marginLeft:"15px"}} > 3.{t.skill3} </p> 
 
-                     </Paper> 
             </div>
-            
-        ))} 
-        </div>
-    
-     </div>
-</div> 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-    </Container>
-
-  );
+        )
+    }
+    }
 }
 
-ProductCategories.propTypes = {
-  classes: PropTypes.object.isRequired,
+profilebyid.propTypes={
+    auth:PropTypes.object.isRequired,
 };
-
-export default withStyles(styles)(ProductCategories);
+const mapStateToProps = state => ({
+    auth: state.auth,
+  });
+  
+  export default connect(
+    mapStateToProps
+  )(profilebyid);
