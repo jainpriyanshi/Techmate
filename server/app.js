@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var users = require('./routes/users');
+var projects = require('./routes/project')
 var app = express();
 var mongoose = require("mongoose");
 var passport = require("passport");
@@ -22,7 +23,7 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.use('/users', users);
-
+app.use('/projects', projects);
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;

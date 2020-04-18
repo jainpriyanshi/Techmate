@@ -1,0 +1,391 @@
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { TextField } from '@material-ui/core';
+import ParticlesBg from "particles-bg";
+import classnames from "classnames";
+import 
+{Button, 
+  Grid,
+  Tooltip , 
+  IconButton, 
+  Snackbar,
+  Menu,
+  MenuItem} 
+  from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+import {Add,
+  Delete} from '@material-ui/icons';
+import { proposeProject } from "../../actions/authActions";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+class ProfileForm extends Component {
+  constructor() { 
+    super();
+    this.state = {
+        contactmail: "",
+        topic: "",
+        title: "",
+        technology: "",
+        deadline: new Date('2020-05-20T21:11:54'),
+        idea: "",
+        githubrepo: "",
+        team: [{
+          name: "",
+          role: "",
+        }],
+        open : false,
+        errors: {},
+        menu1: null,
+        menu2: null
+    };
+  }
+  menuClick = (event) => {
+    this.setState({menu1: event.currentTarget})
+  }
+  menuClose = () => {
+    this.setState({menu1: null});
+  }
+  menuhandle = (e) => {
+       e.preventDefault();
+       this.setState({topic: e.target.getAttribute('index')});
+  }
+  menu2Click = (event) => {
+    this.setState({menu2: event.currentTarget})
+  }
+  menu2Close = () => {
+    this.setState({menu2: null});
+  }
+  menu2handle = (e) => {
+       e.preventDefault();
+       var list = this.state.team.map((option, index) => {
+        if (index == e.target.id) 
+        {option.role = e.target.getAttribute('index');
+        }
+        return option;
+        });
+        this.setState({
+          team: list
+        });
+        console.log(list);
+  }
+  handleDateChange = (date) => {
+    this.setState({deadline: date});
+    console.log(this.state);
+  };
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({open: false});
+  };
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+        open: false,
+      });
+    }
+  }
+ onSubmit = e => {
+    e.preventDefault();
+    const newProject = {
+       team : this.state.team,
+       topic: this.state.topic,
+       technology: this.state.technology,
+       title: this.state.title,
+       proposedby: this.props.auth.user.name,
+       proposedid: this.props.auth.user.id,
+       contactmail: this.state.contactmail,
+       idea: this.state.idea,
+       deadline: this.state.deadline,
+       github: this.state.githubrepo
+    };
+    this.props.proposeProject(newProject);
+    this.setState({open: true});
+  }; 
+  _handleTeamChange= event => {
+    var list = this.state.team.map((option, index) => {
+      if (index == event.target.id) {
+        option.name= event.target.value;
+      };
+      return option;
+    });
+    this.setState({
+      team: list  
+    });
+  }
+  _deleteTeamMember(id) {
+    this.setState(state => ({
+       team: state.team.filter((el, ind) => ind != id),
+    }));
+    console.log(this.state);
+  }
+  addTextField = e => {
+     
+     this.setState({
+     team: [...this.state.team, {name: "" , role: ""}]
+    });
+    console.log(this.state);
+  }
+  render() {
+    const { errors } = this.state
+    return (
+        <div>
+          <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
+           <div class="container">
+                <div  class="inner">
+                  <h1>Propose A Project</h1> 
+                    <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
+                    
+                    <div className="field">
+                    <TextField
+                          required
+                          variant="outlined"
+                          label="Title Of Project"
+                          fullWidth
+                          onChange={this.onChange}
+                          value={this.state.title}
+                          error={errors.title}  
+                          id="title"
+                          type="text"
+                          className={classnames("", {
+                            invalid: errors.title
+                          })}
+                        />
+                    <span className="text-danger">{errors.title}</span>
+                    </div>
+                    <div className="field">
+                    <TextField
+                          required
+                          variant="outlined"
+                          label="Technology Required"
+                          fullWidth
+                          onChange={this.onChange}
+                          value={this.state.technology}
+                          error={errors.technology}  
+                          id="technology"
+                          type="text"
+                          className={classnames("", {
+                            invalid: errors.technology
+                          })}
+                        />
+                        <span className="text-danger">{errors.technology}</span>
+                        </div>
+                        
+                        <div className="field">
+                        <TextField
+                          required
+                          variant="outlined"
+                          label="Idea"
+                          fullWidth
+                          multiline
+                          rows={6}
+                          onChange={this.onChange}
+                          value={this.state.idea}
+                          error={errors.idea}  
+                          id="idea"
+                          type="text"
+                          className={classnames("", {
+                            invalid: errors.idea
+                          })}
+                        />
+                        <span className="text-danger">{errors.idea}</span>
+                        </div>
+                        <div className="field">
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                          margin="normal"
+                          id="deadline"
+                          label="Deadline"
+                          format="dd/MM/yyyy"
+                          value={this.state.deadline}
+                          onChange={this.handleDateChange}
+                          KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                           
+                          }}
+                          style={{width: "50%", marginTop:"20px", marginBottom:"20px"}}
+                        />
+                        </MuiPickersUtilsProvider>
+                        <span className="text-danger">{errors.deadline}</span>
+                        </div>
+                        <div className="field"> 
+                        <Tooltip title="select category of project">  
+                        <Button 
+                        aria-controls="simple-menu" 
+                        aria-haspopup="true" 
+                        onClick={this.menuClick} 
+                        visible="flase" style={{ size:"10%", marginTop:"20px", marginBottom:"20px"}}
+                        >
+                          <ExpandMoreIcon />
+                        </Button>
+                        </Tooltip>  
+                        <Menu
+                        id="simple-menu"
+                        keepMounted
+                        open={Boolean(this.state.menu1)}
+                        onClose={this.menuClose}
+                        >
+                            <MenuItem index="Web Development"  onClick={this.menuhandle}> Web Development</MenuItem>
+                            <MenuItem index="App Development" onClick={this.menuhandle}> App Development </MenuItem>
+                            <MenuItem index="Competitive Programming" onClick={this.menuhandle}>Competitive Programming</MenuItem>
+                            <MenuItem index="Game Development" onClick={this.menuhandle}> Game Development </MenuItem>
+                            <MenuItem index="Machine Learning" onClick={this.menuhandle}> Machine Learning </MenuItem>
+                            <MenuItem index="Cloud Computing" onClick={this.menuhandle}> Cloud Computing </MenuItem>
+                            <MenuItem index="Artificial Intelligence" onClick={this.menuhandle}> Artificial Intelligence</MenuItem>
+                            <MenuItem index="Blockchain" onClick={this.menuhandle}> Blockchain </MenuItem>
+                            <MenuItem index="Image Processing" onClick={this.menuhandle}> Image Processing </MenuItem>
+                        </Menu>
+                        <TextField
+                          required
+                          variant="outlined"
+                          label="Enter Contact Mail"
+                          fullWidth
+                          onChange={this.onChange}
+                          value={this.state.contactmail}
+                          error={errors.contactmail}  
+                          id="contactmail"
+                          type="text"
+                          className={classnames("", {
+                            invalid: errors.contactmail
+                          })}
+                        />
+                        <span className="text-danger">{errors.email}</span>
+                        </div>
+                         <div className="field">
+                        <TextField
+                          required
+                          variant="outlined"
+                          label="Enter Github Repo link for this project"
+                          fullWidth
+                          onChange={this.onChange}
+                          value={this.state.githubrepo}
+                          error={errors.githubrepo}  
+                          id="githubrepo"
+                          type="text"
+                          className={classnames("", {
+                            invalid: errors.githubrepo
+                          })}
+                        />
+                        <span className="text-danger">{errors.github}</span>
+                        </div>
+                      {this.state.team.map((option, index) => {
+                        return (
+                        <Grid item key="index">
+                        <div class="input-root">
+                        <Tooltip title="Edit Team">    
+                            <TextField
+                            variant="outlined"
+                            label="Team Member"
+                            halfWidth
+                            onChange={this._handleTeamChange}
+                            value={this.state.team[index].name}
+                            id={index}
+                            type="text"
+                            style={{ marginTop:"20px", marginBottom:"20px"}}
+                            />
+                        </Tooltip>
+                        <Tooltip title="select role">
+                        <Button 
+                         aria-controls="simple-menu" 
+                          aria-haspopup="true" 
+                          onClick={this.menu2Click} 
+                          visible="flase" style={{ size:"10%", marginTop:"20px", marginBottom:"20px"}}
+                        >
+                          <ExpandMoreIcon />
+                        </Button>
+                        </Tooltip>  
+                        <Menu
+                          id="simple-menu"
+                          keepMounted
+                          open={Boolean(this.state.menu2)}
+                          onClose={this.menu2Close}
+                        >
+                          <MenuItem index="Mentor" id={index} onClick={this.menu2handle}>Mentor </MenuItem>
+                          <MenuItem index="Mentee" id={index} onClick={this.menu2handle}>Mentee </MenuItem>
+                        </Menu>
+                        
+                        <Tooltip title="Delete Team">
+                          <IconButton aria-label="delete" onClick={() => this._deleteTeamMember(index)}
+                            visible="flase" style={{size:"10%", marginTop:"20px", marginBottom:"20px"}}>
+                              <Delete />
+                            </IconButton>
+                        </Tooltip>
+                        </div>
+                        </Grid>
+                        );
+                     })}
+                     
+                    <Tooltip title="Add Team">
+                        <Button 
+                        size="large"
+                        onClick={this.addTextField}
+                        style={{
+                            width:"100%",
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px",
+                            marginBottom: "20px",
+                            marginTop: "20px"
+                          }}>
+                              
+                          <Add/>
+                          &nbsp; Add Team
+                        </Button>
+
+                        </Tooltip>
+                      <button 
+                        type="button" 
+                        class="btn btn-primary btn-lg btn-block card-1" 
+                        type="submit" 
+                        style={{
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px",
+                            marginTop: "1rem"
+                          }}>
+                              Save
+                        </button>
+                        <Snackbar style={{width: "100%"}}open={this.state.open} autoHideDuration={4000} onClose={this.handleClose}>
+                          <Alert onClose={this.handleClose} severity="success">
+                             Information updated Successfully
+                          </Alert>
+                        </Snackbar>
+                    </form>
+                </div>
+          </div>
+      </div>
+
+    );
+  }
+}
+
+ProfileForm.propTypes = {
+  proposeProject: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { proposeProject }
+)(withRouter(ProfileForm));

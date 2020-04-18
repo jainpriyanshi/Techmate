@@ -12,10 +12,20 @@ export const registerUser = (userData, history) => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
+      })  
     );
 };
-
+export const proposeProject = (userData, history) => dispatch => {
+  axios
+    .post("projects/propose", userData)
+    .then(res => history.push("/project"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })  
+    );
+};
 export const verifyUser = (userData, history) => dispatch => {
   axios
     .post("users/verify", userData)

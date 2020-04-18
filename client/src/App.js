@@ -15,7 +15,8 @@ import Changepass from "./components/Auth/changepass";
 import Login from "./components/Auth/Login";
 import ProfileMe from "./components/Profilepage/profile"
 import ProfileForm from "./components/Profilepage/profileform"
-
+import ProjectForm from "./components/Project/Projectform"
+import Projectlist from "./components/Project/Projectlist"
 
 if (localStorage.jwtToken) {
 
@@ -45,8 +46,10 @@ function App() {
             <Route exact path="/verify" component={Verify} /> 
             <Route exact path="/generate" component={Generate} /> 
             <Route exact path="/update" component={Changepass} />
-            <Route exact path="/profile/me" component={ProfileMe} />
-            <Route exact path="/profile/update" component={ProfileForm} />
+            <Route exact path="/profile/:id" component={ProfileMe} />
+            <Route exact path="/profile/me/update" component={ProfileForm} />
+            <Route exact path="/propose" component={ProjectForm} />
+            <Route exact path="/project" component={Projectlist} />
         </Router>
     </div>
     </Provider>

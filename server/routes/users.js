@@ -83,7 +83,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
       isValid: isEmpty(errors)
     };
   };
-  const ValidateForgotInput = function validateOTPInput(data) {
+  const ValidateForgotInput = function validateForgotInput(data) {
     let errors = {};
     data.email = !isEmpty(data.email) ? data.email : "";
 
@@ -98,7 +98,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
       isValid: isEmpty(errors)
     };
   };
-  const ValidateChangeInput = function validateOTPInput(data) {
+  const ValidateChangeInput = function validateChangeInput(data) {
     let errors = {};
     data.email = !isEmpty(data.email) ? data.email : "";
     data.otp = !isEmpty(data.otp) ? data.otp : "" ;
@@ -149,8 +149,6 @@ const ValidateLoginInput = function validateLoginInput(data) {
     if (!isValid) {
       return res.status(400).json(errors);
     }
-   
-    console.log(errors);
     Member.findOne({ email: req.body.email }).then(user => {
       if (user) {
         return res.status(400).json({ email: "Email already exists" });

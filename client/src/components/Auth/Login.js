@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
 
-import { Typography,  TextField } from '@material-ui/core';
+import {TextField } from '@material-ui/core';
 import { AccountCircle} from '@material-ui/icons';
 import './Auth.css';
 import ParticlesBg from "particles-bg";
@@ -37,6 +37,7 @@ import ParticlesBg from "particles-bg";
             errors: nextProps.errors
           });
         }
+        console.log(this.state.errors)
       }
       onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -58,25 +59,11 @@ import ParticlesBg from "particles-bg";
         <div>
           <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
           <div class="container">
-            
-             
                 <div  class="inner">
                 < h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Login </b></h3>
                 
                 
                  <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
-                 <span className="text-danger">
-                            {errors.email}
-                            {errors.emailnotfound}
-                          </span>
-
-
-                          <span className="text-danger">
-                          {errors.password}
-                          {errors.passwordincorrect}
-                        </span>
-
-
                          <div className="field">
                            <TextField
                            required
@@ -92,9 +79,10 @@ import ParticlesBg from "particles-bg";
                             invalid: errors.email || errors.emailnotfound
                           })}
                         />
-                          
-                         
-
+                           <span className="text-danger">
+                            {errors.email}
+                            {errors.emailnotfound}
+                          </span>
                         </div>
 
                         <div className="field">
@@ -112,9 +100,11 @@ import ParticlesBg from "particles-bg";
                             invalid: errors.password || errors.passwordincorrect
                           })}
                         />
-                      
-                       
 
+                        <span className="text-danger">
+                          {errors.password}
+                          {errors.passwordincorrect}
+                        </span>
                       </div>
                    
                         <button type="button" class="btn btn-primary btn-lg btn-block card-1" type="submit" style={{
