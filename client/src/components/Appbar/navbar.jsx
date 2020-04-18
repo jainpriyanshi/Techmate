@@ -54,45 +54,39 @@ class Navbar extends Component {
   sideList = side => (
     <div class="container">
        <div class="text-dec" style={{paddingTop:"5%"}}>
-         <IconButton onClick={this.toggleDrawer(side, false)} >
-       <h5>Back &nbsp;<ArrowForwardIosIcon  />   
+        <IconButton onClick={this.toggleDrawer(side, false)} >
+          <h5>Back &nbsp;<ArrowForwardIosIcon  />   
           </h5>
-          </IconButton>
+        </IconButton>
         </div>
-         <hr></hr>
-        
+        <hr />
         <div style={{   paddingTop:"10px", textAlign: "center"}}>
         <img style={{width:"40px",   marginTop: "10px", marginBottom: "10px"}}src={Search} alt="Techmate" />
-        <TextField
-          variant="outlined"
-          label="Search User"
-          fullWidth
-          onChange={this.onSearchInputChange}
-          value={this.state.searchstring}
-          id="searchInput"
-          type="text"
+          <TextField
+            variant="outlined"
+            label="Search User"
+            fullWidth
+            onChange={this.onSearchInputChange}
+            value={this.state.searchstring}
+            id="searchInput"
+            type="text"
           style={{width: "70%", marginLeft:"10%"}}
         />
         </div>
-        <hr></hr>
-        <br/>
+        <hr/>
         <div style={{letterSpacing:"3.5px" ,textAlign:"center"}}>
         <h6>  <b>TOP RESULTS </b></h6>
         </div>
-        <br/>
         <div>
         {this.state.Data.filter(searchingfor(this.state.searchstring)).map((user)=> (
-          
           <div>
             <Link to = {`/profile/${user._id}`}>
-            <Paper elevation={4} style={{padding: "6% 7%" ,margin:"5% 5%" }}>
-              
+            <Paper elevation={4} sty                                                                                                                                                          le={{padding: "6% 7%" ,margin:"5% " }}>
               <div style={{ textAlign:"left", letterSpacing:"1.5px"}}>
-              <img style={{float:"left", width:"70px", padding: "1% 1%"}}src={Woman} alt="Techmate" />
+              <img style={{float:"left", width:"50px" , height: "50px", padding: "1% 1%"}}src={Woman} alt="Techmate" />
                <h6 style={{ marginLeft:"auto"}}> {user.name} </h6>  
-               <p style={{color: "grey"}}> IIt Jodhpur{user.college }</p>
+               <p style={{color: "grey"}}> {user.college }</p>
               </div>
-
             </Paper>
             </Link>
             <br />
@@ -125,7 +119,7 @@ class Navbar extends Component {
 
           <IconButton
            
-            onClick={this.toggleDrawer('right', true)}> <ArrowBackIosIcon/> &nbsp;<SearchIcon />
+            onClick={this.toggleDrawer('right', true)}> <SearchIcon />
           </IconButton>
 
            
