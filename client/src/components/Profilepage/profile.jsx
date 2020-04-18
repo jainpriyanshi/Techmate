@@ -2,21 +2,20 @@ import React, { Component } from 'react'
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom"; 
 import { connect } from "react-redux";
-import { withStyles } from '@material-ui/core/styles';
 import axios from "axios"
-import MailIcon from '@material-ui/icons/Mail';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Container from '@material-ui/core/Container';
 import Card from'@material-ui/core/Card';
-import Typography from  '@material-ui/core/Typography';
-import hello from '../Images/cc.jpg';
-import avatar from '../Images/avatar.jpg';
-import Paper from '@material-ui/core/Paper';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import Images4 from '../Images/c4.png';
 import ParticlesBg from "particles-bg";
-import Code from'@material-ui/icons/Code'
-import Achievem from'@material-ui/icons/EmojiEvents';
+import P1 from'../Images/p1.png';
+import P2 from'../Images/p2.png';
+import P3 from'../Images/p3.jpg';
+
+import P4 from'../Images/cup.png';
+import college from'../Images/college.png';
+import L from '../Images/contact.png';
+import CUP from '../Images/skills.jpg';
+
+
 
 
 
@@ -51,63 +50,76 @@ class profilebyid extends Component {
             return (
                 <div>    
                
-               <div class="avatar" style={{width:"300px",marginLeft:"40%",opacity:"500"}}>
-                <img src={Images4} alt="Circle Image"  class="img-raised rounded-circle img-fluid"style={{marginTop:"40px"}}/>
-               </div>
                <div>
-                 <h4 style={{marginTop:"50px",textAlign:"center",color:"grey"}}>Hey There!</h4>
-                 <h1 style={{marginTop:"10px",textAlign:"center"}}><b>I am {users.name}</b> </h1>
-                  {!!(users.college)?<p style={{marginTop:"10px",textAlign:"center",color:"grey"}}>Institute: {users.college} </p>:users.college}
-                   {!!(users.degree)?<p style={{textAlign:"center",color:"grey"}}>{users.degree}</p>:users.degree }
-                   {!!(users.bio)?<p style={{marginTop:"10px",color:"grey",marginLeft:"200px",marginRight:"200px",fontSize:"14px",fontFamily:"Inherit"}}>{users.bio} </p>:users.bio}
-               </div>
-               <div class="card container col-lg-4"  >
-                   <br/>
-                   <p><b> Contact : </b></p>
-                   <hr/>
-                    {!!(users.linkedin)?
-                    <div>
-                   <a href={users.linkedin} >
-                    <p>LinkedIn : </p>
-                    <LinkedInIcon style={{ color: "black",marginTop:"-1.5rem" }}/>
-                    <p> {users.linkedin}</p>
-                  </a>
-                  <hr/>
-                  </div>:users.linkedin
-                  }
-                  {!!(users.email)?
-                    <div>
-                   <a href={users.email} >
-                    <p>Email : </p>
-                    <MailIcon style={{ color: "black",marginTop:"-1.5rem" }}/>
-                    <p> {users.email}</p>
-                  </a>
-                  <hr/>
-                  </div>:users.email
-                  }
+                     <p style={{color:"grey",fontSize:"100px",marginTop:"50px",textAlign:"center"}}>Profile</p>
+                   </div>
+                 <div>
+                    <div style={{float:"left"}}>
+                         <img src={P1} style={{height:"450px" ,width:"450px",marginTop:"50px",marginLeft:"150px"}}/> 
+                    </div>
+                    <div style={{float:"Right",textAlign:"center",marginRight:"90px"}}>
+                    <h4 style={{marginTop:"250px",color:"grey"}}>Hey There!</h4>
+                    <h1 style={{marginTop:"10px",fontSize:"75px"}}><b>I am {users.name}</b> </h1>
+                    </div>
+
+                </div>
+                <div >
+                     <div style={{float:"Right",marginTop:"50px"}}>
+                         <img src={P2}/>
+                     </div >  
+                     <div  style={{float:"left",width:"450px",marginLeft:"90px",marginTop:"70px"}}>
+                     {!!(users.bio)?<div><h2>Let's Introduce About Myself</h2><p style={{marginTop:"10px",color:"grey"}}>{users.bio} </p></div>:users.bio}
+                     {!!(users.college)?
+                  
+                    <h2 > Institute:  {users.college} </h2> 
+                     :users.college}
+                     {!!(users.degree)?<h4 style={{textAlign:"center",color:"grey",marginLeft:"-100px"}}>{users.degree}</h4>:users.degree }
+                    </div>   
+                </div>
+               <div>
+               <div style={{float:"Left"}}>
+                   <img src={L} style={{height:"300px",width:"600px",marginTop:"50px",marginLeft:"20px"}}/>
 
                </div>
-                <div style={{marginTop:"20px"}} >
-                <Card class="card container col-lg-3" style={{float:"left",marginLeft:"200px"}}>
-                <p><b>Achievement:               </b></p>
+               <div style={{float:"Right"}}>
+               <h4 style={{marginTop:"10px",marginRight:"100px"}}><b> Email: <a href={users.email} >{users.email}</a></b> </h4> 
+               {!!(users.linkedin)?<h4 style={{marginTop:"10px",marginRight:"100px"}}><b> Linkedin: <a href={users.linkedin} >{users.linkedin}</a></b> </h4>:users.linkedin}
+               {!!(users.github)?<h4 style={{marginTop:"10px",marginRight:"100px"}}><b> GitHub: <a href={users.github} >{users.github}</a></b></h4>:users.linkedin}
+               {!!(users.codechef)?<h4 style={{marginTop:"10px",marginRight:"100px"}}><b> Codechef: <a href={users.codechef} >{users.codechef}</a></b> </h4>:users.codechef}
+               {!!(users.codeforces)?<h4 style={{marginTop:"10px",marginRight:"100px"}}><b> codeforces: <a href={users.codeforces} >{users.codeforces}</a></b> </h4>:users.codeforces}
+               {!!(users.spoj)?<h4 style={{marginTop:"10px",marginRight:"100px"}}><b> Spoj: <a href={users.spoj} >{users.spoj}</a></b> </h4>:users.spoj}
+               </div>
+               </div>
+               <div >
+               <div style={{float:"Left",marginTop:"400px",marginLeft:"-500px"}}>
+                   <Card style={{height:"300px",width:"400px"}}>
+                       <div style={{marginLeft:"20px"}}>
+               <h4 style={{color:"blue",marginBotton:"10px",marginTop:"10px"}}><b>Skills & Endorsement: </b></h4>
+                       <h5 style={{fontFamily:"Roboto",color:"grey",marginLeft:"10px"}}>   {badgeItems}
+                          </h5>
+                          </div>
+                          </Card>
+               </div>
+               <div style={{float:"Left"}}>
+                 <img src={CUP} style={{height:"200px",width:"200px",marginTop:"400px"}}></img>
+               </div>
+               <div style={{float:"Right",marginTop:"400px",marginRight:"-400px"}}>
+               
+                   <Card style={{height:"300px",width:"400px"}}>
+                       <div style={{marginLeft:"20px"}}>
+                      
+               <h4 style={{color:"blue",marginBotton:"10px",marginTop:"10px"}}><b>Achievement:               </b></h4>
                       {users.achievement.map((achievement,index)=>(
-                      achievement!== null?<p> {achievement}</p>:null
+                      achievement!== null?<h5 style={{fontFamily:"Roboto",color:"grey"}}> {achievement}</h5>
+                      :null
                      ))}
+                     </div>
+                     </Card>
+               </div>
+               </div>
 
-                     </Card> 
-
-                       <Card class="card container col-lg-3" style={{float:"right",marginRight:"200px"}}>
-                        <p><b>Skills: </b></p>
-                       <p style={{fontFamily:"Roboto"}}>   {badgeItems}
-                          </p>
-                        
-
-                     </Card> 
-            </div> 
-        
-              </div>
       
-            
+            </div>
         
             
             )});
@@ -147,17 +159,19 @@ class profilebyid extends Component {
     } {
         return (
           <div>
-          <div>
-          <img src={hello} style={{width:"90%",height:"500px",marginLeft:"5%",marginRight:"5%"}}/>
-          </div>
+          
            <div class="bgrd">
               <ParticlesBg  type="custom" config={config} bg={true} />
           </div>
-
-            <div style={{marginTop: "10px"}}>
+            <div >
+            <div class="bgrd">
+              <ParticlesBg  type="custom" config={config} bg={true} />
+          </div>
                 {this.fetch_users()}
             </div>
-
+            <div class="bgrd">
+              <ParticlesBg  type="custom" config={config} bg={true} />
+          </div>
             </div>
         )
     }
