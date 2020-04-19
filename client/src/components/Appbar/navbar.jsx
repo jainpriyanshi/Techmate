@@ -55,15 +55,14 @@ class Navbar extends Component {
     <div class="container">
        <div class="text-dec" style={{paddingTop:"5%"}}>
         <IconButton onClick={this.toggleDrawer(side, false)} >
-          <h5>Back &nbsp;<ArrowForwardIosIcon  />   
-          </h5>
+          <h6>Back &nbsp;<ArrowForwardIosIcon  />   
+          </h6>
         </IconButton>
         </div>
         <hr />
-        <div style={{   paddingTop:"10px", textAlign: "center"}}>
-        <img style={{width:"40px",   marginTop: "10px", marginBottom: "10px"}}src={Search} alt="Techmate" />
+        <div style={{   paddingTop:"2px", textAlign: "center"}}>
+        
           <TextField
-            variant="outlined"
             label="Search User"
             fullWidth
             onChange={this.onSearchInputChange}
@@ -72,21 +71,24 @@ class Navbar extends Component {
             type="text"
           style={{width: "70%", marginLeft:"10%"}}
         />
+         <img style={{width:"24px", marginTop: "12px", marginBottom: "10px"}}src={Search} alt="Techmate" />
         </div>
         <hr/>
         <div style={{letterSpacing:"3.5px" ,textAlign:"center"}}>
-        <h6>  <b>TOP RESULTS </b></h6>
+        <h6 style={{fontFamily: "roboto"}}>  <b>TOP RESULTS </b></h6>
         </div>
         <div>
         {this.state.Data.filter(searchingfor(this.state.searchstring)).map((user)=> (
           <div>
             <Link to = {`/profile/${user._id}`}>
-            <Paper elevation={4} sty                                                                                                                                                          le={{padding: "6% 7%" ,margin:"5% " }}>
-              <div style={{ textAlign:"left", letterSpacing:"1.5px"}}>
+            <Paper elevation={4} sty                                                                                                                                                         le={{padding: "6% 7%" ,margin:"5% " }}>
+              <div style={{letterSpacing:"1.5px", display: "flex"}}>
               <img style={{float:"left", width:"50px" , height: "50px", padding: "1% 1%"}}src={Woman} alt="Techmate" />
-               <h6 style={{ marginLeft:"auto"}}> {user.name} </h6>  
-               <p style={{color: "grey"}}> {user.college }</p>
-              </div>
+                <div>
+                  <h6 style={{ float:"left",  marginLeft:"auto" ,marginTop: "5px",  marginBottom: "0px"}}> {user.name} </h6>
+                   <p style={{color: "grey" , fontFamily: "roboto" , marginTop: "0px"}}> {user.college }</p>
+                </div>
+               </div>
             </Paper>
             </Link>
             <br />
