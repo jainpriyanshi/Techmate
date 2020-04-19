@@ -18,6 +18,7 @@ import ProfileForm from "./components/Profilepage/profileform"
 import ProjectForm from "./components/Project/Projectform"
 import Projectlist from "./components/Project/Projectlist"
 import EditProject from "./components/Project/Edit"
+import Footer from "./components/Appbar/footer"
 
 
 if (localStorage.jwtToken) {
@@ -53,6 +54,7 @@ function App() {
             <Route exact path="/propose" component={ProjectForm} />
             <Route exact path="/project" component={Projectlist} />
             <Route exact path="/project/edit/:id" component={EditProject} />
+            < Footer />
         </Router>
     </div>
     </Provider>

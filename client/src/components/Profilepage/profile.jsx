@@ -9,7 +9,6 @@ import ParticlesBg from "particles-bg";
 import P1 from'../Images/p1.png';
 import P2 from'../Images/p2.png';
 import P3 from'../Images/p3.jpg';
-
 import P4 from'../Images/cup.png';
 import college from'../Images/college.png';
 import L from '../Images/contact.png';
