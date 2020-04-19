@@ -77,9 +77,13 @@ const ValidateProjectRegister = function validateProjectRegister(data) {
     router.get('/getdata', function(req, res){
       Project.find({}).then(docs => {
       res.send(docs);
-      console.log(docs);
     })
     
+  });
+  router.post('/updateproject',(req,res)=>{
+    console.log(req.body);
+     Project.findOneAndUpdate({ _id: req.body._id},req.body).then(user => {
+    });
   });
 
 module.exports = router;  

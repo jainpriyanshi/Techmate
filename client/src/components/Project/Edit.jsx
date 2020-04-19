@@ -297,6 +297,28 @@ class EditProject extends Component {
         )
     }
   }
+  componentDidMount() { 
+    axios.get("/projects/getdata")
+    .then((response) => {
+        response.data.map(data=>{
+            console.log(this.props.match.params.id)
+            if(data._id===this.props.match.params.id)
+            {
+                this.setState({ 
+                    contactmail: data.contactmail,
+                        topic: data.topic,
+                        title: data.title,
+                        technology: data.technology,
+                        deadline: data.deadline,
+                        idea: data.idea,
+                        githubrepo: data.github,
+                        team: data.team
+                    });
+            }
+        });
+    });
+
+  }
   onSubmit = e => {
     e.preventDefault();
     const newProject = {
@@ -311,8 +333,8 @@ class EditProject extends Component {
        _id: this.props.match.params.id
     };
 
-    this.props.proposeProject(newProject);
-    this.setState({open: true});
+    axios.post("/projects/updateproject",newProject)
+    .then(this.setState({open: true}))
     
   }; 
   menuClick = (event) => {
@@ -413,7 +435,7 @@ class EditProject extends Component {
           <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
            <div class="container">
                 <div  class="inner">
-                  <h1>Propose A Project</h1> 
+                  <h1>Edit Project</h1> 
                     <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
                     <Stepper activeStep={this.state.activeStep} orientation="vertical"  >
                     {this.state.steps.map((label, index) => (
