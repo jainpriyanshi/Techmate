@@ -48,7 +48,7 @@
       axios.get('/users/getdata')
       .then((response) => {
           response.data.map(data=>{
-              if(data._id===this.atet.auth.user.id)
+              if(data._id===this.props.auth.user.id)
               {
                   this.setState({ name : data.name,
                       email : data.email ,

@@ -4,15 +4,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
-
-import { Typography,  TextField } from '@material-ui/core';
+import {  TextField } from '@material-ui/core';
 import { AccountCircle} from '@material-ui/icons';
 import './Auth.css';
-import ParticlesBg from "particles-bg";
-
-
-
-
 class Register extends Component {
   constructor() {
     super();
@@ -26,7 +20,7 @@ class Register extends Component {
   }
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/project");
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -56,38 +50,29 @@ class Register extends Component {
 
   render() {
     const { errors } = this.state;
-
     return (
-            <div>
-                <div>
-                <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" /></div>
-                <div class="container">
-         
-          
-             <div  class="inner">
-             <h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Register </b></h3>
-          <br></br>
-          
+      <div>
+        <div class="container">
+           <div  class="inner">
+            <h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Register </b></h3>
+              <br></br>
                 <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
-                  
                   <div className="field">
                   <TextField
-                  required
-                  variant="outlined"
-                  label="Name"
-                  fullWidth
-                  onChange={this.onChange}
-                  value={this.state.name}
-                  error={errors.name}
-                  id="name"
-                  type="text"
-                  className={classnames("", {
-                    invalid: errors.name
-                  })}
+                    required
+                    variant="outlined"
+                    label="Name"
+                    fullWidth
+                    onChange={this.onChange}
+                    value={this.state.name}
+                    error={errors.name}
+                    id="name"
+                    type="text"
+                    className={classnames("", {
+                      invalid: errors.name
+                    })}
                 />
-                
                 <span className="text-danger">{errors.name}</span>
-
                   </div>
                   <div className="field">
                   <TextField
@@ -104,10 +89,8 @@ class Register extends Component {
                     invalid: errors.email
                   })}
                 />
-                
                 <span className="text-danger">{errors.email}</span>
                 </div>
-
                 <div className="field">
                 <TextField
                   required
@@ -142,32 +125,25 @@ class Register extends Component {
                     invalid: errors.password2
                   })}
                 />
-                
-                <span className="text-danger">{errors.password2}</span>
-              </div>
-                        <button type="button" class="btn btn-primary btn-lg btn-block card-1" type="submit" style={{
-                            
-                            borderRadius: "3px",
-                            letterSpacing: "1.5px",
-                            marginTop: "1rem"
-                            
-
-
-                          }}>Register</button>
-                            <br></br>
-                            <br></br>
-
-                        <p className="text-secondary">
-                        Already have an account? <Link to="/login">Login</Link>
-                      </p>
-                      <p className="text-secondary">
-                         <Link to="/generate">Forgot password</Link>
-                      </p>
-                </form>
-              </div>
+              <span className="text-danger">{errors.password2}</span>
             </div>
-          </div>
-              
+            <button type="button" class="btn btn-primary btn-lg btn-block card-1" type="submit" style={{                            
+              borderRadius: "3px",
+              letterSpacing: "1.5px",
+              marginTop: "1rem"
+            }}>Register</button>
+              <br></br>
+              <br></br>
+            <p className="text-secondary">
+              Already have an account? <Link to="/login">Login</Link>
+            </p>
+            <p className="text-secondary">
+                <Link to="/generate">Forgot password</Link>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>        
     );
   }
 }

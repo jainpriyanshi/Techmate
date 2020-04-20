@@ -8,137 +8,119 @@ import classnames from "classnames";
 import {TextField } from '@material-ui/core';
 import { AccountCircle} from '@material-ui/icons';
 import './Auth.css';
-import ParticlesBg from "particles-bg";
 
-  class Login extends Component {
-    constructor() {
-      super();
-      this.state = {
-        email: "",
-        password: "",
-        errors: {}
+class Login extends Component {
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+      errors: {}
       };
+  }
+
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/project");
     }
+  }
 
-    componentDidMount() {
-        // If logged in and user navigates to Login page, should redirect them to dashboard
-        if (this.props.auth.isAuthenticated) {
-          this.props.history.push("/dashboard");
-        }
-      }
-    
-      componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-          this.props.history.push("/dashboard");
-        }
-    
-        if (nextProps.errors) {
-          this.setState({
-            errors: nextProps.errors
-          });
-        }
-        console.log(this.state.errors)
-      }
-      onChange = e => {
-        this.setState({ [e.target.id]: e.target.value });
-      };
-      onSubmit = e => {
-        e.preventDefault();
-        const userData = {
-          email: this.state.email,
-          password: this.state.password
-        };
-        this.props.loginUser(userData);
-      };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/project");
+  }
 
-
-      render() {
-        const { errors } = this.state;
-        return (
-
+  if (nextProps.errors) {
+      this.setState({
+      errors: nextProps.errors
+      });
+    }
+  }
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+  onSubmit = e => {
+    e.preventDefault();
+    const userData = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.props.loginUser(userData);
+  };
+  render() {
+    const { errors } = this.state;
+    return (
         <div>
-          <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
           <div class="container">
-                <div  class="inner">
-                < h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Login </b></h3>
-                
-                
-                 <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
-                         <div className="field">
-                           <TextField
-                           required
-                            variant="outlined"
-                           label="Email"
-                           fullWidth
-                          onChange={this.onChange}
-                          value={this.state.email}
-                          error={errors.email}
-                          id="email"
-                          type="email"
-                          className={classnames("", {
-                            invalid: errors.email || errors.emailnotfound
-                          })}
-                        />
-                           <span className="text-danger">
-                            {errors.email}
-                            {errors.emailnotfound}
-                          </span>
-                        </div>
-
-                        <div className="field">
-                        <TextField
-                          required
-                          variant="outlined"
-                          label="Password"
-                          fullWidth
-                          onChange={this.onChange}
-                          value={this.state.password}
-                          error={errors.password}
-                          id="password"
-                          type="password"
-                          className={classnames("", {
-                            invalid: errors.password || errors.passwordincorrect
-                          })}
-                        />
-
-                        <span className="text-danger">
-                          {errors.password}
-                          {errors.passwordincorrect}
-                        </span>
-                      </div>
-                   
-                        <button type="button" class="btn btn-primary btn-lg btn-block card-1" type="submit" style={{
-                            
-                            borderRadius: "3px",
-                            letterSpacing: "1.5px",
-                            marginTop: "1rem"
-                            
-
-
-                          }}>Login</button>
-                            <br></br>
-                            <br></br>
-
-                        <p className="text-secondary">
-                        Don't have an account? <Link to="/register">Register</Link>
-                      </p>
-                      <p className="text-secondary">
-                         <Link to="/generate">Forgot password</Link>
-                      </p>
-  
-                    </form>
-                </div>
-                  
-              
-                
-          </div>
+            <div  class="inner">
+              <h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Login </b></h3>
+              <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
+              <div className="field">
+                <TextField
+                  required
+                  variant="outlined"
+                  label="Email"
+                  fullWidth
+                  onChange={this.onChange}
+                  value={this.state.email}
+                  error={errors.email}
+                  id="email"
+                  type="email"
+                  className={classnames("", {
+                  invalid: errors.email || errors.emailnotfound
+                  })}
+                />
+                <span className="text-danger">
+                {errors.email}
+                {errors.emailnotfound}
+                </span>
+              </div>
+              <div className="field">
+                <TextField
+                  required
+                  variant="outlined"
+                  label="Password"
+                  fullWidth
+                  onChange={this.onChange}
+                  value={this.state.password}
+                  error={errors.password}
+                  id="password"
+                  type="password"
+                  className={classnames("", {
+                  invalid: errors.password || errors.passwordincorrect
+                  })}
+                />
+              <span className="text-danger">
+              {errors.password}
+              {errors.passwordincorrect}
+              </span>
+            </div>
+            <button 
+              type="button" 
+              class="btn btn-primary btn-lg btn-block card-1" 
+              type="submit" 
+              style={{
+                borderRadius: "3px",
+                letterSpacing: "1.5px",
+                marginTop: "1rem"
+                }}
+            >
+              Login
+            </button>
+          <br />
+          < br/ >
+            <p className="text-secondary">
+            Don't have an account? <Link to="/register">Register</Link>
+            </p>
+            <p className="text-secondary">
+            <Link to="/generate">Forgot password</Link>
+            </p>
+          </form>
         </div>
-
-
-
-      );
-    
-    }
+      </div>
+</div>
+);
+}
 }
 
 Login.propTypes = {
@@ -153,6 +135,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-  mapStateToProps,
-  { loginUser }
+mapStateToProps,
+{ loginUser }
 )(Login);
