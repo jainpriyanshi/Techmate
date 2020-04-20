@@ -56,15 +56,10 @@ class profilebyid extends Component {
             return (
                <div>
                   <div id="user-profile-2" class="user-profile" style={{marginTop:"10%"}}>
-                  <div class="tabbable">
-                  <ul class="nav nav-tabs padding-18">
-				<li class="active">
-					<a data-toggle="tab" href="#home">
-						<i class="green ace-icon fa fa-user bigger-120"></i>
-						Profile
-					</a>
-				</li>
-			</ul>
+                  
+                        <div>
+                            <h2 style={{marginTop:"10%",textAlign:"center"}}>Profile</h2>
+                        </div>
             <div class="tab-content no-border padding-24">
 				<div id="home" class="tab-pane in active">
 					<div class="row">
@@ -85,8 +80,8 @@ class profilebyid extends Component {
 						                  	<a href={users.email} class="btn btn-sm btn-block btn-primary">
                                        <MailIcon style={{ color: "lightred" }}/>
 								                       <span class="bigger-110">Send an email</span>
-						                       	</a>
-                         </div>
+						                    </a>
+                          </div>
                          <div class="col-xs-12 col-sm-9">
                          <h4 class="blue">
 								<span class="middle" style={{marginLeft:"20px"}}>Hey There!</span>
@@ -195,7 +190,7 @@ class profilebyid extends Component {
                      </div>               
                  </div>
             </div>
-                  </div>
+                 
                   </div>
               </div>
         
