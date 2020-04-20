@@ -18,10 +18,9 @@ class Verify extends Component {
   componentDidMount() {
     
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/project");
     }
     let params = queryString.parse(this.props.location.search);
-    console.log(params);
     const newUser = {
       otp: params.otp,
       email: params.email,
@@ -43,8 +42,6 @@ class Verify extends Component {
         <div class="deadcentre">
         <Spinner />
         </div>
-            
-           
       </div>
     );
   }
