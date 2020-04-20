@@ -9,6 +9,7 @@ var projects = require('./routes/project')
 var app = express();
 var mongoose = require("mongoose");
 var passport = require("passport");
+var forum = require('./routes/forum');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -23,6 +24,7 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.use('/users', users);
+app.use('/forum', forum);
 app.use('/projects', projects);
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

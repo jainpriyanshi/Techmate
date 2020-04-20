@@ -19,7 +19,10 @@ import ProjectForm from "./components/Project/Projectform"
 import Projectlist from "./components/Project/Projectlist"
 import EditProject from "./components/Project/Edit"
 import Footer from "./components/Appbar/footer"
-
+import Forum from "./components/Forum/Forum"
+import Post from "./components/Forum/Post"
+import AddPost from "./components/Forum/AddPost/AddPost"
+import EditPost from "./components/Forum/AddPost/EditPost"
 
 if (localStorage.jwtToken) {
 
@@ -54,6 +57,10 @@ function App() {
             <Route exact path="/propose" component={ProjectForm} />
             <Route exact path="/project" component={Projectlist} />
             <Route exact path="/project/edit/:id" component={EditProject} />
+            <Route exact path="/forum" component={Forum} />
+            <Route exact path="/forum/show/:id" component={Post} />
+            <Route exact path="/forum/post" component={AddPost}/>
+            <Route exact path="/forum/editpost/:id" component={EditPost}/>
             < Footer />
         </Router>
     </div>
