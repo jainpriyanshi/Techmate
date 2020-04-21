@@ -58,6 +58,7 @@ class Projectlist extends Component {
         axios.get('/projects/getdata')
         .then((response) => {
             this.setState({Data: response.data})
+            console.log(response.data);
         });
       }
       getStepContent(step){
@@ -65,55 +66,55 @@ class Projectlist extends Component {
             case "App Development":
                 return (
                     <div>
-                        <img src= {app} style={{height: "200px" , width: "100%"}} />
+                        <img src= {app} style={{height: "150px" , width: "100%" , position: "relative" }} />
                     </div>
                 )
             case "Web Development":
             return (
                 <div>
-                    <img src= {web} style={{height: "200px" , width: "100%"}} />
+                    <img src= {web} style={{height: "150px" , width: "100%" , position: "relative" }} />
                 </div>
             )
             case "Game Development":
             return (
                 <div>
-                    <img src= {game} style={{height: "200px" , width: "100%"}} />
+                    <img src= {game} style={{height: "150px" , width: "100%" , position: "relative" }} />
                 </div>
             )
             case "Competitive Programming":
             return (
                 <div>
-                    <img src= {competitive} style={{height: "200px" , width: "100%"}} />
+                    <img src= {competitive} style={{height: "150px" , width: "100%" , position: "relative" }} />
                 </div>
             )
             case "Machine Learning":
             return (
                 <div>
-                    <img src= {ml} style={{height: "200px" , width: "100%"}} />
+                    <img src= {ml} style={{height: "150px" , width: "100%" , position: "relative"}} />
                 </div>
             )
             case "Cloud Computing":
             return (
                 <div>
-                    <img src= {cc} style={{height: "200px" , width: "100%"}} />
+                    <img src= {cc} style={{height: "150px" , width: "100%" , position: "relative"}} />
                 </div>
             )
             case "Image Processing":
             return (
                 <div>
-                    <img src= {ip} style={{height: "200px" , width: "100%"}} />
+                    <img src= {ip} style={{height: "150px" , width: "100%" , position: "relative"}} />
                 </div>
             )
             case "Blockchain":
             return (
                 <div>
-                    <img src= {blockchain} style={{height: "200px" , width: "100%"}} />
+                    <img src= {blockchain} style={{height: "150px" , width: "100%" , position: "relative"}} />
                 </div>
             )
             case "Artificial Intelligence":
             return (
                 <div>
-                    <img src= {AI} style={{height: "200px" , width: "100%"}} />
+                    <img src= {AI} style={{height: "150px" , width: "100%", position: "relative"}} />
                 </div>
             )
           }
@@ -125,15 +126,13 @@ class Projectlist extends Component {
             badgelist = data.technology.split(",");
             badgeItems = badgelist.map((badge) =>
                    <Chip variant="outlined" size= "small" 
-                   color="info.main" label={badge} icon={<CheckCircleOutlineIcon />}/>
+                   color="secondary" label={badge} icon={<CheckCircleOutlineIcon />}/>
                   );
                 var table = (
                 <TableContainer>
-                    <Table a
-                    
-                    ria-label="customized table">
+                    <Table aria-label="customized table">
                     <TableHead>
-                    <TableRow style={{backgroundColor: "black"}}>
+                    <TableRow style={{backgroundColor: "black"}} >
                         <TableCell style={{color: "white"}}> Team Member </TableCell>
                         <TableCell  style={{color: "white"}} align="right"> Role </TableCell>
                     </TableRow>
@@ -151,9 +150,10 @@ class Projectlist extends Component {
                     </Table>
                 </TableContainer>
             )
+            if(data.state==="proposed")
             return(
                 <div>
-                    <div class="flip-card col-lg-4 col-sm-12" style={{float: "left"}}>
+                    <div class="flip-card col-lg-4 col-sm-12">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                         <Card classname="card">
@@ -164,16 +164,207 @@ class Projectlist extends Component {
                                 }
                                 title={data.proposedby}
                             />
+                            <div style={{ display: "flex"}}>
                             {this.getStepContent(data.topic)}
-                            
+                            <h3 style={{position: "absolute" ,  color: "white" , margin: "53px 100px" , border: "4px solid" }}> {data.title} </h3>
+                            </div>
                             <CardContent>
-                                 <h3 style={{color: "teal" , fontFamily: "roboto"}}> {data.title} </h3>
-                                 <hr />
+                                 
                                  <h6> Technologies </h6>
                                  {badgeItems}
                                  <hr />
                                  <h6>Category</h6>
-                                 <Chip  color="green" label={data.topic} />
+                                 <Chip  color="primary" label={data.topic} />
+                                 <hr />
+                                 <b> Deadline : </b>
+                                 <Moment format="DD-MM-YY">
+                                   {data.deadline} 
+                                </Moment>
+                            </CardContent>
+                            </Card>
+                        </div>
+                        <div class="flip-card-back">
+                        <Card>
+                                <Avatar style={{float: "left"}}/>
+                                  <Link to = {`/profile/${data.proposedid}`} style={{marginLeft: "5px", color: "black", float: "left"}}>
+                                  {data.proposedby}
+                                  </Link>
+                                  {this.props.auth.user.id===data.proposedid ?
+                                  <Link to = {`/project/edit/${data._id}`} style={{marginLeft: "5px",color: "grey", float:"right"}} >
+                                     <EditIcon />
+                                  </Link>: null}
+                                  <a href={data.github} style={{marginLeft: "5px", color: "grey", float:"right"}}>
+                                      <GitHubIcon />
+                                  </a>
+                                  <a href = {`mailto:${data.contactmail}`} style={{marginLeft: "5px" , color: "grey", float:"right"}}>
+                                      <MailIcon />
+                                  </a>
+                            <CardContent>
+                                <h6 style={{marginTop: "20px"}}> Idea </h6>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                  {data.idea}
+                                </Typography>
+                                <h6> Team </h6>
+                                {table}
+                            </CardContent>
+                            </Card>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            )});
+      }
+      fetch_data1(){
+        return this.state.Data.filter(searchingfor(this.state.searchstring)).map(data =>{
+            var badgelist="";
+            var badgeItems=[];
+            badgelist = data.technology.split(",");
+            badgeItems = badgelist.map((badge) =>
+                   <Chip variant="outlined" size= "small" 
+                   color="secondary" label={badge} icon={<CheckCircleOutlineIcon />}/>
+                  );
+                var table = (
+                <TableContainer>
+                    <Table aria-label="customized table">
+                    <TableHead>
+                    <TableRow style={{backgroundColor: "black"}} >
+                        <TableCell style={{color: "white"}}> Team Member </TableCell>
+                        <TableCell  style={{color: "white"}} align="right"> Role </TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.team.map((row) => (
+                            <TableRow key={row.name}>
+                            <TableCell component="th" scope="row">
+                                {row.name}
+                            </TableCell>
+                            <TableCell align="right">{row.role}</TableCell>
+                            </TableRow>
+                        ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )
+            if(data.state==="ongoing")
+            return(
+                <div>
+                    <div class="flip-card col-lg-4 col-sm-12">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                        <div classname="card">
+                            <CardHeader
+                                avatar={
+                                <Avatar style={{color: "black"}}>
+                                </Avatar>
+                                }
+                                title={data.proposedby}
+                            />
+                            <div style={{ display: "flex"}}>
+                            {this.getStepContent(data.topic)}
+                            <h3 style={{position: "absolute" ,  color: "white" , margin: "53px 100px" , border: "4px solid" }}> {data.title} </h3>
+                            </div>
+                            <CardContent>
+                                 
+                                 <h6> Technologies </h6>
+                                 {badgeItems}
+                                 <hr />
+                                 <h6>Category</h6>
+                                 <Chip  color="primary" label={data.topic} />
+                                 <hr />
+                                 <b> Deadline : </b>
+                                 <Moment format="DD-MM-YY">
+                                   {data.deadline} 
+                                </Moment>
+                            </CardContent>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                        <Card>
+                                <Avatar style={{float: "left"}}/>
+                                  <Link to = {`/profile/${data.proposedid}`} style={{marginLeft: "5px", color: "black", float: "left"}}>
+                                  {data.proposedby}
+                                  </Link>
+                                  {this.props.auth.user.id===data.proposedid ?
+                                  <Link to = {`/project/edit/${data._id}`} style={{marginLeft: "5px",color: "grey", float:"right"}} >
+                                     <EditIcon />
+                                  </Link>: null}
+                                  <a href={data.github} style={{marginLeft: "5px", color: "grey", float:"right"}}>
+                                      <GitHubIcon />
+                                  </a>
+                                  <a href = {`mailto:${data.contactmail}`} style={{marginLeft: "5px" , color: "grey", float:"right"}}>
+                                      <MailIcon />
+                                  </a>
+                            <CardContent>
+                                <h6 style={{marginTop: "20px"}}> Idea </h6>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                  {data.idea}
+                                </Typography>
+                                <h6> Team </h6>
+                                {table}
+                            </CardContent>
+                            </Card>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            )});
+      }
+      fetch_data2(){
+        return this.state.Data.filter(searchingfor(this.state.searchstring)).map(data =>{
+            var badgelist="";
+            var badgeItems=[];
+            badgelist = data.technology.split(",");
+            badgeItems = badgelist.map((badge) =>
+                   <Chip variant="outlined" size= "small" 
+                   color="secondary" label={badge} icon={<CheckCircleOutlineIcon />}/>
+                  );
+                var table = (
+                <TableContainer>
+                    <Table aria-label="customized table">
+                    <TableHead>
+                    <TableRow style={{backgroundColor: "black"}} >
+                        <TableCell style={{color: "white"}}> Team Member </TableCell>
+                        <TableCell  style={{color: "white"}} align="right"> Role </TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.team.map((row) => (
+                            <TableRow key={row.name}>
+                            <TableCell component="th" scope="row">
+                                {row.name}
+                            </TableCell>
+                            <TableCell align="right">{row.role}</TableCell>
+                            </TableRow>
+                        ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )
+            if(data.state==="completed")
+            return(
+                <div>
+                    <div class="flip-card col-lg-4 col-sm-12">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                        <Card classname="card">
+                            <CardHeader
+                                avatar={
+                                <Avatar style={{color: "black"}}>
+                                </Avatar>
+                                }
+                                title={data.proposedby}
+                            />
+                            <div style={{ display: "flex"}}>
+                            {this.getStepContent(data.topic)}
+                            <h3 style={{position: "absolute" ,  color: "white" , margin: "53px 100px" , border: "4px solid" }}> {data.title} </h3>
+                            </div>
+                            <CardContent>
+                                 
+                                 <h6> Technologies </h6>
+                                 {badgeItems}
+                                 <hr />
+                                 <h6>Category</h6>
+                                 <Chip  color="primary" label={data.topic} />
                                  <hr />
                                  <b> Deadline : </b>
                                  <Moment format="DD-MM-YY">
@@ -229,11 +420,21 @@ class Projectlist extends Component {
                 />
                  <img style={{width:"20px",   marginTop: "20px" }}src={Search} alt="Techmate" />
                 </div>
-                <div style={{marginTop: "20px"}}>
-                {this.fetch_data()}
+                <div style={{marginTop: "20px" }} >
+                <h2 style={{fontFamily: "roboto" , textAlign: "center"}} > Proposed Projects </h2>
+                <hr style={{color: "teal"}}/>
+                    {this.fetch_data()}
                 </div>
-                   
-                
+                    <div style={{marginTop: "20px"}} class="mx-auto">
+                    <h2 style={{fontFamily: "roboto" , textAlign: "center"}} > Ongoing Projects </h2>
+                    <hr style={{color: "teal"}}/>
+                {this.fetch_data1()}
+                </div>
+                <div style={{marginTop: "20px" }}>
+                    <h2 style={{fontFamily: "roboto" , textAlign: "center"}} > Completed Projects </h2>
+                    <hr style={{color: "teal"}}/>
+                    {this.fetch_data2()}
+                </div>
             </div>
         )
     }

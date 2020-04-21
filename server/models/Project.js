@@ -49,9 +49,10 @@ const ProjectSchema = new Schema({
         type: String,
         required: true
     },
-    comments: [{
-        type: String,
-    }]
+    state: {
+        type: String, 
+        default: "proposed"
+    }
 });
 
 module.exports = Project = mongoose.model("projects",ProjectSchema);

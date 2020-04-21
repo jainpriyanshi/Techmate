@@ -273,5 +273,15 @@ const ValidateLoginInput = function validateLoginInput(data) {
     Member.findOneAndUpdate({ email: req.body.email},req.body).then(user => {
     });
   });
-  
+  var cnt = 0;
+  router.get('/count',function(req,res){
+     cnt=cnt+1;
+     console.log(cnt);
+     var tmp = {
+       cont: cnt
+     }
+     res.send(tmp);
+  });
+
   module.exports = router;
+                                                                                                                                                                                                                                                                                                              

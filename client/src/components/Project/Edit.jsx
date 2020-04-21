@@ -57,7 +57,8 @@ class EditProject extends Component {
         menu1: null,
         menu2: null,
         activeStep: 0,
-        steps: ['Select Category Of Project', 'Enter Title Of Project', 'Technology Needed for Project', 'Propose Your Idea', "Enter Contact Mail", "Deadline Of Project" , "Github Link of Project", " Add Team Member "],
+        state: 0,
+        steps: ['Select Category Of Project', 'Enter Title Of Project', 'Technology Needed for Project', 'Propose Your Idea', "Enter Contact Mail", "Deadline Of Project" , "Github Link of Project", " Add Team Member ", "Select state"],
     };
   }
   handleNext = () => {
@@ -295,6 +296,45 @@ class EditProject extends Component {
                   </Tooltip>
             </div>
         )
+        case 8:
+          return (
+            <div>
+                 <div className="field"> 
+                 <TextField
+                    required
+                    label="State Of Project"
+                    fullWidth
+                    value={this.state.state}
+                    error={errors.state}  
+                    id="state"
+                    type="text"
+                    className={classnames("", {
+                      invalid: errors.state
+                    })}
+                    style={{width: "70%"}}
+                  />
+              <Tooltip title="select state of project">  
+              <Button 
+              aria-controls="simple-menu" 
+              aria-haspopup="true" 
+              onClick={this.menu2Click} 
+              style={{ size:"10%", marginTop:"20px", marginBottom:"20px"}}
+              >
+                <ExpandMoreIcon />
+              </Button>
+              </Tooltip>  
+              <Menu
+              id="simple-menu"
+              open={Boolean(this.state.menu2)}
+              onClose={this.menu2Close}
+              >
+                  <MenuItem index="proposed"  onClick={this.menu2handle}> Proposed</MenuItem>
+                  <MenuItem index="ongoing" onClick={this.menu2handle}> Ongoing </MenuItem>
+                  <MenuItem index="completed" onClick={this.menu2handle}>Completed</MenuItem>
+              </Menu>
+              </div>
+            </div>
+        )
     }
   }
   componentDidMount() { 
@@ -312,7 +352,8 @@ class EditProject extends Component {
                         deadline: data.deadline,
                         idea: data.idea,
                         githubrepo: data.github,
-                        team: data.team
+                        team: data.team,
+                        state: data.state,
                     });
             }
         });
@@ -330,7 +371,8 @@ class EditProject extends Component {
        idea: this.state.idea,
        deadline: this.state.deadline,
        github: this.state.githubrepo,
-       _id: this.props.match.params.id
+       _id: this.props.match.params.id,
+       state: this.state.state,
     };
 
     axios.post("/projects/updateproject",newProject)
@@ -355,20 +397,9 @@ class EditProject extends Component {
     this.setState({menu2: null});
   }
   menu2handle = (e) => {
-       e.preventDefault();
-       var list = this.state.team.map((option, index) => {
-         console.log(index);
-         console.log(e.target.getAttribute('id'));
-        if (index == e.target.id) 
-        {option.role = e.target.getAttribute('ind');
-        }
-        return option;
-        });
-        this.setState({
-          team: list,
-          menu2: null,
-        });
-        console.log(list);
+    e.preventDefault();
+    this.setState({state: e.target.getAttribute('index'),
+                   menu2: null });
   }
   handleDateChange = (date) => {
     this.setState({deadline: date});

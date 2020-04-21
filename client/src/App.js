@@ -61,7 +61,8 @@ function App() {
             <Route exact path="/forum/show/:id" component={Post} />
             <Route exact path="/forum/post" component={AddPost}/>
             <Route exact path="/forum/editpost/:id" component={EditPost}/>
-            < Footer />
+            
+          
         </Router>
     </div>
     </Provider>

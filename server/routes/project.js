@@ -78,7 +78,6 @@ const ValidateProjectRegister = function validateProjectRegister(data) {
       Project.find({}).then(docs => {
       res.send(docs);
     })
-    
   });
   router.post('/updateproject',(req,res)=>{
     console.log(req.body);

@@ -8,6 +8,15 @@ import {  TextField } from '@material-ui/core';
 import { LockOpen} from '@material-ui/icons';
 import './Auth.css';
 
+var sectionStyle = {
+  position : "absolute",
+  width: "100%",
+  height: "150%",
+ background: `url(${process.env.PUBLIC_URL}/bg1.jpg)` ,
+ backgroundPosition: 'center',
+ backgroundSize: 'cover',
+ backgroundRepeat: 'no-repeat',
+};
 class Generate extends Component {
   constructor() { 
     super();
@@ -48,17 +57,16 @@ class Generate extends Component {
     const { errors } = this.state;
 
     return (
-      <div>
-        <div class="container outer">
+      <div style= {sectionStyle}>
+        <div class="container outer col-lg-7 " style={{right: "0px",  opacity: "1"}}>
           <div  class="inner">
-            <h3 variant='h5'> <LockOpen color="primary" style={{ fontSize: 50 }}/> 
+            <h3 variant='h5'> <LockOpen color="primary" style={{ fontSize: 40}}/> 
               <b>Forgot Password?</b>
             </h3>
-            <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
+            <form noValidate onSubmit={this.onSubmit} >
               <div className="field">
                 <TextField
                 required
-                variant="outlined"
                 label="Email"
                 fullWidth
                 onChange={this.onChange}
@@ -68,7 +76,9 @@ class Generate extends Component {
                 type="email"
                 className={classnames("", {
                   invalid: errors.email || errors.emailnotfound
+
                 })}
+                style={{width: "70%"}}
                 />
               <span className="text-danger">
                 {errors.email}
@@ -77,18 +87,17 @@ class Generate extends Component {
             </div>
             <button 
             type="button" 
-            class="btn btn-primary btn-lg btn-block card-1" 
+            class="btn btn-primary btn-small btn-block card-1 mx-auto" 
             type="submit" 
             style={{      
               borderRadius: "3px",
               letterSpacing: "1.5px",
-              marginTop: "1rem"
+              marginTop: "1rem",
+              width: "70%"
             }}>
               Send OTP
             </button>
-            <br></br>
-            <br></br>
-            <p className="text-secondary">
+            <p style={{color: "grey"}}>
               Don't have an account? <Link to="/register">Register</Link>
             </p>
             <Link to="/login">Login</Link>
