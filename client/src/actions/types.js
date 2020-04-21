@@ -11,3 +11,4 @@ export const REPLY_COMMENT = "REPLY_COMMENT";
 export const DELETE_COMMENT= "DELETE_COMMENT";
 export const DELETE_POST = "DELETE_POST";
 export const LIKE_COMMENT = "LIKE_COMMENT";
+export const GET_CATEGORY = "GET_CATEGORY";

@@ -7,7 +7,7 @@ import { withHistory } from 'slate-history'
 import isHotkey from 'is-hotkey'
 import Moment from 'react-moment';
 import axios from 'axios';
-import { TextField} from '@material-ui/core';
+import { TextField, TextareaAutosize} from '@material-ui/core';
 import { Button, Icon, Toolbar } from './componets'
 import { connect } from 'react-redux';
 import { getPost } from "../../../actions/forumActions";
@@ -29,7 +29,7 @@ const EditPost = ({getPost,match,forum:{post, loading}}) => {
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
-  
+  const [code, setCode] = useState('');
   useEffect(()=>{
     getPost(match.params.id)
   }, [match.params.id])
@@ -40,6 +40,7 @@ const EditPost = ({getPost,match,forum:{post, loading}}) => {
     setDoubt(post.doubt);
     setValue(post.description);
     setCategory(post.category);
+    setCode(post.code);
     }
   }, [post])
 
@@ -57,7 +58,7 @@ const EditPost = ({getPost,match,forum:{post, loading}}) => {
         }
       };
       const description=value;
-      const body = JSON.stringify({  doubt, category, description });
+      const body = JSON.stringify({  doubt, category, description,code });
       console.log(body);
       try {
         const res = await axios.post(`/forum/editpost/${match.params.id}`, body, config);
@@ -75,7 +76,7 @@ const EditPost = ({getPost,match,forum:{post, loading}}) => {
     </Fragment>
   ):(
     <div style={{marginTop:"100px" ,marginLeft:"3%", marginRight:"3%", padding:"3% 3%", textAlign:"center"}}>
-    <h1>EDIR POST </h1>
+    <h1>EDIT POST </h1>
          <form className='form' onSubmit={e => onSubmit(e)}>
              <div style={{marginTop:"30px"}}><h5 style={{textAlign:"left", letterSpacing:"2px"}}>Short Query:</h5>
                          <TextField
@@ -90,12 +91,19 @@ const EditPost = ({getPost,match,forum:{post, loading}}) => {
                          required
                         />
                     </div>
-
+                    
                     <div style={{marginTop:"30px"}}><h5 style={{textAlign:"left", letterSpacing:"2px"}}>Select A Category</h5>
                      <span class="select">
                      <select  name="slct" id="slct" value={category} onChange={e=>{setCategory(e.currentTarget.value); console.log(category)} }>
                       <option selected disabled>Choose an option</option>
                       <option value="Competitive Programming" >Competitive Programming</option>
+                      <option value="Web Development" >Web Development</option>
+                      <option value="App Development" >App Development</option>
+                      <option value="Game Development" >Game Development</option>
+                      <option value="Blockchain" >Blockchain</option>
+                      <option value="Artifical Intelligence" >Artifical Intelligence</option>
+                      <option value="Cloud Comuting" >Cloud Comuting</option>
+                      <option value="Image Processing" >Image Processing</option>
                       <option value="Other">Other</option>
                       </select>
                     </span> 
@@ -117,7 +125,7 @@ const EditPost = ({getPost,match,forum:{post, loading}}) => {
       </Toolbar>
       </div>
       <div>
-      <Editable style={{marginBottom:"10px", paddingBottom:"5px"}}
+      <Editable style={{marginBottom:"10px", paddingBottom:"5px", textAlign:"left", paddingLeft:"5px", paddingRight:"5px", height:"200px" }}
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         placeholder="Enter some rich text…"
@@ -137,9 +145,14 @@ const EditPost = ({getPost,match,forum:{post, loading}}) => {
     </Slate>
     </div>
     </div>
-    <button type="submit">Post</button>
+
+    <div style={{marginTop:"30px"}}><h5 style={{textAlign:"left", letterSpacing:"2px"}}>Share your code</h5>
+    <TextareaAutosize rowsMin={5} style={{width:"100%",  padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#2c3e50", color:"white"}} placeholder="Share your code snippets here" value={code} onChange={e=>{setCode(e.target.value);}}></TextareaAutosize>
+    </div>
+    <button class="btn btn-primary btn-lg" style={{marginTop:"20px", marginBottom:"20px"}} type="submit">Post this question</button>
     </form>
     </div>
+    
   )
 }
 

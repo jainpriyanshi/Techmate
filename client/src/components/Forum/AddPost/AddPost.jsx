@@ -7,7 +7,7 @@ import { withHistory } from 'slate-history'
 import isHotkey from 'is-hotkey'
 import Moment from 'react-moment';
 import axios from 'axios';
-import { TextField} from '@material-ui/core';
+import { TextField, TextareaAutosize} from '@material-ui/core';
 import { ArrowBackIos} from '@material-ui/icons';
 
 import './textEditor.css';
@@ -31,7 +31,7 @@ const AddPost = () => {
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
-  
+  const [code, setCode] = useState('');
   const onChange = e => 
   {
     setDoubt(e.target.value);
@@ -46,7 +46,7 @@ const AddPost = () => {
         }
       };
       const description=value;
-      const body = JSON.stringify({  doubt, category, description });
+      const body = JSON.stringify({  doubt, category, description,code });
       console.log(body);
       try {
         const res = await axios.post(`/forum/`, body, config);
@@ -77,12 +77,19 @@ const AddPost = () => {
                          required
                         />
                     </div>
-
+                    
                     <div style={{marginTop:"30px"}}><h5 style={{textAlign:"left", letterSpacing:"2px"}}>Select A Category</h5>
                      <span class="select">
                      <select  name="slct" id="slct" value={category} onChange={e=>{setCategory(e.currentTarget.value); console.log(category)} }>
                       <option selected disabled>Choose an option</option>
                       <option value="Competitive Programming" >Competitive Programming</option>
+                      <option value="Web Development" >Web Development</option>
+                      <option value="App Development" >App Development</option>
+                      <option value="Game Development" >Game Development</option>
+                      <option value="Blockchain" >Blockchain</option>
+                      <option value="Artifical Intelligence" >Artifical Intelligence</option>
+                      <option value="Cloud Comuting" >Cloud Comuting</option>
+                      <option value="Image Processing" >Image Processing</option>
                       <option value="Other">Other</option>
                       </select>
                     </span> 
@@ -104,7 +111,7 @@ const AddPost = () => {
       </Toolbar>
       </div>
       <div>
-      <Editable style={{marginBottom:"10px", paddingBottom:"5px"}}
+      <Editable style={{marginBottom:"10px", paddingBottom:"5px", textAlign:"left", paddingLeft:"5px", paddingRight:"5px", height:"200px" }}
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         placeholder="Enter some rich text…"
@@ -124,7 +131,11 @@ const AddPost = () => {
     </Slate>
     </div>
     </div>
-    <button type="submit">Post</button>
+
+    <div style={{marginTop:"30px"}}><h5 style={{textAlign:"left", letterSpacing:"2px"}}>Share your code</h5>
+    <TextareaAutosize rowsMin={5} style={{width:"100%",  padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#2c3e50", color:"white"}} placeholder="Share your code snippets here" value={code} onChange={e=>{setCode(e.target.value);}}></TextareaAutosize>
+    </div>
+    <button class="btn btn-primary btn-lg" style={{marginTop:"20px", marginBottom:"20px"}} type="submit">Post this question</button>
     </form>
     </div>
     
@@ -154,7 +165,8 @@ const AddPost = () => {
                           onKeyDown={event => {event.preventDefault()}}              
                         />
                       </Slate>
-                      <p className="text-muted"> Date: <Moment format="DD-MM-YYYY HH:mm" date={post.date}/> &nbsp; Comments:{post.n_comments} &nbsp; Likes: {post.likes}
+                      <TextareaAutosize rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} readonly>{post.code}</TextareaAutosize>
+                      <p className="text-muted"><Moment format="DD-MM-YYYY HH:mm" date={post.date}/> &nbsp; Comments:{post.n_comments} &nbsp; Likes: {post.likes}
                       <div>    
                           <Link to={`/forum/editpost/${post._id}`}><button class="btn btn-link">Edit</button></Link>
                       </div>
@@ -163,7 +175,7 @@ const AddPost = () => {
                       </div>
                       </div>
                       </div>
-                      <Link to ="/forum/post"><h1 style={{letterSpacing:"3.5px", textAlign:"center"}}>Ask another question</h1></Link>
+                      <Link to ="/forum/post"><h1 style={{letterSpacing:"3.5px", textAlign:"center"}}> <button class="btn btn-link" onClick={ ()=>{setPost(null); setDoubt(null); setCategory(null); setValue(initialValue)}}>  Ask another question </button> </h1></Link>
                       </Fragment>
   )
 }
@@ -282,7 +294,7 @@ const initialValue = [
   {
     type: 'paragraph',
     children: [
-      { text: '<Code snippets appreciated. Describe your query here...../> ',  italic: true }
+      { text: '#Description of the query '}
     ],
   },
 ]

@@ -4,24 +4,31 @@ import { Slate, Editable, withReact,useSlate } from 'slate-react'
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {} from '@material-ui/core';
-import { SentimentVerySatisfiedOutlined } from '@material-ui/icons';
-import { getForum, deletePost, like } from "../../actions/forumActions";
+import {TextareaAutosize} from '@material-ui/core';
+import { } from '@material-ui/icons';
+import { getForum, deletePost, like, getCategory, } from "../../actions/forumActions";
 import { Spinner } from 'react-spinners-css';
 import Moment from 'react-moment';
 import { withHistory } from 'slate-history'
+import axios from 'axios';
 
 
-const Forum = ({getForum, errors ,like,deletePost,forum :{forum,loading}, auth:{user}}) => {
+const Forum = ({getForum, errors,getCategory ,like,deletePost,forum :{forum,loading}, auth:{user}}) => {
   useEffect(() => {
     getForum();
   }, []);
 
-  
+  const [category, setCategory] = useState("All");
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
   const [value, setValue] = useState(null)
+
+  const onFilter = async e =>{
+    e.preventDefault();
+    getCategory({category})
+    
+}
 
   return loading||errors.notfound|| errors.notfound|| errors.auth || forum === null ?(
   <Fragment>
@@ -46,9 +53,12 @@ const Forum = ({getForum, errors ,like,deletePost,forum :{forum,loading}, auth:{
                 <div style={{textAlign:"left"}}>
                   <div style={{letterSpacing:"3.5px", textAlign:"center"}}> 
                     <h1>DISCUSSION FORUM</h1>
-                  </div>
-                 <br></br>
-                  <hr></hr>
+                      </div>
+                      <br></br>
+                      <hr></hr> 
+                      
+                    
+
                   <Link to ="/forum/post"><h1 style={{letterSpacing:"3.5px", textAlign:"center"}}>Ask a question</h1></Link>
                   <br></br>
                     {forum.map(post =>(  
@@ -68,7 +78,8 @@ const Forum = ({getForum, errors ,like,deletePost,forum :{forum,loading}, auth:{
                           onKeyDown={event => {event.preventDefault()}}              
                         />
                       </Slate>
-                      <p className="text-muted"> <Moment format="DD-MM-YYYY HH:mm" date={post.date}/> &nbsp; Comments:{post.n_comments} &nbsp; Likes: {post.likes} 
+                      <TextareaAutosize rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} readonly>{post.code}</TextareaAutosize>
+                      <p className="text-muted"> <Moment format="DD-MM-YYYY HH:mm" date={post.date}/> &nbsp; Comments: {post.n_comments} &nbsp; Likes: {post.likes} 
                       <div style={{float:"right" , marginBottom:"100px"}}>
                         <button  class="btn btn-link" onClick={ ()=>{like(post._id)}}>Like</button> 
                         {
@@ -94,6 +105,7 @@ Forum.propTypes = {
     getForum: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired,
     like: PropTypes.func.isRequired,
+    category: PropTypes.func.isRequired,
     
   };
   
@@ -143,7 +155,7 @@ Forum.propTypes = {
   }
   
   export default connect(
-    mapStateToProps, {getForum, deletePost, like}
+    mapStateToProps, {getForum, deletePost, like, getCategory}
   )(withRouter(Forum));
   
 
