@@ -7,8 +7,8 @@ import './footer1.css'
 
 function Footer() {
   return (
-   
-       <AppBar position="static"style={{marginTop: "150px" , backgroundColor:"black",width:"100%", align:"left" , float: "down"}} >
+      <div style={{marginBottom:"0%"}}>
+       <AppBar position="static"style={{ backgroundColor:"black",width:"100%", align:"left" , float: "down",marginBotton:"0%"}} >
            <div style={{marginTop:"2%"}}></div>
             <div class="container">
            <div class="row">
@@ -44,7 +44,7 @@ function Footer() {
         </div>
       </div>
         </AppBar>
-   
+        </div>
   );
 }
 
