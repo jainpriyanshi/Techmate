@@ -98,6 +98,50 @@ const ValidateLoginInput = function validateLoginInput(data) {
       isValid: isEmpty(errors)
     };
   };
+  const ValidateQuery = function validateQuery(data) {
+    let errors = {};
+    data.email = !isEmpty(data.email) ? data.email : "";
+    data.name = !isEmpty(data.name) ? data.name: "";
+    data.query = !isEmpty(data.query) ? data.query: "";
+    if (Validator.isEmpty(data.email)) {
+      errors.email2 = "Email field is required";
+    } 
+    else if (!Validator.isEmail(data.email)) {
+      errors.email2 = "Email is invalid";
+    }
+    if (Validator.isEmpty(data.name)) {
+      errors.name2 = "Name field is required";
+    } 
+    if (Validator.isEmpty(data.query)) {
+      errors.query = "Query field is required";
+    } 
+    return {
+      errors,
+      isValid: isEmpty(errors)
+    };
+  };
+  const ValidateRepresentative = function ValidateRepresentative(data) {
+    let errors = {};
+    data.email = !isEmpty(data.email) ? data.email : "";
+    data.name = !isEmpty(data.name) ? data.name: "";
+    data.college = !isEmpty(data.college) ? data.college: "";
+    if (Validator.isEmpty(data.email)) {
+      errors.email1 = "Email field is required";
+    } 
+    else if (!Validator.isEmail(data.email)) {
+      errors.email1 = "Email is invalid";
+    }
+    if (Validator.isEmpty(data.name)) {
+      errors.name1 = "Name field is required";
+    } 
+    if (Validator.isEmpty(data.college)) {
+      errors.college = "College field is required";
+    } 
+    return {
+      errors,
+      isValid: isEmpty(errors)
+    };
+  };
   const ValidateChangeInput = function validateChangeInput(data) {
     let errors = {};
     data.email = !isEmpty(data.email) ? data.email : "";
@@ -273,6 +317,25 @@ const ValidateLoginInput = function validateLoginInput(data) {
     Member.findOneAndUpdate({ email: req.body.email},req.body).then(user => {
     });
   });
+  router.post('/query',(req,res)=>{
+    const { errors, isValid } = ValidateQuery(req.body);// Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    require('../validations/query').mailQuery(req.body.name,req.body.email,req.body.query)
+    res.send("done");
+  });
+
+  router.post('/representative',(req,res)=>{
+
+    const { errors, isValid } = ValidateRepresentative(req.body);// Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    require('../validations/representative').mailQuery(req.body.name,req.body.email,req.body.college)
+    res.send("done");
+  });
+
   var cnt = 0;
   router.get('/count',function(req,res){
      cnt=cnt+1;
