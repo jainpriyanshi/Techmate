@@ -79,7 +79,7 @@
         codeforces: this.state.codeforces,
         github: this.state.github,
         spoj: this.state.spoj,
-        linedin: this.state.linkedin,
+        linkedin: this.state.linkedin,
         bio: this.state.bio,
         college: this.state.college,
         year: this.state.year,
@@ -122,7 +122,6 @@
                   <h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Your Profile </b></h3>
                     <br></br>
                       <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
-                          
                       <h6>  <b>About You </b></h6>
                           <div className="field">
                           <TextField

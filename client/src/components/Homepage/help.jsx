@@ -8,9 +8,6 @@ import axios from "axios"
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   };
-function Abc(props) {
-     return 1;
-}
 export default class help extends Component {
     constructor(){
         super();    
@@ -48,8 +45,7 @@ export default class help extends Component {
      })
      .catch(err => {
          this.setState({errors: err.response.data});
-     })
-    
+     })   
     };
 
     componentWillReceiveProps(nextProps) {
