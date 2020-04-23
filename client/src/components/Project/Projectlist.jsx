@@ -416,7 +416,7 @@ class Projectlist extends Component {
                     value={this.state.searchstring}
                     id="searchInput"
                     type="text"
-                style={{width: "20%"}}
+                style={{width: "90%"}}
                 />
                  <img style={{width:"20px",   marginTop: "20px" }}src={Search} alt="Techmate" />
                 </div>

@@ -6,14 +6,14 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {TextareaAutosize} from '@material-ui/core';
 import { QuestionAnswer, FilterList, Stars, PersonPin, Delete, Edit} from '@material-ui/icons';
-import { getForum, deletePost, like, getCategory, } from "../../actions/forumActions";
+import { getForum, deletePost, likeForum, getCategory, } from "../../actions/forumActions";
 import { Spinner } from 'react-spinners-css';
 import Moment from 'react-moment';
 import { withHistory } from 'slate-history'
 import axios from 'axios';
 import Alert from '@material-ui/lab/Alert';
 
-const Forum = ({getForum, errors,getCategory ,like,deletePost,forum :{forum,loading}, auth:{user}}) => {
+const Forum = ({getForum, errors,getCategory ,likeForum,deletePost,forum :{forum,loading}, auth:{user}}) => {
   useEffect(() => {
     getForum();
   }, []);
@@ -116,7 +116,7 @@ const Forum = ({getForum, errors,getCategory ,like,deletePost,forum :{forum,load
                       <p className="text-muted"> 
                       <span class="text-monospace"> <Moment format="DD/MM/YY HH:mm" date={post.date}/>&nbsp;</span> 
                              <Link to={`/forum/show/${post._id}`}> <QuestionAnswer/> {post.n_comments} </Link> 
-                             <button  class="btn btn-link" onClick={ ()=>{like(post._id); setLikeAlert(true); setLikePost(post._id)}}><Stars/> {post.likes} </button>
+                             <button  class="btn btn-link" onClick={ ()=>{likeForum(post._id); setLikeAlert(true); setLikePost(post._id)}}><Stars/> {post.likes} </button>
                             {
                                 user.id===post.member &&
                                 <button style={{marginLeft:"2px"}} class="btn btn-link" onClick={ () => { if (window.confirm('Are you sure you wish to delete this item?')){deletePost(post._id);getForum();window.alert("Your Post is deleted")}}}> <Delete/></button>
@@ -152,7 +152,7 @@ Forum.propTypes = {
     forum: PropTypes.object.isRequired,
     getForum: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired,
-    like: PropTypes.func.isRequired,
+    likeForum: PropTypes.func.isRequired,
     category: PropTypes.func.isRequired,
     
   };
@@ -203,7 +203,7 @@ Forum.propTypes = {
   }
   
   export default connect(
-    mapStateToProps, {getForum, deletePost, like, getCategory}
+    mapStateToProps, {getForum, deletePost, likeForum, getCategory}
   )(withRouter(Forum));
   
 

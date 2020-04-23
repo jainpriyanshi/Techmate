@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_FORUM, GET_POST,GET_ERRORS, ADD_COMMENT, GET_CATEGORY, DELETE_POST, LIKE, DELETE_COMMENT, LIKE_COMMENT } from "./types";
+import {GET_FORUM, GET_POST,GET_ERRORS, ADD_COMMENT, GET_CATEGORY, DELETE_POST, LIKE, DELETE_COMMENT, LIKE_COMMENT, LIKE_FORUM } from "./types";
 
 export const getForum = () => async dispatch => {
     try {
@@ -122,6 +122,25 @@ export const getForum = () => async dispatch => {
       
     } catch (err) {
       console.log(err);
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+      
+    }
+  }
+
+
+  export const likeForum = (id) => async dispatch => {
+    try {
+      
+      const res = await axios.post(`/forum/likeforum/${id}`);
+      dispatch({
+        type: LIKE_FORUM,
+        payload: res.data
+      })
+      
+    } catch (err) {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data

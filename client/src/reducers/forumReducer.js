@@ -1,4 +1,4 @@
-import { GET_FORUM, GET_CATEGORY,GET_POST, ADD_COMMENT,LIKE, ADD_POST, DELETE_COMMENT, DELETE_POST, REPLY_COMMENT, LIKE_COMMENT } from "../actions/types";
+import { GET_FORUM, GET_CATEGORY,GET_POST, ADD_COMMENT,LIKE, ADD_POST, DELETE_COMMENT, DELETE_POST, REPLY_COMMENT, LIKE_COMMENT, LIKE_FORUM } from "../actions/types";
 
 const initialState = {
     loading:true,
@@ -43,6 +43,13 @@ export default function(state = initialState, action) {
             ...state,
             post:payload,
             loading:false
+          }
+
+        case LIKE_FORUM:
+          return{
+            ...state,
+            forum:payload,
+            loading:false,
           }
 
       case DELETE_POST:

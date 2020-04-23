@@ -182,6 +182,29 @@ router.post('/like/:id', auth, async(req,res) =>{
 });
 
 
+router.post('/likeforum/:id', auth, async(req,res) =>{  
+  try {
+      const post = await Post.findById(req.params.id);
+      if(!post)
+        {
+          return res.status(404).json({ notfound: 'Post not found' })
+        }
+
+    post.likes = post.likes+1;
+
+    await post.save();
+    const forum =await Post.find({});
+
+    res.json(forum);
+    
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({servererror:'Server Error'});
+  }
+});
+
+
 router.post('/comment/:id', auth, async(req,res) =>{  
   try {
       const user = await Member.findById(req.user.id);

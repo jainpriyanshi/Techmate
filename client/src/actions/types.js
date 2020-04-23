@@ -12,3 +12,4 @@ export const DELETE_COMMENT= "DELETE_COMMENT";
 export const DELETE_POST = "DELETE_POST";
 export const LIKE_COMMENT = "LIKE_COMMENT";
 export const GET_CATEGORY = "GET_CATEGORY";
+export const LIKE_FORUM ="LIKE_FORUM";

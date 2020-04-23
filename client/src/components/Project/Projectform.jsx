@@ -77,8 +77,8 @@ class EditProject extends Component {
                  <div className="field"> 
                  <TextField
                     required
-                    label="Topic Of Project"
-                    fullWidth
+                    label="Category"
+                    halfWidth
                     value={this.state.topic}
                     error={errors.topic}  
                     id="topic"
@@ -88,7 +88,7 @@ class EditProject extends Component {
                     })}
                     style={{width: "70%"}}
                   />
-              <Tooltip title="select category of project">  
+              <Tooltip title="Select category of project">  
               <Button 
               aria-controls="simple-menu" 
               aria-haspopup="true" 
@@ -122,7 +122,7 @@ class EditProject extends Component {
           <TextField
             required
             variant="outlined"
-            label="Title Of Project"
+            label="Title"
             fullWidth
             onChange={this.onChange}
             value={this.state.title}
@@ -142,7 +142,7 @@ class EditProject extends Component {
             <TextField
               required
               variant="outlined"
-              label="Technology Required"
+              label="Technologies"
               fullWidth
               onChange={this.onChange}
               value={this.state.technology}
@@ -184,7 +184,7 @@ class EditProject extends Component {
         <TextField
           required
           variant="outlined"
-          label="Enter Contact Mail"
+          label="Mail"
           fullWidth
           onChange={this.onChange}
           value={this.state.contactmail}
@@ -225,7 +225,7 @@ class EditProject extends Component {
             <TextField
               required
               variant="outlined"
-              label="Enter Github Repo link for this project"
+              label="Link"
               fullWidth
               onChange={this.onChange}
               value={this.state.githubrepo}
@@ -247,29 +247,31 @@ class EditProject extends Component {
                   <Grid item key="index">
                   <div class="input-root">
                   <Tooltip title="Edit Team">    
+                      <div className="field">
                       <TextField
                       label="Team Member"
-                      halfWidth
+                      fullWidth
                       onChange={this._handleTeamChange}
                       value={this.state.team[index].name}
                       id={index}
                       type="text"
-                      style={{ width: "30%",marginTop:"20px", marginBottom:"20px"}}
                       />
+                      </div>
                   </Tooltip>
+                  <div classNamw="field">
                   <TextField
                       label="Role(Mentor/Mentee)"
-                      halfWidth
+                      fullwidth
                       value={this.state.team[index].role}
                       onChange={this._handleRoleChange}
                       id={index}
                       type="text"
-                      style={{ width: "30%",marginTop:"20px", marginBottom:"20px"}}
                       />
+                      </div>
                   
                   <Tooltip title="Delete Team">
                     <IconButton aria-label="delete" onClick={() => this._deleteTeamMember(index)}
-                      visible="flase" style={{size:"10%", marginTop:"20px", marginBottom:"20px"}}>
+                      visible="flase" style={{size:"10px", marginTop:"10px", marginBottom:"10px"}}>
                         <Delete />
                       </IconButton>
                   </Tooltip>
@@ -286,10 +288,10 @@ class EditProject extends Component {
                       width:"100%",
                       borderRadius: "3px",
                       letterSpacing: "1.5px",
-                      marginBottom: "20px",
-                      marginTop: "20px"
+                      marginBottom: "10px",
+                      marginTop: "10px"
                     }}>
-                        
+       
                     <Add/>
                   </Button>
 

@@ -45,7 +45,7 @@ class profilebyid extends Component {
               <Card class="col-lg-8 container">
                <div >
                 
-                  <div id="user-profile-2" class="user-profile" style={{marginTop:"10%"}}>
+                  <div id="user-profile-2" class="user-profile" style={{marginTop:"100px"}}>
                     <div>
                        <h2 style={{marginTop:"10%",textAlign:"center"}}>My Profile
                        <Link to ="/profile/me/update"> <EditIcon color="black"/>  </Link></h2>
