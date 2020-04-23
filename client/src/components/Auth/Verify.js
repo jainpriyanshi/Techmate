@@ -37,11 +37,8 @@ class Verify extends Component {
   }
   render() {
     return (
-      <div class="deadcentre">
-        <h1>Please &nbsp; &nbsp; &nbsp; &nbsp; wait....</h1>
-        <div class="deadcentre">
-        <Spinner />
-        </div>
+      <div class="center">
+        <h1 style={{marginTop: "20%" , marginBottom: "20%"}}>Please  <Spinner /> wait.. .</h1>   
       </div>
     );
   }

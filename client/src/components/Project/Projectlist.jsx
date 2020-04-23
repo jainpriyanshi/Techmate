@@ -152,11 +152,11 @@ class Projectlist extends Component {
             )
             if(data.state==="proposed")
             return(
-                <div>
-                    <div class="flip-card col-lg-4 col-sm-12">
+                <div class="col-lg-4 container">
+                    <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                        <Card classname="card">
+                        <div classname="card">
                             <CardHeader
                                 avatar={
                                 <Avatar style={{color: "black"}}>
@@ -181,7 +181,7 @@ class Projectlist extends Component {
                                    {data.deadline} 
                                 </Moment>
                             </CardContent>
-                            </Card>
+                            </div>
                         </div>
                         <div class="flip-card-back">
                         <Card>
@@ -247,8 +247,8 @@ class Projectlist extends Component {
             )
             if(data.state==="ongoing")
             return(
-                <div>
-                    <div class="flip-card col-lg-4 col-sm-12">
+                <div class="col-lg-4 container">
+                    <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                         <div classname="card">
@@ -342,11 +342,11 @@ class Projectlist extends Component {
             )
             if(data.state==="completed")
             return(
-                <div>
-                    <div class="flip-card col-lg-4 col-sm-12">
+                <div class="col-lg-4 container">
+                    <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                        <Card classname="card">
+                        <div classname="card">
                             <CardHeader
                                 avatar={
                                 <Avatar style={{color: "black"}}>
@@ -371,7 +371,7 @@ class Projectlist extends Component {
                                    {data.deadline} 
                                 </Moment>
                             </CardContent>
-                            </Card>
+                            </div>
                         </div>
                         <div class="flip-card-back">
                         <Card>
@@ -420,20 +420,23 @@ class Projectlist extends Component {
                 />
                  <img style={{width:"20px",   marginTop: "20px" }}src={Search} alt="Techmate" />
                 </div>
-                <div style={{marginTop: "20px" }} >
-                <h2 style={{fontFamily: "roboto" , textAlign: "center"}} > Proposed Projects </h2>
-                <hr style={{color: "teal"}}/>
-                    {this.fetch_data()}
+                    <div style={{marginTop: "20px"}}>
+                    <h2 style={{fontFamily: "roboto" , textAlign: "center"}} > Proposed Projects </h2>
+                    <hr style={{color: "teal"}}/>
+                    <div class="row"> {this.fetch_data()} </div>
+                
                 </div>
-                    <div style={{marginTop: "20px"}} class="mx-auto">
+                <div style={{marginTop: "20px"}}>
                     <h2 style={{fontFamily: "roboto" , textAlign: "center"}} > Ongoing Projects </h2>
                     <hr style={{color: "teal"}}/>
-                {this.fetch_data1()}
+                    <div class="row"> {this.fetch_data1()} </div>
+                
                 </div>
-                <div style={{marginTop: "20px" }}>
+                <div style={{marginTop: "20px"}}>
                     <h2 style={{fontFamily: "roboto" , textAlign: "center"}} > Completed Projects </h2>
                     <hr style={{color: "teal"}}/>
-                    {this.fetch_data2()}
+                    <div class="row"> {this.fetch_data2()} </div>
+                
                 </div>
             </div>
         )

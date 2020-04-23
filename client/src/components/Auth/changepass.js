@@ -10,13 +10,13 @@ import { VpnKey} from '@material-ui/icons';
 import './Auth.css';
 
 var sectionStyle = {
-  position : "absolute",
-  width: "100%",
-  height: "170%",
+  height: "120vh",
  background: `url(${process.env.PUBLIC_URL}/bg1.jpg)` ,
  backgroundPosition: 'center',
  backgroundSize: 'cover',
  backgroundRepeat: 'no-repeat',
+ backgroundAttachment: "static",
+ marginTop: "60px"
 };
 
 class Changepass extends Component {
@@ -62,7 +62,7 @@ class Changepass extends Component {
 
     return (
       <div style={sectionStyle}>
-      <div class="container outer col-lg-4" style={{float: "left"}}>
+      <div class="container outer col-lg-7" style={{float: "right"}}>
       <div  class="inner">
       <h3 variant='h5'> <VpnKey style={{ fontSize: 50 }}/> <b>Change Password </b></h3>
         <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>

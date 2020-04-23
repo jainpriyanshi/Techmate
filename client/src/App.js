@@ -84,7 +84,7 @@ function App() {
               <PrivateRoute exact path="/forum/editpost/:id" component={EditPost}/>
             </Switch> 
             <Route exact path="/help" component={Help}/>
-          
+            <Footer />
         </Router>
     </div>
     </Provider>

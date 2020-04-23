@@ -202,7 +202,7 @@ class Navbar extends Component {
          {this.sideList1('left')}
          </Drawer>
           <Link to ="/">
-          <img style={{width:"50px"}}src={process.env.PUBLIC_URL + '/logo2.png'} alt="Techmate" />
+          <img style={{width:"70px"}}src={process.env.PUBLIC_URL + '/logo4.png'} alt="Techmate" />
           </Link>
           <div style={{ marginLeft: "auto"}}>
           {this.props.auth.user.name?

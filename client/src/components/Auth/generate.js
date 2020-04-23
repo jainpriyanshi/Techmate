@@ -9,13 +9,13 @@ import { LockOpen} from '@material-ui/icons';
 import './Auth.css';
 
 var sectionStyle = {
-  position : "absolute",
-  width: "100%",
-  height: "150%",
+  height: "120vh",
  background: `url(${process.env.PUBLIC_URL}/bg1.jpg)` ,
  backgroundPosition: 'center',
  backgroundSize: 'cover',
  backgroundRepeat: 'no-repeat',
+ backgroundAttachment: "static",
+ marginTop: "60px"
 };
 class Generate extends Component {
   constructor() { 
@@ -57,8 +57,8 @@ class Generate extends Component {
     const { errors } = this.state;
 
     return (
-      <div style= {sectionStyle}>
-        <div class="container outer col-lg-7 " style={{right: "0px",  opacity: "1"}}>
+      <div style={sectionStyle}>
+        <div class="container outer col-lg-7" style={{float: "right"}}>
           <div  class="inner">
             <h3 variant='h5'> <LockOpen color="primary" style={{ fontSize: 40}}/> 
               <b>Forgot Password?</b>

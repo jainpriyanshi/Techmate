@@ -10,13 +10,13 @@ import { AccountCircle} from '@material-ui/icons';
 import './Auth.css';
 
 var sectionStyle = {
-  position : "absolute",
-  width: "100%",
-  height: "150%",
+  height: "125vh",
  background: `url(${process.env.PUBLIC_URL}/bg1.jpg)` ,
  backgroundPosition: 'center',
  backgroundSize: 'cover',
  backgroundRepeat: 'no-repeat',
+ backgroundAttachment: "static",
+ marginTop: "60px"
 };
 
 class Login extends Component {
@@ -60,11 +60,11 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
     return (
-        <div style={sectionStyle} >
-          <div class="container col-lg-8" >
+      <div style={sectionStyle}>
+        <div class="container outer col-lg-7" style={{float: "right"}}>
             <div  class="inner">
               <h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Login </b></h3>
-              <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px"}}>
+              <form noValidate onSubmit={this.onSubmit} style={{ margin: "10px 10px"}}>
               <div className="field">
                 <TextField
                   required
