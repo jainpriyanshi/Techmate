@@ -115,10 +115,10 @@ export const getForum = () => async dispatch => {
     try {
       console.log(id);
       const res = await axios.post(`/forum/like/${id}`);
-      // dispatch({
-      //   type: LIKE,
-      //   payload: res.data
-      // })
+      dispatch({
+        type: LIKE,
+        payload: res.data
+      })
       
     } catch (err) {
       console.log(err);

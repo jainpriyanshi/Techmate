@@ -7,8 +7,8 @@ import { withHistory } from 'slate-history'
 import isHotkey from 'is-hotkey'
 import Moment from 'react-moment';
 import axios from 'axios';
-import { TextField, TextareaAutosize} from '@material-ui/core';
-import { ArrowBackIos} from '@material-ui/icons';
+import { TextField, TextareaAutosize, } from '@material-ui/core';
+import { ArrowBackIos, PersonPin, Edit} from '@material-ui/icons';
 
 import './textEditor.css';
 import { Button, Icon, Toolbar } from './componets'
@@ -79,7 +79,7 @@ const AddPost = () => {
                     </div>
                     
                     <div style={{marginTop:"30px"}}><h5 style={{textAlign:"left", letterSpacing:"2px"}}>Select A Category</h5>
-                     <span class="select">
+                     <span class="select" style={{width:"100%"}}>
                      <select  name="slct" id="slct" value={category} onChange={e=>{setCategory(e.currentTarget.value); console.log(category)} }>
                       <option selected disabled>Choose an option</option>
                       <option value="Competitive Programming" >Competitive Programming</option>
@@ -133,7 +133,7 @@ const AddPost = () => {
     </div>
 
     <div style={{marginTop:"30px"}}><h5 style={{textAlign:"left", letterSpacing:"2px"}}>Share your code</h5>
-    <TextareaAutosize rowsMin={5} style={{width:"100%",  padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#2c3e50", color:"white"}} placeholder="Share your code snippets here" value={code} onChange={e=>{setCode(e.target.value);}}></TextareaAutosize>
+    <TextareaAutosize required rowsMin={5} style={{width:"100%",  padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#2c3e50", color:"white"}} placeholder="Share your code snippets here" value={code} onChange={e=>{setCode(e.target.value);}}></TextareaAutosize>
     </div>
     <button class="btn btn-primary btn-lg" style={{marginTop:"20px", marginBottom:"20px"}} type="submit">Post this question</button>
     </form>
@@ -141,20 +141,16 @@ const AddPost = () => {
     
   ):(
     <Fragment>
-        
         <div style={{marginTop:"100px"}}>
-                <div>
-                  <div style={{letterSpacing:"3.5px", textAlign:"center"}}> 
-                    <h1> <Link to="/forum"><ArrowBackIos/></Link> &nbsp;&nbsp; VIEW YOUR QUESTION</h1>
-                  </div>
-                  <br></br>
-                   <div >
-                    <div key={post._id} style={{margin:"3% 2%" , padding:"3% 3%"}} class="border rounded">
-                      <h2> <Link to={`/forum/show/${post._id}`}> {post.doubt} </Link></h2>
-                      <h5>
-                      <span class="badge badge-pill badge-dark"> {post.category}</span>
-                      <span class="badge badge-pill badge-light"> Posted by : <Link to = {`/profile/${post.member}`}>{post.name}</Link> </span> 
-                      </h5>
+          <div>
+            <div style={{letterSpacing:"3.5px", textAlign:"center"}}> 
+              <h1> <Link to="/forum"><ArrowBackIos/></Link> &nbsp;&nbsp; REVIEW</h1>
+            </div>
+            <br></br>
+            <div key={post._id} style={{margin:"3% 2%"}} >
+                     <div class="border rounded" style={{padding:"5% 5%"}}>
+                      <h6> <PersonPin/><b><Link to = {`/profile/${post.member}`}>{post.name}</Link></b> asks <Link to={`/forum/show/${post._id}`}> {post.doubt} </Link> </h6>
+                      
                       <Slate editor={editor} value={post.description} onChange={value => setValue(post.description)}>
                         <Editable  style={{padding:"1% 1%"}}
                           renderElement={renderElement}
@@ -165,18 +161,20 @@ const AddPost = () => {
                           onKeyDown={event => {event.preventDefault()}}              
                         />
                       </Slate>
-                      <TextareaAutosize rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} readonly>{post.code}</TextareaAutosize>
-                      <p className="text-muted"><Moment format="DD-MM-YYYY HH:mm" date={post.date}/> &nbsp; Comments:{post.n_comments} &nbsp; Likes: {post.likes}
-                      <div>    
-                          <Link to={`/forum/editpost/${post._id}`}><button class="btn btn-link">Edit</button></Link>
-                      </div>
-                      </p>
-                      </div>
-                      </div>
-                      </div>
-                      </div>
-                      <Link to ="/forum/post"><h1 style={{letterSpacing:"3.5px", textAlign:"center"}}> <button class="btn btn-link" onClick={ ()=>{setPost(null); setDoubt(null); setCategory(null); setValue(initialValue)}}>  Ask another question </button> </h1></Link>
-                      </Fragment>
+                      <TextareaAutosize rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} readOnly>{post.code}</TextareaAutosize>
+                    </div>
+                    </div>
+                  
+          </div>
+        </div>
+        <div style={{letterSpacing:"3.5px", textAlign:"center"}}>
+        <Link to ="/forum/post"><span> 
+          <button class="btn btn-link" onClick={ ()=>{setPost(null); setDoubt(null); setCategory(null); setValue(initialValue)}}>Ask another question</button> </span>
+        </Link>
+        &nbsp;|&nbsp;
+        <Link to={`/forum/editpost/${post._id}`}><button class="btn btn-link">Edit</button></Link>
+        </div>
+        </Fragment>
   )
 }
 

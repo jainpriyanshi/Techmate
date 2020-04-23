@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {TextareaAutosize} from '@material-ui/core';
-import { } from '@material-ui/icons';
+import { QuestionAnswer, FilterList, Stars, PersonPin, Delete, Edit} from '@material-ui/icons';
 import { getForum, deletePost, like, getCategory, } from "../../actions/forumActions";
 import { Spinner } from 'react-spinners-css';
 import Moment from 'react-moment';
 import { withHistory } from 'slate-history'
 import axios from 'axios';
-
+import Alert from '@material-ui/lab/Alert';
 
 const Forum = ({getForum, errors,getCategory ,like,deletePost,forum :{forum,loading}, auth:{user}}) => {
   useEffect(() => {
@@ -23,11 +23,16 @@ const Forum = ({getForum, errors,getCategory ,like,deletePost,forum :{forum,load
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
   const [value, setValue] = useState(null)
-
-  const onFilter = async e =>{
-    e.preventDefault();
-    getCategory({category})
+  const[likeAlert, setLikeAlert]= useState(false);
+  const[likePost, setLikePost]= useState(null);
     
+  const onSubmit = async e =>{
+    e.preventDefault();
+    console.log(category);
+    if(category==="All")
+      getForum();
+    else
+    getCategory({category});
 }
 
   return loading||errors.notfound|| errors.notfound|| errors.auth || forum === null ?(
@@ -50,24 +55,53 @@ const Forum = ({getForum, errors,getCategory ,like,deletePost,forum :{forum,load
   (
     <Fragment>
         <div style={{marginTop:"100px"}}>
-                <div style={{textAlign:"left"}}>
-                  <div style={{letterSpacing:"3.5px", textAlign:"center"}}> 
-                    <h1>DISCUSSION FORUM</h1>
-                      </div>
-                      <br></br>
-                      <hr></hr> 
+          <div style={{textAlign:"left"}}>
+            <div style={{letterSpacing:"3.5px", textAlign:"center"}}> 
+              <h1>FORUM</h1>
+            </div>                   
+            <br></br>
+            <hr/>
+            <div style={{marginTop:"30px", marginBottom:"30px"}}>
+              <div class="container">
+              <div class="row" style={{height:'250px' }}>
+                <div class="col-xs-4 col-sm-4" style={{marginTop:"40px", textAlign:"center"}}>
+                  <button type="button" class="btn btn-md btn-dark"><Link to ="/forum/post" style={{textDecoration:"none", color:"white", letterSpacing:"3px"}}>POST QUERY</Link></button>
+                  <h5 style={{marginTop:"30px", marginBottom:"10px"}}> Posts </h5>
+                  <h3><b>{forum.length}</b></h3>
+                </div >
+                <div class="col-xs-12 col-sm-8">
+                  <div style={{margin:"20px 10px"}}>
+                    <div style={{padding:"10px 50px", textAlign:"center"}} class="border-left">
+                      <h5 style={{margin:"10px 5px"}}> Select a Category </h5>
+                        <form className='form' onSubmit={e => onSubmit(e)}> 
+                          <div>
+                          <span class="select" style={{width:"100%", marginTop:"20px"}}>
+                                      <select  name="slct" id="slct" value={category} onChange={e=>{setCategory(e.currentTarget.value); console.log(category)} }>
+                                        <option selected disabled>Choose an option</option>
+                                        <option value="All" >All</option>
+                                        <option value="Competitive Programming" >Competitive Programming</option>
+                                        <option value="Web Development" >Web Development</option>
+                                        <option value="App Development" >App Development</option>
+                                        <option value="Game Development" >Game Development</option>
+                                        <option value="Blockchain" >Blockchain</option>
+                                        <option value="Artifical Intelligence" >Artifical Intelligence</option>
+                                        <option value="Cloud Comuting" >Cloud Comuting</option>
+                                        <option value="Image Processing" >Image Processing</option>
+                                        <option value="Other">Other</option>
+                                        </select>
+                          </span>
+                          </div>
+                          <button type="submit" class="btn btn-sm btn-dark" style={{marginTop:"10px"}}> <FilterList/> Filter </button>
+                          </form>
+                  </div>
+                </div>
+              </div>
+              {forum.map(post =>(  
+                    <div key={post._id} style={{margin:"3% 2%"}}  class="col-lg-12">
+                    <div>
+                     <div class="border rounded" style={{padding:"2% 2%"}}>
+                      <h6> <PersonPin/><b><Link to = {`/profile/${post.member}`}>{post.name}</Link></b> asks <Link to={`/forum/show/${post._id}`}> {post.doubt} </Link> </h6>
                       
-                    
-
-                  <Link to ="/forum/post"><h1 style={{letterSpacing:"3.5px", textAlign:"center"}}>Ask a question</h1></Link>
-                  <br></br>
-                    {forum.map(post =>(  
-                    <div key={post._id} style={{margin:"3% 2%" , padding:"3% 3%"}} class="border rounded">
-                      <h2> <Link to={`/forum/show/${post._id}`}> {post.doubt} </Link></h2>
-                      <h5>
-                      <span class="badge badge-pill badge-dark"> {post.category}</span>
-                      <span class="badge badge-pill badge-light"> Posted by : <Link to = {`/profile/${post.member}`}>{post.name}</Link> </span> 
-                      </h5>
                       <Slate editor={editor} value={post.description} onChange={value => setValue(post.description)}>
                         <Editable  style={{padding:"1% 1%"}}
                           renderElement={renderElement}
@@ -78,21 +112,35 @@ const Forum = ({getForum, errors,getCategory ,like,deletePost,forum :{forum,load
                           onKeyDown={event => {event.preventDefault()}}              
                         />
                       </Slate>
-                      <TextareaAutosize rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} readonly>{post.code}</TextareaAutosize>
-                      <p className="text-muted"> <Moment format="DD-MM-YYYY HH:mm" date={post.date}/> &nbsp; Comments: {post.n_comments} &nbsp; Likes: {post.likes} 
-                      <div style={{float:"right" , marginBottom:"100px"}}>
-                        <button  class="btn btn-link" onClick={ ()=>{like(post._id)}}>Like</button> 
-                        {
-                          user.id===post.member &&
-                           <button style={{marginLeft:"2px", padding:"0px 0px"}} class="btn btn-link" onClick={ () => {deletePost(post._id);getForum()}}> Delete</button>
-                        }
+                      <TextareaAutosize readOnly rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} >{post.code}</TextareaAutosize>
+                      <p className="text-muted"> 
+                      <span class="text-monospace"> <Moment format="DD/MM/YY HH:mm" date={post.date}/>&nbsp;</span> 
+                             <Link to={`/forum/show/${post._id}`}> <QuestionAnswer/> {post.n_comments} </Link> 
+                             <button  class="btn btn-link" onClick={ ()=>{like(post._id); setLikeAlert(true); setLikePost(post._id)}}><Stars/> {post.likes} </button>
+                            {
+                                user.id===post.member &&
+                                <button style={{marginLeft:"2px"}} class="btn btn-link" onClick={ () => { if (window.confirm('Are you sure you wish to delete this item?')){deletePost(post._id);getForum();window.alert("Your Post is deleted")}}}> <Delete/></button>
+                            }
+                            {
+                              user.id===post.member &&
+                              <Link to={`/forum/editpost/${post._id}`}><button class="btn btn-link"><Edit/></button></Link>
+                            }
+                      </p>
+                       {likeAlert && post._id===likePost && <Alert onClose={() => {setLikeAlert(false)}} severity="success">You Liked this post</Alert>}
                       </div>
-
-                      </p>            
+                      </div>
                     </div>
                     ))}
 
-                </div>
+            </div>   
+            </div>
+            
+            
+            
+           
+            
+            </div>
+            </div>
           </div>
     </Fragment>
   );

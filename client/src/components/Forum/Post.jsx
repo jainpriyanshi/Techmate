@@ -2,8 +2,8 @@ import React, { Fragment, useState, useEffect , useCallback, useMemo} from 'reac
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {TextField} from '@material-ui/core';
-import {ArrowBackIos} from '@material-ui/icons';
+import {TextField, TextareaAutosize} from '@material-ui/core';
+import {ArrowBackIos, QuestionAnswer, FilterList, Stars, PersonPin, Delete, Edit, Reply} from '@material-ui/icons';
 import { getPost, addComment, like , deleteComment, deletePost,replyComment,likeComment} from "../../actions/forumActions";
 import { Spinner } from 'react-spinners-css';
 import Moment from 'react-moment';
@@ -11,7 +11,7 @@ import axios from 'axios';
 import { withHistory } from 'slate-history'
 import { createEditor } from 'slate'
 import { Slate, Editable, withReact,useSlate } from 'slate-react'
-
+import Alert from '@material-ui/lab/Alert';
 const Post = ({getPost, like,addComment,deleteComment, likeComment,deletePost,replyComment,errors,forum :{post,loading},auth:{user}, match}) => {
   useEffect(() => {
     getPost(match.params.id);
@@ -27,7 +27,8 @@ const Post = ({getPost, like,addComment,deleteComment, likeComment,deletePost,re
   const {comment} = formData;
   const [showReplyForm, setShowReplyForm]=useState(false);
   const [commentid, setCommentid]=useState('');
-  
+  const[likeAlert, setLikeAlert]= useState(false);
+  const [color, setColor]=useState("white");
 
 
 
@@ -53,6 +54,7 @@ const Post = ({getPost, like,addComment,deleteComment, likeComment,deletePost,re
   const onSubmit = async e =>{
       e.preventDefault();
       addComment(match.params.id, {comment});
+      setLikeAlert(true);
   }  
 
 
@@ -75,51 +77,50 @@ const Post = ({getPost, like,addComment,deleteComment, likeComment,deletePost,re
       ):
   (
     <Fragment>
-        {console.log(post)}
+        
         <div style={{marginTop:"100px"}}>
                 <div>
                   <div style={{letterSpacing:"3.5px", textAlign:"center"}}> 
-                    <h1> <Link to="/forum"><ArrowBackIos/></Link> &nbsp; DISCUSSION FORUM</h1>
+                    <h1> <Link to="/forum"><ArrowBackIos/></Link> &nbsp;FORUM</h1>
                   </div>
                   <br></br>
-                   <div >
-                    <div key={post._id} style={{margin:"3% 2%" , padding:"3% 3%"}} class="border rounded">
-                      <h2> <Link to={`/forum/show/${post._id}`}> {post.doubt} </Link></h2>
-                      <h5>
-                      <span class="badge badge-pill badge-dark"> {post.category}</span>
-                      <span class="badge badge-pill badge-light"> Posted by : <Link to = {`/profile/${post.member}`}>{post.name}</Link> </span> 
-                      </h5>
-                      <Slate editor={editor} value={post.description} onChange={value => setValue(post.description)}>
-                        <Editable  style={{padding:"1% 1%"}}
-                          renderElement={renderElement}
-                          renderLeaf={renderLeaf}
-                          spellCheck
-                          autoFocus
-                          readOnly
-                          onKeyDown={event => {event.preventDefault()}}              
-                        />
-                      </Slate>
-                      <p className="text-muted"> Date: <Moment format="DD-MM-YYYY HH:mm" date={post.date}/> &nbsp; Comments:{post.n_comments} &nbsp; Likes: {post.likes}
-                      <div>    
-                      <button  class="btn btn-link" onClick={ ()=>{like(post._id)}}>Like</button> 
-                      {
-                          user.id===post.member &&
-                          <button  class="btn btn-link" onClick={ () => {deletePost(post._id); window.location.href = "/forum"}}>Delete</button>
-                        
-                      }
-
-
+                   <div>
+                      <div key={post._id} style={{margin:"3% 2%"}} >
+                        <div class="border rounded" style={{padding:"2% 2%"}}>
+                          <h6> <PersonPin/><b><Link to = {`/profile/${post.member}`}>{post.name}</Link></b> asks <Link to={`/forum/show/${post._id}`}> {post.doubt} </Link> </h6>
+                      
+                          <Slate editor={editor} value={post.description} onChange={value => setValue(post.description)}>
+                            <Editable  style={{padding:"1% 1%"}}
+                              renderElement={renderElement}
+                              renderLeaf={renderLeaf}
+                              spellCheck
+                              autoFocus
+                              readOnly
+                              onKeyDown={event => {event.preventDefault()}}/>
+                          </Slate>
+                      <TextareaAutosize rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} readonly>{post.code}</TextareaAutosize>
+                      <p className="text-muted"> 
+                      <span class="text-monospace"> <Moment format="DD/MM/YY HH:mm" date={post.date}/>&nbsp;</span> 
+                      <Link to={`/forum/show/${post._id}`}> <QuestionAnswer/> {post.n_comments} </Link> 
+                      <button  class="btn btn-link" onClick={ ()=>{like(post._id);}}><Stars/> {post.likes} </button>
                         {
                           user.id===post.member &&
-                          <Link to={`/forum/editpost/${post._id}`}><button class="btn btn-link">Edit</button></Link>
-                        
+                          <button  class="btn btn-link" onClick={ () => {deletePost(post._id); window.location.href = "/forum"}}>Delete</button>
                         }
-                      </div>
-                      </p> 
-                      </div>
-                      <div style={{textAlign:"center" ,margin:"5% 2%"}}>
-                      <form className='form' onSubmit={e => onSubmit(e)}>
-                      <div className="text-danger"> {errors.comment} </div>
+                        {
+                          user.id===post.member &&
+                          <Link to={`/forum/editpost/${post._id}`}><button class="btn btn-link"><Edit/></button></Link>
+                        }
+                      </p>
+                    </div>
+                  </div>
+
+
+
+
+                <div style={{textAlign:"center" ,margin:"5% 2%"}}>
+                  <form className='form' onSubmit={e => onSubmit(e)}>
+                    <div className="text-danger"> {errors.comment} </div>
                       <TextField
                          variant="outlined"
                          type="text"
@@ -131,83 +132,59 @@ const Post = ({getPost, like,addComment,deleteComment, likeComment,deletePost,re
                          required
                         />
                       <button type="submit" class="btn btn-lg btn-dark" style={{margin:"3px 10px"}}>Reply</button>
-                        </form>
-                        </div>
-  
-                      {post.comments.map((comment) =>(
-                        <Fragment key={comment._id}>
-                      <div style={{margin:"1% 2%" , padding:"1% 3%"}} class="border-bottom rounded">
-                        <b>
-                      <span class="badge badge-pill badge-dark"> <Link to = {`/profile/${comment.user}`}>{comment.name}</Link></span>
-                      <span class="badge badge-pill badge-light"> Replying to: @<Link to = {`/profile/${comment.tagUserId}`}>{comment.tagUserName}</Link> </span> 
-                      </b>
-                      <p>  {comment.comment} </p>
-                      <p className="text-muted"> Date: <Moment format="DD-MM-YYYY HH:mm" date={comment.date}/> &nbsp; &nbsp; Likes: {comment.likes}  
-                      <div>  
-                      {user.id===comment.user && <button class="btn btn-link" onClick={()=> {deleteComment(post._id, comment._id)}}>Delete</button>}
-                          <button  class="btn btn-link" onClick={()=> {setShowReplyForm(!showReplyForm); setCommentid(comment._id) }}>Reply</button>
-                          <button class="btn btn-link" onClick={ ()=>{likeComment(post._id, comment._id)}}>Like</button>
-                          {
-                             showReplyForm && (comment._id===commentid) &&
-                             <form className='form' onSubmit={e => onSubmit_r(e, post._id, commentid)}>
-                              <TextField
-                                variant="outlined"
-                                type="text"
-                                label="Comment"
-                                value={reply}
-                                name="comment"
-                                onChange={e => onChange_r(e)}
-                                style={{width: "47%"}}
-                                required
-                                />
-                              <button type="submit" class="btn btn-lg btn-dark" style={{margin:"3px 10px"}}>Reply</button>
-                                </form>
-
-                          }
-                        </div>
-                      </p> 
-                      </div>
-                          
-{/*                           
-                          <div> Comment : {comment.comment} </div>
-                          <div>Name: <Link to = {`/profile/${comment.user}`}>{comment.name}</Link> </div>
-                          <div>Replying to <Link to = {`/profile/${comment.tagUserId}`}>{comment.tagUserName}</Link></div>
-                          Date: <Moment date={comment.date}/>
-                          <div>Likes{comment.likes}</div>
-                          {user.id===comment.user && <button onClick={()=> {deleteComment(post._id, comment._id)}}>Delete</button>}
-                          <button onClick={()=> {setShowReplyForm(!showReplyForm); setCommentid(comment._id) }}>Reply</button>
-                          <button onClick={ ()=>{likeComment(post._id, comment._id)}}>Like</button>
-                          {
-                             showReplyForm && (comment._id===commentid) &&
-                             <form className='form' onSubmit={e => onSubmit_r(e, post._id, commentid)}>
-                              <input
-                                type="text"
-                                label="Comment"
-                                value={reply}
-                                name="comment"
-                                onChange={e => onChange_r(e)}
-                                style={{width: "47%"}}
-                                required
-                                />
-                              <button> Submit</button>
-                                </form> */}
-
-                          }
-    
-                          
-                        </Fragment>
-                      ))}
-                          
-
-
-
-
-
-                    </div>
-
+                  </form>
                 </div>
-          </div>
-    </Fragment>
+                <div style={{width:"80%", margin:"2% 10%"}}>
+                  {likeAlert && <Alert onClose={() => {setLikeAlert(false)}} severity="success">You posted to this thread</Alert>}
+                </div>
+
+
+
+
+
+                    {post.comments.map((comment) =>(
+                    <Fragment key={comment._id}>
+                      <div style={{margin:"2% 2%"}}>
+                        <div style={{padding:"2% 2%"}} class="border rounded">
+                            <h6>
+                              
+                            <PersonPin/><span><Link to = {`/profile/${comment.user}`}><b>{comment.name}</b></Link></span>
+                            <br/>
+                            <p style={{marginTop:"2%"}}> @<Link to = {`/profile/${comment.tagUserId}`}>{comment.tagUserName}  </Link>{comment.comment} </p>
+                            </h6>            
+                            <p className="text-muted"><Moment format="DD-MM-YYYY HH:mm" date={comment.date}/>  
+                              <span>  
+                              {user.id===comment.user && <button class="btn btn-link" onClick={()=> {if (window.confirm('Are you sure you wish to delete this item?')){deleteComment(post._id, comment._id)}}}><Delete/></button>}
+                                  <button  class="btn btn-link" onClick={()=> {setShowReplyForm(!showReplyForm); setCommentid(comment._id) }}><Reply/></button>
+                                  <button class="btn btn-link" onClick={ ()=>{likeComment(post._id, comment._id)}}><Stars/>{comment.likes}</button>
+                                  {
+                                    showReplyForm && (comment._id===commentid) &&
+                                    <form className='form' onSubmit={e => onSubmit_r(e, post._id, commentid)}>
+                                      <TextField
+                                        variant="outlined"
+                                        type="text"
+                                        label="Comment"
+                                        value={reply}
+                                        name="comment"
+                                        onChange={e => onChange_r(e)}
+                                        style={{width: "47%"}}
+                                        required
+                                        />
+                                      <button type="submit" class="btn btn-lg btn-dark" style={{margin:"3px 10px"}}>Reply</button>
+                                        </form>
+                                  }
+                                </span>
+                            </p>
+                      </div> 
+                    </div>
+                    </Fragment>))}
+
+
+
+                  </div>
+                </div>
+            </div>
+      </Fragment>
   );
 };
 

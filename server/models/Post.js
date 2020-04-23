@@ -36,6 +36,10 @@ const PostSchema = new Schema({
        required: true
     },
 
+    code:{
+      type:"String",
+      required:true
+    },
 
     comments: [
         {
