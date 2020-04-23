@@ -185,7 +185,7 @@ class Navbar extends Component {
   render() {
   return (
     <div  >
-       <AppBar  style={{backgroundColor:"white",width:"100%"}}>
+       <AppBar  style={{backgroundColor:"white",width:"100%" }}>
         <Toolbar>
         <IconButton
            
@@ -202,7 +202,7 @@ class Navbar extends Component {
          {this.sideList1('left')}
          </Drawer>
           <Link to ="/">
-          <img style={{width:"70px"}}src={process.env.PUBLIC_URL + '/logo4.png'} alt="Techmate" />
+          <img style={{width:"80px"}}src={process.env.PUBLIC_URL + '/logo4.png'} alt="Techmate" />
           </Link>
           <div style={{ marginLeft: "auto"}}>
           {this.props.auth.user.name?
@@ -218,8 +218,6 @@ class Navbar extends Component {
           </button>
           :null
           }
-          
-
           <IconButton
            
             onClick={this.toggleDrawer('right', true)}> <SearchIcon />

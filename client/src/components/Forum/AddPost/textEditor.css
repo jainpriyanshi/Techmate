@@ -1,33 +1,16 @@
-@media screen and (max-width: 540px) {
-    .editor{
-        width: 100%;
-        margin: 10px auto;
-        padding: 20px;
-        text-align: center;
-        
-    }
+@media screen and (max-width: 578px) {
+  .custom-margin{
+    margin-top: "270px";
+  }
 }
 
 
-@media screen and (min-width: 540px) and (max-width: 780px) {
-    .editor{
-        width: 80%;
-        margin: 10px auto;
-        padding: 20px;
-        text-align: center;
-        
-    }
+@media screen and (min-width: 577px) {
+  .custom-margin{
+    margin-top: "500px";
+  }
 }
 
-@media screen and (min-width: 780px)  {
-    .editor{
-        width: 50%;
-        margin: 10px auto;
-        padding: 20px;
-        text-align: left;
-        
-    }
-}
 
 
 select {
@@ -80,4 +63,4 @@ select {
   .select:hover::after {
     color: #f39c12;
   }
-  
+

@@ -53,12 +53,12 @@ class EditProject extends Component {
           role: "",
         }],
         open : false,
+        openerror: false,
         errors: {},
         menu1: null,
         menu2: null,
         activeStep: 0,
-        state: 0,
-        steps: ['Select Category Of Project', 'Enter Title Of Project', 'Technology Needed for Project', 'Propose Your Idea', "Enter Contact Mail", "Deadline Of Project" , "Github Link of Project", " Add Team Member ", "Select state"],
+        steps: ['Select Category Of Project', 'Enter Title Of Project', 'Technology Needed for Project', 'Propose Your Idea', "Enter Contact Mail", "Deadline Of Project" , "Github Link of Project", " Add Team Member " , "Select state"],
     };
   }
   handleNext = () => {
@@ -68,6 +68,29 @@ class EditProject extends Component {
   handleBack = () => {
     this.setState({activeStep: this.state.activeStep-1});
   };
+  componentDidMount() { 
+    axios.get("/projects/getdata")
+    .then((response) => {
+        response.data.map(data=>{
+            console.log(this.props.match.params.id)
+            if(data._id===this.props.match.params.id)
+            {
+                this.setState({ 
+                    contactmail: data.contactmail,
+                        topic: data.topic,
+                        title: data.title,
+                        technology: data.technology,
+                        deadline: data.deadline,
+                        idea: data.idea,
+                        githubrepo: data.github,
+                        team: data.team,
+                        state: data.state,
+                    });
+            }
+        });
+    });
+
+  }
   getStepContent(step) {
     const { errors } = this.state
     switch (step) {
@@ -337,29 +360,6 @@ class EditProject extends Component {
         )
     }
   }
-  componentDidMount() { 
-    axios.get("/projects/getdata")
-    .then((response) => {
-        response.data.map(data=>{
-            console.log(this.props.match.params.id)
-            if(data._id===this.props.match.params.id)
-            {
-                this.setState({ 
-                    contactmail: data.contactmail,
-                        topic: data.topic,
-                        title: data.title,
-                        technology: data.technology,
-                        deadline: data.deadline,
-                        idea: data.idea,
-                        githubrepo: data.github,
-                        team: data.team,
-                        state: data.state,
-                    });
-            }
-        });
-    });
-
-  }
   onSubmit = e => {
     e.preventDefault();
     const newProject = {
@@ -371,12 +371,24 @@ class EditProject extends Component {
        idea: this.state.idea,
        deadline: this.state.deadline,
        github: this.state.githubrepo,
-       _id: this.props.match.params.id,
+       proposedid: this.props.auth.user.id,
+       proposedby: this.props.auth.user.name,
        state: this.state.state,
+       _id: this.props.match.params.id
     };
 
     axios.post("/projects/updateproject",newProject)
-    .then(this.setState({open: true}))
+    .then(res=> 
+      {this.setState({
+        open : true,
+        errors: {},
+      })
+    })
+      .catch(err => {
+        console.log(err.response.data);
+        this.setState({errors: err.response.data , activeStep: 0, openerror: true});
+    })  
+    console.log(this.state);
     
   }; 
   menuClick = (event) => {
@@ -409,12 +421,11 @@ class EditProject extends Component {
     if (reason === 'clickaway') {
       return;
     }
-    this.setState({open: false});
+    this.setState({open: false , openerror: false});
   };
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
@@ -460,13 +471,12 @@ class EditProject extends Component {
     console.log(this.state);
   }
   render() {
-    const { errors } = this.state
     return (
         <div>
           <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
            <div class="container">
                 <div  class="inner">
-                  <h1>Edit Project</h1> 
+                  <h1>Propose A Project</h1> 
                     <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
                     <Stepper activeStep={this.state.activeStep} orientation="vertical"  >
                     {this.state.steps.map((label, index) => (
@@ -518,6 +528,11 @@ class EditProject extends Component {
                              Information updated Successfully
                           </Alert>
                         </Snackbar>
+                        <Snackbar style={{width: "100%"}}open={this.state.openerror} autoHideDuration={4000} onClose={this.handleClose}>
+                          <Alert onClose={this.handleClose} severity="error">
+                              Fill all Information
+                          </Alert>
+                        </Snackbar>
                     </form>
                 </div>
           </div>
@@ -542,3 +557,4 @@ export default connect(
   mapStateToProps,
   { proposeProject }
 )(withRouter(EditProject));
+

@@ -19,6 +19,10 @@ const ValidateDoubt = function validateDoubt(data) {
     if (Validator.isEmpty(data.category)) {
       errors.category = "Select a category";
     }  
+
+    if (Validator.isEmpty(data.code)) {
+      errors.code = "Select a code";
+    } 
     
     else{
       
@@ -88,7 +92,7 @@ router.get('/showpost/:id', auth, async(req, res)=>{
 
 
 
-  router.get('/category', auth, async(req, res)=>{
+  router.post('/category', auth, async(req, res)=>{
     try {
       console.log(req.body.category);
       const posts= await Post.find({category: req.body.category});
@@ -121,7 +125,8 @@ router.post('/', auth, async(req,res) =>{
         category: req.body.category,
         name: user.name,
         date: new Date(),
-        description: req.body.description
+        description: req.body.description,
+        code: req.body.code,
         
       });
 

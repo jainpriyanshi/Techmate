@@ -168,7 +168,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
   };
 
   const Member = require ("../models/Member");
-
+  const Count = require ("../models/Count");
   router.post("/verify", (req, res) => {
     
     const { errors, isValid } = ValidateOTPInput(req.body);
@@ -336,14 +336,28 @@ const ValidateLoginInput = function validateLoginInput(data) {
     res.send("done");
   });
 
-  var cnt = 0;
   router.get('/count',function(req,res){
-     cnt=cnt+1;
-     console.log(cnt);
-     var tmp = {
-       cont: cnt
-     }
-     res.send(tmp);
+    console.log("hey");
+    var cont = 0;
+    Count.findOne({}).then(docs => {
+       if(docs)
+       {
+         cont=docs.cnt;
+         Count.findOneAndUpdate({},{cnt: cont+1})
+         .then(res.send({cnt: cont+1}))
+          
+       }
+       else
+       {
+         var New = new Count({
+           cnt: 1
+         });
+         New.save()
+         .then( res.send({cnt: 1}));
+       }
+    })                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+   
   });
 
   module.exports = router;

@@ -53,6 +53,7 @@ class EditProject extends Component {
           role: "",
         }],
         open : false,
+        openerror: false,
         errors: {},
         menu1: null,
         menu2: null,
@@ -308,11 +309,34 @@ class EditProject extends Component {
        idea: this.state.idea,
        deadline: this.state.deadline,
        github: this.state.githubrepo,
-       _id: this.props.match.params.id
+       proposedby: this.props.auth.user.name,
+       proposedid: this.props.auth.user.id
     };
 
-    this.props.proposeProject(newProject);
-    this.setState({open: true});
+    axios.post("/projects/propose",newProject)
+    .then(res=> 
+      {this.setState({
+        contactmail: "",
+        topic: "",
+        title: "",
+        technology: "",
+        deadline: new Date('2020-05-20T21:11:54'),
+        idea: "",
+        githubrepo: "",
+        team: [{
+          name: "",
+          role: "",
+        }],
+        open : true,
+        errors: {},
+        activeStep: 0
+      })
+    })
+      .catch(err => {
+        console.log(err.response.data);
+        this.setState({errors: err.response.data , activeStep: 0, openerror: true});
+    })  
+    console.log(this.state);
     
   }; 
   menuClick = (event) => {
@@ -356,12 +380,11 @@ class EditProject extends Component {
     if (reason === 'clickaway') {
       return;
     }
-    this.setState({open: false});
+    this.setState({open: false , openerror: false});
   };
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
@@ -407,7 +430,6 @@ class EditProject extends Component {
     console.log(this.state);
   }
   render() {
-    const { errors } = this.state
     return (
         <div>
           <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
@@ -463,6 +485,11 @@ class EditProject extends Component {
                         <Snackbar style={{width: "100%"}}open={this.state.open} autoHideDuration={4000} onClose={this.handleClose}>
                           <Alert onClose={this.handleClose} severity="success">
                              Information updated Successfully
+                          </Alert>
+                        </Snackbar>
+                        <Snackbar style={{width: "100%"}}open={this.state.openerror} autoHideDuration={4000} onClose={this.handleClose}>
+                          <Alert onClose={this.handleClose} severity="error">
+                              Fill all Information
                           </Alert>
                         </Snackbar>
                     </form>
