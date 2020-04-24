@@ -38,7 +38,6 @@ const PostSchema = new Schema({
 
     code:{
       type:"String",
-      required:true
     },
 
     comments: [

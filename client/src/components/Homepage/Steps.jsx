@@ -62,7 +62,7 @@ class Steps extends React.Component {
     <img src={user} class="icon1 "/>
       <Fade left>
           <h1> Register</h1>
-          <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis iure molestias nam rerum fuga, nostrum error magni harum dolorem labore commodi! Quasi, repudiandae? Perferendis veniam voluptates error vero voluptate tenetur!</p>
+          <p> Register free of cost to get access to projects, discussion forums, and mentor profiles. Complete your profile to help the community know you better.</p>
          
         </Fade>
         </div>
@@ -72,7 +72,7 @@ class Steps extends React.Component {
         <Fade right>
            
           <h1>Meet Mentors</h1>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis iure molestias nam rerum fuga, nostrum error magni harum dolorem labore commodi! Quasi, repudiandae? Perferendis veniam voluptates error vero voluptate tenetur!</p>
+          <p>Browse or propose projects in any field of your choice. Search and contact mentors or team up with members of the community with a mentor for consulting or even go solo.</p>
          
         </Fade>
         </div>
@@ -82,7 +82,7 @@ class Steps extends React.Component {
         <Fade left>
             
           <h1>Code</h1>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis iure molestias nam rerum fuga, nostrum error magni harum dolorem labore commodi! Quasi, repudiandae? Perferendis veniam voluptates error vero voluptate tenetur!</p>
+          <p>Collaborate and Code on gitHub, ask your queries on discussion forums, get in touch to your mentor and teammates through their registered email.</p>
          
         </Fade>
         </div>
@@ -92,8 +92,7 @@ class Steps extends React.Component {
         <Fade right>
             
           <h1>Excel</h1>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis iure molestias nam rerum fuga, nostrum error magni harum dolorem labore commodi! Quasi, repudiandae? Perferendis veniam voluptates error vero voluptate tenetur!</p>
-         
+          <p>Finish projects and improve your resume, get experience and most importantly gain a lot of knowledge from the community.</p>         
         </Fade>
         </div>
       </div>

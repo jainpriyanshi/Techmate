@@ -6,14 +6,14 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {TextareaAutosize} from '@material-ui/core';
 import { QuestionAnswer, FilterList, Stars, PersonPin, Delete, Edit} from '@material-ui/icons';
-import { getForum, deletePost, likeForum, getCategory, } from "../../actions/forumActions";
+import { getForum, deletePost, likeForum, getCategory, getUserPost } from "../../actions/forumActions";
 import { Spinner } from 'react-spinners-css';
 import Moment from 'react-moment';
 import { withHistory } from 'slate-history'
 import axios from 'axios';
 import Alert from '@material-ui/lab/Alert';
 
-const Forum = ({getForum, errors,getCategory ,likeForum,deletePost,forum :{forum,loading}, auth:{user}}) => {
+const Forum = ({getForum, errors,getCategory,getUserPost ,likeForum,deletePost,forum :{forum,loading}, auth:{user}}) => {
   useEffect(() => {
     getForum();
   }, []);
@@ -31,6 +31,8 @@ const Forum = ({getForum, errors,getCategory ,likeForum,deletePost,forum :{forum
     console.log(category);
     if(category==="All")
       getForum();
+    else if(category==="My Posts")
+      getUserPost();
     else
     getCategory({category});
 }
@@ -80,6 +82,7 @@ const Forum = ({getForum, errors,getCategory ,likeForum,deletePost,forum :{forum
                                       <select  name="slct" id="slct" value={category} onChange={e=>{setCategory(e.currentTarget.value); console.log(category)} }>
                                         <option selected disabled>Choose an option</option>
                                         <option value="All" >All</option>
+                                        <option value="My Posts" >My Posts</option>
                                         <option value="Competitive Programming" >Competitive Programming</option>
                                         <option value="Web Development" >Web Development</option>
                                         <option value="App Development" >App Development</option>
@@ -116,7 +119,10 @@ const Forum = ({getForum, errors,getCategory ,likeForum,deletePost,forum :{forum
                           onKeyDown={event => {event.preventDefault()}}              
                         />
                       </Slate>
-                      <TextareaAutosize readOnly rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} >{post.code}</TextareaAutosize>
+                      {
+                        post.code!=="" && <TextareaAutosize readOnly rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} >{post.code}</TextareaAutosize>
+                      }
+                      
                       <p className="text-muted"> 
                       <span class="text-monospace"> <Moment format="DD/MM/YY HH:mm" date={post.date}/>&nbsp;</span> 
                              <Link to={`/forum/show/${post._id}`}> <QuestionAnswer/> {post.n_comments} </Link> 
@@ -151,6 +157,7 @@ Forum.propTypes = {
     deletePost: PropTypes.func.isRequired,
     likeForum: PropTypes.func.isRequired,
     category: PropTypes.func.isRequired,
+    getUserPost:PropTypes.func.isRequired,
     
   };
   
@@ -200,7 +207,7 @@ Forum.propTypes = {
   }
   
   export default connect(
-    mapStateToProps, {getForum, deletePost, likeForum, getCategory}
+    mapStateToProps, {getForum, deletePost, likeForum, getCategory, getUserPost}
   )(withRouter(Forum));
   
 

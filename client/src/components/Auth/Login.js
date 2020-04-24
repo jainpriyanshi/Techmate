@@ -65,6 +65,12 @@ class Login extends Component {
             <div  class="inner">
               <h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Login </b></h3>
               <form noValidate onSubmit={this.onSubmit} style={{ margin: "10px 10px"}}>
+              <span className="text-danger" style={{padding:"10px 3px"}}>
+                {errors.emailnotverified}
+                {
+                  errors.emailnotverified && <span>. Check your Email for verification link</span>
+                }
+                </span>
               <div className="field">
                 <TextField
                   required

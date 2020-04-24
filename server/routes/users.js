@@ -275,7 +275,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
       }
       else if(!user.isVerified)
       {
-        return res.status(404).json({emailnotverified: "email not verified"})
+        return res.status(404).json({emailnotverified: "Email not verified"})
       };
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {

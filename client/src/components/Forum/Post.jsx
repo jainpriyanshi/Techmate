@@ -98,7 +98,9 @@ const Post = ({getPost, like,addComment,deleteComment, likeComment,deletePost,re
                               readOnly
                               onKeyDown={event => {event.preventDefault()}}/>
                           </Slate>
-                      <TextareaAutosize rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} readonly>{post.code}</TextareaAutosize>
+                          {
+                        post.code!=="" && <TextareaAutosize readOnly rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} >{post.code}</TextareaAutosize>
+                      }
                       <p className="text-muted"> 
                       <span class="text-monospace"> <Moment format="DD/MM/YY HH:mm" date={post.date}/>&nbsp;</span> 
                       <Link to={`/forum/show/${post._id}`}> <QuestionAnswer/> {post.n_comments} </Link> 
