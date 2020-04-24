@@ -9,11 +9,12 @@ import hello from '../Images/hello.jpg';
 import avatar from '../Images/avatar.jpg';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import './Contact.css';
+import dev1 from "../Images/dev1.jpeg"
 const styles = (theme) => ({
   root: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(4),
-  },
+  },  
   images: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -92,8 +93,8 @@ function ProductCategories(props) {
   const team =[
     {
       name: 'Priyanshi Jain',
-      description : 'hey , I am a Sophomore at IIT Jodhpur',
-      url: avatar,
+      description : 'Hey , I am a Sophomore at IIT Jodhpur',
+      url: dev1,
       mail: "mailto:jain.23@iitj.ac.in",
       github: "https://github.com/jainpriyanshi",
       linkidin: "https://www.linkedin.com/in/priyanshi-jain-a3262a188"
@@ -149,34 +150,26 @@ function ProductCategories(props) {
       </div>
       <div style={{marginTop: "20px"}} >
        <h1 style={{fontFamily: "Roboto" , textAlign : "center" , color: "teal" ,  marginTop: "10px", marginBottom: "10px"}} > Our Team </h1> 
-       <div class="row mx-auto ">
+       <div class="row">
        {team.map((t) => (
-          <div class="flip-card col-lg-4 ">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-            <div
-              className={classes.imageSrc}
-              style={{
-                backgroundImage: `url(${t.url})`,
-              }}
-            />
-            </div>
-            <div class="flip-card-back">
-                 <h2 style={{marginTop:"8px", fontFamily: "Roboto"}}> {t.name} </h2>
-                  <p>{t.description}</p>
-                  
-                  <a href={t.linkidin} >
-                    <LinkedInIcon style={{ color: "black" }}/>
-                  </a>
-                  <a href={t.github} style ={{marginLeft: "10px"}} >
-                    <GitHubIcon style={{ color: "black" }}/>
-                  </a>
-                  <a href={t.mail} style ={{marginLeft: "10px"}} >
-                    <MailIcon style={{ color: "black" }}/>
-                  </a>
-            </div>
-          </div>
-          </div>
+           <div class="col-lg-4">
+           <div class="card profile-card-3">
+               <div class="background-block">
+                   <img src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="profile-sample1" class="background"/>
+               </div>
+               <div class="profile-thumb-block">
+                   <img src={t.url} alt="profile-image" class="profile"/>
+               </div>
+               <div class="card-content">
+                   <h2>{t.name}<small>Developer</small> <small>{t.description}</small></h2>
+                   <div class="icon-block">
+                     <a href={t.github}> <GitHubIcon style={{color:"black"}}/></a>
+                     <a href={t.mail}> <MailIcon style={{color:"black"}}/></a>
+                     <a href={t.linkedin}> <LinkedInIcon style={{color:"black"}}/> </a>
+                    </div>
+                   </div>
+               </div>
+       </div>
         ))} 
         </div>
        
