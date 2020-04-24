@@ -114,13 +114,17 @@ class Navbar extends Component {
     <div class="container" style={{width: "200px"}}>
        <div class="text-dec" style={{paddingTop:"5%"}}>
         <IconButton onClick={this.toggleDrawer(side, false)} >
-          <h6>Back &nbsp;<ArrowBackIosIcon  />   
+          <h6 style={{marginLeft: "60px"}}>Back &nbsp;<ArrowBackIosIcon  />   
           </h6>
         </IconButton>
         <hr />
         </div>
         {this.props.auth.user.id ?
           <div>
+            <div style={{color: "black", fontFamily: "roboto"}}>
+                   <h5>  Hey {this.props.auth.user.name} </h5>
+                </div > 
+                <hr />
              <List>
              <ListItem >
              <ListItemIcon> <FaceIcon/> </ListItemIcon>
@@ -154,7 +158,7 @@ class Navbar extends Component {
               </ListItem>
               <ListItem >
               <ListItemIcon> <GroupIcon/> </ListItemIcon>
-                <Link to = "/contact" style={{color: "black" , fontFamily: "roboto"}}>
+                <Link to = "/team" style={{color: "black" , fontFamily: "roboto"}}>
                   <h5> Team </h5>
                 </Link>
               </ListItem>

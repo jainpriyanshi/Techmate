@@ -49,7 +49,7 @@ function App() {
         <Router>
             <Navbar />
             <Route exact path="/" component={Homepage} />
-            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/team" component={Contact} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />            
             <Route exact path="/verify" component={Verify} /> 
