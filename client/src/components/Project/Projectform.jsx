@@ -334,6 +334,7 @@ class EditProject extends Component {
         errors: {},
         activeStep: 0
       })
+      this.props.history.push("/project")
     })
       .catch(err => {
         console.log(err.response.data);

@@ -65,7 +65,8 @@ class Navbar extends Component {
   }
 
   sideList = side => (
-    <div class="container">
+    <div class="container" style={{width: "200px"}}
+    onClick={this.toggleDrawer(side,false)}>
        <div class="text-dec" style={{paddingTop:"5%"}}>
         <IconButton onClick={this.toggleDrawer(side, false)} >
           <h6>Back &nbsp;<ArrowForwardIosIcon  />   
@@ -111,7 +112,8 @@ class Navbar extends Component {
       </div>
   );
   sideList1 = side => (
-    <div class="container" style={{width: "200px"}}>
+    <div class="container" style={{width: "200px"}} 
+    onClick={this.toggleDrawer(side,false)}>
        <div class="text-dec" style={{paddingTop:"5%"}}>
         <IconButton onClick={this.toggleDrawer(side, false)} >
           <h6 style={{marginLeft: "60px"}}>Back &nbsp;<ArrowBackIosIcon  />   

@@ -22,6 +22,7 @@ export default class help extends Component {
             name2: "",
             open1: false,
             open2: false,
+            openerror: false,
         }
     }
     onChange = e => {
@@ -45,7 +46,7 @@ export default class help extends Component {
         errors:{}});
      })
      .catch(err => {
-         this.setState({errors: err.response.data});
+         this.setState({errors: err.response.data , openerror: true});
      })   
     };
 
@@ -64,6 +65,7 @@ export default class help extends Component {
         }
         this.setState({open1: false});
         this.setState({open2: false});
+        this.setState({openerror: false});
       };
     
     onSubmit2 = e => {
@@ -83,7 +85,7 @@ export default class help extends Component {
         errors: {}});
     })
     .catch(err => {
-        this.setState({errors: err.response.data});
+        this.setState({errors: err.response.data, openerror: true});
     })
     };
     render() {
@@ -240,6 +242,11 @@ export default class help extends Component {
                     <Snackbar style={{width: "100%"}}open={this.state.open2} autoHideDuration={4000} onClose={this.handleClose}>
                           <Alert onClose={this.handleClose} severity="success">
                              Request Posted Succesfully
+                          </Alert>
+                        </Snackbar>
+                        <Snackbar style={{width: "100%"}}open={this.state.openerror} autoHideDuration={4000} onClose={this.handleClose}>
+                          <Alert onClose={this.handleClose} severity="error">
+                              Fill all Information
                           </Alert>
                         </Snackbar>
                     </form>
