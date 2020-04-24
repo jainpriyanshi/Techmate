@@ -1,14 +1,12 @@
 import React from 'react';
 import {Link} from "react-router-dom"; 
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import { BottomNavigation } from '@material-ui/core';
 import './footer1.css'
 
 function Footer() {
   return (
       <div style={{marginBottom:"0%"}}>
-       <AppBar position="static"style={{ backgroundColor:"black",width:"100%", align:"left" , float: "down",marginBotton:"0%"}} >
+       <AppBar position="static" style={{ backgroundColor:"black",width:"100%", align:"left" , float: "down",marginBotton:"0%"}} >
            <div style={{marginTop:"2%"}}></div>
             <div class="container">
            <div class="row">

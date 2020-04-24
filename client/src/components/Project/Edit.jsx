@@ -32,6 +32,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import {Link} from "react-router-dom"
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -472,7 +473,8 @@ class EditProject extends Component {
   }
   render() {
     return (
-        <div>
+      <div style={{ marginTop : "70px"}}>
+      <span style={{marginLeft: "10px"}}>    <Link to ="/" style={{color: "grey"}}> Home </Link> / <Link to ="/project" style={{color: "grey"}}> Project</Link> /  Edit</span>
           <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
            <div class="container">
                 <div  class="inner">

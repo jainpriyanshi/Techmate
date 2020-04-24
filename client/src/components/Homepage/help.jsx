@@ -4,6 +4,7 @@ import classnames from "classnames";
 import MuiAlert from '@material-ui/lab/Alert';
 import Snackbar from "@material-ui/core/Snackbar";
 import axios from "axios"
+import {Link} from "react-router-dom"
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -88,7 +89,9 @@ export default class help extends Component {
     render() {
         const {errors} = this.state
         return (
-            <div style={{ marginTop : "10px"}} class="row mx-auto">
+            <div style={{ marginTop : "70px"}}>
+            <span style={{marginLeft: "10px"}}>    <Link to ="/" style={{color: "grey"}}> Home </Link> / <Link to ="/help"> Help</Link></span>
+            <div class="row mx-auto">
                 <div class = "col-lg-4  card inner">
                     <p> Have any query , Feel free to ask your doubt</p>
                     <form noValidate onSubmit={this.onSubmit1} >
@@ -241,6 +244,7 @@ export default class help extends Component {
                         </Snackbar>
                     </form>
                 </div>
+            </div>
             </div>
         )
     }

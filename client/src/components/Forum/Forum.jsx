@@ -37,7 +37,7 @@ const Forum = ({getForum, errors,getCategory ,likeForum,deletePost,forum :{forum
 
   return loading||errors.notfound|| errors.notfound|| errors.auth || forum === null ?(
   <Fragment>
-  <div class="deadcentre">
+  <div class="deadcentre" style={{marginBottom: "100px"}}>
         <h1>Please &nbsp; &nbsp; &nbsp; &nbsp; wait....</h1>
         
         <div class="deadcentre">
@@ -53,8 +53,9 @@ const Forum = ({getForum, errors,getCategory ,likeForum,deletePost,forum :{forum
   </Fragment>
       ):
   (
-    <Fragment>
-        <div style={{marginTop:"100px"}}>
+    <div style={{ marginTop : "70px"}}>
+            <span style={{marginLeft: "10px"}}>    <Link to ="/" style={{color: "grey"}}> Home </Link> / <Link to ="/forum"> Forum</Link></span>
+       <div style={{marginTop:"100px" }} style={{marginBottom: "100px"}}>
           <div style={{textAlign:"left"}}>
             <div style={{letterSpacing:"3.5px", textAlign:"center"}}> 
               <h1>FORUM</h1>
@@ -96,11 +97,14 @@ const Forum = ({getForum, errors,getCategory ,likeForum,deletePost,forum :{forum
                   </div>
                 </div>
               </div>
-              {forum.map(post =>(  
+              
+            </div>   
+            </div>
+            {forum.map(post =>(  
                     <div key={post._id} style={{margin:"3% 2%"}}  class="col-lg-12">
                     <div>
-                     <div class="border rounded" style={{padding:"2% 2%"}}>
-                      <h6> <PersonPin/><b><Link to = {`/profile/${post.member}`}>{post.name}</Link></b> asks <Link to={`/forum/show/${post._id}`}> {post.doubt} </Link> </h6>
+                    <div class="border rounded" style={{padding:"2% 2%"}}>
+                    <h6> <PersonPin/><b><Link to = {`/profile/${post.member}`}>{post.name}</Link></b> asks <Link to={`/forum/show/${post._id}`}> {post.doubt} </Link> </h6>
                       
                       <Slate editor={editor} value={post.description} onChange={value => setValue(post.description)}>
                         <Editable  style={{padding:"1% 1%"}}
@@ -132,17 +136,10 @@ const Forum = ({getForum, errors,getCategory ,likeForum,deletePost,forum :{forum
                     </div>
                     ))}
 
-            </div>   
-            </div>
-            
-            
-            
-           
-            
             </div>
             </div>
           </div>
-    </Fragment>
+    </div>
   );
 };
 

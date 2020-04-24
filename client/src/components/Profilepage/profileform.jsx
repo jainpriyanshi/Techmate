@@ -8,7 +8,7 @@
   import {Button, Grid,Tooltip , IconButton, Snackbar} from '@material-ui/core';
   import MuiAlert from '@material-ui/lab/Alert';
   import { AccountCircle, Add,Delete, GitHub} from '@material-ui/icons';
-
+  import {Link} from "react-router-dom"
   import CC from '../Images/codechef.jpg';
   import CF from '../Images/codeforces.png';
   import SPOJ from "../Images/spoj.jpeg";
@@ -115,7 +115,8 @@
     }
     render() {
       return (
-          <div>
+        <div style={{ marginTop : "70px"}}>
+        <span style={{marginLeft: "10px"}}>    <Link to ="/" style={{color: "grey"}}> Home </Link> / <Link to ="/myprofile" style={{color: "grey"}}> Myprofile</Link> / <Link to ="/profile/me/update"> Edit</Link></span>
             <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
             <div class="container">
                   <div  class="inner">

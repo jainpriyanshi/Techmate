@@ -406,6 +406,8 @@ class Projectlist extends Component {
       }
     render() {
         return (
+            <div style={{ marginTop : "70px"}}>
+            <span style={{marginLeft: "10px"}}>    <Link to ="/" style={{color: "grey"}}> Home </Link> / <Link to ="/project"> Project</Link></span>
             <div style={{marginTop: "100px"}} class="container" >
               <div style={{   paddingTop:"10px", textAlign: "center"}}>
                 <h1 style={{fontFamily: "roboto"}}> Projects </h1>
@@ -436,7 +438,7 @@ class Projectlist extends Component {
                     <h2 style={{fontFamily: "roboto" , textAlign: "center"}} > Completed Projects </h2>
                     <hr style={{color: "teal"}}/>
                     <div class="row"> {this.fetch_data2()} </div>
-                
+                  </div>
                 </div>
             </div>
         )

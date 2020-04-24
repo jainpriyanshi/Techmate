@@ -189,8 +189,8 @@ class profilebyid extends Component {
     }
     render() {
         return (
-          <div>
-          
+            <div style={{ marginTop : "70px"}}>
+            <span style={{marginLeft: "10px"}}>    <Link to ="/" style={{color: "grey"}}> Home </Link> / <Link to ="/myprofile"> myprofile </Link></span>
            
             <div>
                 {this.fetch_users()}

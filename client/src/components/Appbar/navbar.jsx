@@ -184,7 +184,7 @@ class Navbar extends Component {
   );
   render() {
   return (
-    <div  >
+    <div  >                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
        <AppBar  style={{backgroundColor:"white",width:"100%" }}>
         <Toolbar>
         <IconButton
