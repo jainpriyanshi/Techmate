@@ -10,6 +10,7 @@ import avatar from '../Images/avatar.jpg';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import './Contact.css';
 import dev1 from "../Images/dev1.jpeg"
+import dev2 from "../Images/dev2.jpg"
 const styles = (theme) => ({
   root: {
     marginTop: theme.spacing(8),
@@ -102,7 +103,7 @@ function ProductCategories(props) {
     {
       name: 'Parul Jain',
       description : 'Hey , I am a Sophomore at IIT Jodhpur',
-      url: avatar,
+      url: dev2,
       mail: "mailto:jain.26@iitj.ac.in",
       github: "https://github.com/jparul26",
       linkidin: "https://www.linkedin.com/in/parul-jain-2b958a17b/"
