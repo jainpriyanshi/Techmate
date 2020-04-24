@@ -10,7 +10,8 @@ const ValidateDoubt = function validateDoubt(data) {
     let errors = {};
     data.doubt = !isEmpty(data.doubt) ? data.doubt : "";
     data.category = !isEmpty(data.category) ? data.category : "";
-  
+    data.code = !isEmpty(data.code) ? data.code : "";
+    
     if (Validator.isEmpty(data.doubt)) {
       errors.doubt = "Post can't be empty";
     } 
@@ -20,9 +21,6 @@ const ValidateDoubt = function validateDoubt(data) {
       errors.category = "Select a category";
     }  
 
-    if (Validator.isEmpty(data.code)) {
-      errors.code = "Select a code";
-    } 
     
     else{
       

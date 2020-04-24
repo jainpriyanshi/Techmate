@@ -41,6 +41,16 @@ mongoose
   .then(() => console.log("MongoDB connected successfully "))
   .catch(err => console.log(err));
 
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+    });
+    app.options("*", cors());
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
@@ -48,6 +58,7 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+app.use(express.static(path.join(__dirname, '../client/build')));
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname , '../client/build/index.html'));
   });

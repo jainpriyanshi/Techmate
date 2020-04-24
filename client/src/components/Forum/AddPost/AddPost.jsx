@@ -133,7 +133,7 @@ const AddPost = () => {
     </div>
 
     <div style={{marginTop:"30px"}}><h5 style={{textAlign:"left", letterSpacing:"2px"}}>Share your code</h5>
-    <TextareaAutosize required rowsMin={5} style={{width:"100%",  padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#2c3e50", color:"white"}} placeholder="Share your code snippets here" value={code} onChange={e=>{setCode(e.target.value);}}></TextareaAutosize>
+    <TextareaAutosize rowsMin={5} style={{width:"100%",  padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#2c3e50", color:"white"}} placeholder="Share your code snippets here" value={code} onChange={e=>{setCode(e.target.value);}}></TextareaAutosize>
     </div>
     <button class="btn btn-primary btn-lg" style={{marginTop:"20px", marginBottom:"20px"}} type="submit">Post this question</button>
     </form>
@@ -161,7 +161,9 @@ const AddPost = () => {
                           onKeyDown={event => {event.preventDefault()}}              
                         />
                       </Slate>
-                      <TextareaAutosize rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} readOnly>{post.code}</TextareaAutosize>
+                      {
+                        post.code!=="" && <TextareaAutosize readOnly rowsMin={3} style={{width:"100%", border:"black", padding:"1% 1%", fontFamily:"monospace", fontWeight:"bold", background:"#e3e2e1"}} >{post.code}</TextareaAutosize>
+                      }
                     </div>
                     </div>
                   

@@ -4,17 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-     "start" : "cd server && npm install && npm start",
-     "heroku-postbuild": "cd client && npm install && npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jainpriyanshi/Techmate.git"
-  },
+    "start": " cd server && npm install && npm start",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+    },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jainpriyanshi/Techmate/issues"
-  },
-  "homepage": "https://github.com/jainpriyanshi/Techmate#readme"
+  "engines": {
+    "node": "12.13.1",
+    "npm": "6.14.2"
+  }
 }
