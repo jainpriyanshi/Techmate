@@ -10,6 +10,7 @@ var app = express();
 var mongoose = require("mongoose");
 var passport = require("passport");
 var forum = require('./routes/forum');
+var cors = require('cors');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -51,13 +52,6 @@ mongoose
     next();
     });
     app.options("*", cors());
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname , '../client/build/index.html'));
   });
