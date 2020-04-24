@@ -24,14 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-app.use('/users', users);
-app.use('/forum', forum);
-app.use('/projects', projects);
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+
 
 const db = require("./config/keys").mongoURI;
 mongoose
@@ -52,8 +45,12 @@ mongoose
     next();
     });
     app.options("*", cors());
-app.get("*", (req, res) => {
+    app.use('/users', users);
+    app.use('/forum', forum);
+    app.use('/projects', projects);
+    app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname , '../client/build/index.html'));
+    
   });
 
 
