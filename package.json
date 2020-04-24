@@ -1,0 +1,20 @@
+{
+  "name": "techmate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+     "start" : "cd server && npm install && npm start",
+     "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jainpriyanshi/Techmate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jainpriyanshi/Techmate/issues"
+  },
+  "homepage": "https://github.com/jainpriyanshi/Techmate#readme"
+}
