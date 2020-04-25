@@ -20,7 +20,7 @@ class Steps extends React.Component {
       alpha: [0.6, 0],
       scale: [.1, 0.4],
       position: "all",
-      color: ["circle", "#ff0000"],
+      color: ["random", "#ff0000"],
       cross: "dead",
       // emitter: "follow",
       random: 15
