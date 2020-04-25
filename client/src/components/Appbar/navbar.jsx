@@ -24,7 +24,7 @@ import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ForumIcon from '@material-ui/icons/Forum';
 import GroupIcon from '@material-ui/icons/Group';
-
+import LockIcon from '@material-ui/icons/Lock';
 
 function searchingfor(searchstring) {
   return function (x) {
@@ -65,8 +65,7 @@ class Navbar extends Component {
   }
 
   sideList = side => (
-    <div class="container" style={{width: "200px"}}
-    onClick={this.toggleDrawer(side,false)}>
+    <div class="container" style={{width: "300px"}}>
        <div class="text-dec" style={{paddingTop:"5%"}}>
         <IconButton onClick={this.toggleDrawer(side, false)} >
           <h6>Back &nbsp;<ArrowForwardIosIcon  />   
@@ -91,7 +90,7 @@ class Navbar extends Component {
         <div style={{letterSpacing:"3.5px" ,textAlign:"center"}}>
         <h6 style={{fontFamily: "roboto"}}>  <b>TOP RESULTS </b></h6>
         </div>
-        <div>
+        <div  onClick={this.toggleDrawer(side,false)} >
         {this.state.Data.filter(searchingfor(this.state.searchstring)).map((user)=> (
           <div>
             <Link to = {`/profile/${user._id}`}>
@@ -164,6 +163,20 @@ class Navbar extends Component {
                   <h5> Team </h5>
                 </Link>
               </ListItem>
+              <ListItem >
+             <ListItemIcon> <ForumIcon/> </ListItemIcon>
+               <Link to = "/faq" style={{color: "black", fontFamily: "roboto"}}>
+                  <h5> FAQ </h5>
+                </Link>
+              </ListItem>
+              <ListItem>
+              <ListItemIcon> <LockIcon/> </ListItemIcon>
+              <Link>
+              <h5 style={{color: "black", fontFamily: "roboto"}} onClick= {this.onLogoutClick}>
+                  Logout
+              </h5>
+              </Link>
+              </ListItem>
              </List>
           </div>
           :
@@ -211,19 +224,6 @@ class Navbar extends Component {
           <img style={{width:"80px"}}src={process.env.PUBLIC_URL + '/logo4.png'} alt="Techmate" />
           </Link>
           <div style={{ marginLeft: "auto"}}>
-          {this.props.auth.user.name?
-          <button
-            style={{
-                borderRadius: "3px",
-                letterSpacing: "2px"
-                }}
-              onClick={this.onLogoutClick}
-              class="btn btn-lg">
-          
-            Logout
-          </button>
-          :null
-          }
           <IconButton
            
             onClick={this.toggleDrawer('right', true)}> <SearchIcon />

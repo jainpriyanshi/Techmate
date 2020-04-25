@@ -101,6 +101,8 @@ class EditProject extends Component {
                  <div className="field"> 
                  <TextField
                     required
+                    variant="outlined"
+                    disabled
                     label="Topic Of Project"
                     fullWidth
                     value={this.state.topic}
@@ -110,33 +112,7 @@ class EditProject extends Component {
                     className={classnames("", {
                       invalid: errors.title
                     })}
-                    style={{width: "70%"}}
                   />
-              <Tooltip title="select category of project">  
-              <Button 
-              aria-controls="simple-menu" 
-              aria-haspopup="true" 
-              onClick={this.menuClick} 
-              style={{ size:"10%", marginTop:"20px", marginBottom:"20px"}}
-              >
-                <ExpandMoreIcon />
-              </Button>
-              </Tooltip>  
-              <Menu
-              id="simple-menu"
-              open={Boolean(this.state.menu1)}
-              onClose={this.menuClose}
-              >
-                  <MenuItem index="Web Development"  onClick={this.menuhandle}> Web Development</MenuItem>
-                  <MenuItem index="App Development" onClick={this.menuhandle}> App Development </MenuItem>
-                  <MenuItem index="Competitive Programming" onClick={this.menuhandle}>Competitive Programming</MenuItem>
-                  <MenuItem index="Game Development" onClick={this.menuhandle}> Game Development </MenuItem>
-                  <MenuItem index="Machine Learning" onClick={this.menuhandle}> Machine Learning </MenuItem>
-                  <MenuItem index="Cloud Computing" onClick={this.menuhandle}> Cloud Computing </MenuItem>
-                  <MenuItem index="Artificial Intelligence" onClick={this.menuhandle}> Artificial Intelligence</MenuItem>
-                  <MenuItem index="Blockchain" onClick={this.menuhandle}> Blockchain </MenuItem>
-                  <MenuItem index="Image Processing" onClick={this.menuhandle}> Image Processing </MenuItem>
-              </Menu>
               </div>
             </div>
         )
@@ -237,7 +213,7 @@ class EditProject extends Component {
                 'aria-label': 'change date',
                 
               }}
-              style={{width: "50%", marginTop:"20px", marginBottom:"20px"}}
+              style={{width: "100%", marginTop:"20px", marginBottom:"20px"}}
             />
             </MuiPickersUtilsProvider>
             <span className="text-danger">{errors.deadline}</span>
@@ -263,7 +239,7 @@ class EditProject extends Component {
             <span className="text-danger">{errors.github}</span>
             </div>
         ) 
-        case 7 : 
+        case 8 : 
         return (
             <div>
                {this.state.team.map((option, index) => {
@@ -320,23 +296,23 @@ class EditProject extends Component {
                   </Tooltip>
             </div>
         )
-        case 8:
+        case 7:
           return (
             <div>
                  <div className="field"> 
                  <TextField
-                    required
-                    label="State Of Project"
-                    fullWidth
-                    value={this.state.state}
-                    error={errors.state}  
-                    id="state"
-                    type="text"
-                    className={classnames("", {
-                      invalid: errors.state
-                    })}
-                    style={{width: "70%"}}
-                  />
+                  required
+                  label="Status"
+                  fullWidth
+                  value={this.state.state}
+                  error={errors.state}  
+                  id="state"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.state
+                  })}
+                  style={{width: "85%"}}
+                />
               <Tooltip title="select state of project">  
               <Button 
               aria-controls="simple-menu" 
@@ -348,7 +324,7 @@ class EditProject extends Component {
               </Button>
               </Tooltip>  
               <Menu
-              id="simple-menu"
+              id="simple-menu"  
               open={Boolean(this.state.menu2)}
               onClose={this.menu2Close}
               >
@@ -481,36 +457,13 @@ class EditProject extends Component {
                 <div  class="inner">
                   <h1>Propose A Project</h1> 
                     <form noValidate onSubmit={this.onSubmit} style={{ margin: "30px 30px "  }}>
-                    <Stepper activeStep={this.state.activeStep} orientation="vertical"  >
+                    
                     {this.state.steps.map((label, index) => (
-                    <Step>
-                    <StepLabel >{label}</StepLabel>
-                    <StepContent>
+                    <Step>                                                                                                         
                     <Typography>{this.getStepContent(index)}</Typography>
-                    <div>
-                    <div>
-                    <Button
-                        disabled={this.state.activeStep === 0}
-                        onClick={this.handleBack}
-                    >
-                        Back
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleNext}
-                    >
-                        {this.state.activeStep === this.state.steps.length - 1 ? 'Finish' : 'Next'}
-                    </Button>
-                    </div>
-                    </div>
-                    </StepContent>
                     </Step>
                         ))}
-                        </Stepper>
-                        {this.state.activeStep === this.state.steps.length && (
                         <Paper square elevation={0}>
-                          <Typography>All steps completed - you&apos;re finished</Typography>
                           <button 
                             type="button" 
                             class="btn btn-primary btn-lg btn-block card-1" 
@@ -522,8 +475,7 @@ class EditProject extends Component {
                               }}>
                                   Save
                         </button>
-                          
-                        </Paper> )}     
+                        </Paper>   
 
                       
                         <Snackbar style={{width: "100%"}}open={this.state.open} autoHideDuration={4000} onClose={this.handleClose}>

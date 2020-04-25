@@ -26,6 +26,8 @@ import EditPost from "./components/Forum/AddPost/EditPost"
 import Help from "./components/Homepage/help"
 import PrivateRoute from "./components/Private-routes/PrivateRoutes";
 import MyProfile from "./components/Profilepage/myprofile"
+import Error from "./components/Homepage/error";
+import FAQ from "./components/Homepage/faq"
 
 if (localStorage.jwtToken) {
 
@@ -48,42 +50,29 @@ function App() {
     <div>
         <Router>
             <Navbar />
-            <Route exact path="/" component={Homepage} />
-            <Route exact path="/team" component={Contact} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />            
-            <Route exact path="/verify" component={Verify} /> 
-            <Route exact path="/generate" component={Generate} /> 
-            <Route exact path="/update" component={Changepass} />
-            <Route exact path="/profile/:id" component={ProfileMe} /> 
-             <Switch>
+            <Switch>
+              <Route exact path="/" component={Homepage} />
+              <Route exact path="/team" component={Contact} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />            
+              <Route exact path="/verify" component={Verify} /> 
+              <Route exact path="/generate" component={Generate} /> 
+              <Route exact path="/update" component={Changepass} />
+              <Route exact path="/profile/:id" component={ProfileMe} /> 
+              <Route exact path="/help" component={Help}/>
+              <Route exact path ="/faq" component= {FAQ}/>
               <PrivateRoute exact path="/profile/me/update" component={ProfileForm} />
-            </Switch>
-            <Switch>
               <PrivateRoute exact path="/myprofile" component={MyProfile} />
-            </Switch>
-            <Switch>
               <PrivateRoute exact path="/propose" component={ProjectForm} />
-            </Switch> 
-            <Switch>
               <PrivateRoute exact path="/project" component={Projectlist} />
-            </Switch> 
-            <Switch>
               <PrivateRoute exact path="/project/edit/:id" component={EditProject} />
-            </Switch> 
-            <Switch>
               <PrivateRoute exact path="/forum" component={Forum} />
-            </Switch> 
-            <Switch>
               <PrivateRoute exact path="/forum/show/:id" component={Post} />
-            </Switch> 
-            <Switch>
               <PrivateRoute exact path="/forum/post" component={AddPost}/>
-            </Switch> 
-            <Switch>
               <PrivateRoute exact path="/forum/editpost/:id" component={EditPost}/>
+              <Route component= {Error} />
             </Switch> 
-            <Route exact path="/help" component={Help}/>
+            
             <Footer />
         </Router>
     </div>

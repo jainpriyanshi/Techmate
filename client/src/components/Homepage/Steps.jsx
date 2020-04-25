@@ -20,7 +20,7 @@ class Steps extends React.Component {
       alpha: [0.6, 0],
       scale: [.1, 0.4],
       position: "all",
-      color: ["random", "#ff0000"],
+      color: ["random"],
       cross: "dead",
       // emitter: "follow",
       random: 15
@@ -47,7 +47,6 @@ class Steps extends React.Component {
          <div class="bgrd">
               <ParticlesBg  type="custom" config={config} bg={true} />
           </div>
-
       <div class="content">
      
     <div class="step1">     

@@ -408,9 +408,10 @@ class Projectlist extends Component {
         return (
             <div style={{ marginTop : "70px"}}>
             <span style={{marginLeft: "10px"}}>    <Link to ="/" style={{color: "grey"}}> Home </Link> / <Link to ="/project"> Project</Link></span>
-            <div style={{marginTop: "100px"}} class="container" >
+            <div style={{marginTop: "10px"}} class="container" >
               <div style={{   paddingTop:"10px", textAlign: "center"}}>
                 <h1 style={{fontFamily: "roboto"}}> Projects </h1>
+                <div>
                 <TextField
                     label="Search By Project Category"
                     fullWidth
@@ -421,6 +422,8 @@ class Projectlist extends Component {
                 style={{width: "90%"}}
                 />
                  <img style={{width:"20px",   marginTop: "20px" }}src={Search} alt="Techmate" />
+                 </div>
+                
                 </div>
                     <div style={{marginTop: "20px"}}>
                     <h2 style={{fontFamily: "roboto" , textAlign: "center"}} > Proposed Projects </h2>
