@@ -11,6 +11,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import './Contact.css';
 import dev1 from "../Images/dev1.jpeg"
 import dev2 from "../Images/dev2.jpg"
+import dev3 from "../Images/dev3.jpg"
 const styles = (theme) => ({
   root: {
     marginTop: theme.spacing(8),
@@ -87,7 +88,7 @@ function ProductCategories(props) {
   const images = [
     {
       url: hello,
-      title: 'Contact Us',
+      title: 'Team',
       width: '100%',
     },
   ];
@@ -111,7 +112,7 @@ function ProductCategories(props) {
     {
       name: 'Shreya Das',
       description : 'Hey there! I am a Sophomore at IIT Jodhpur',
-      url: avatar,
+      url: dev3,
       mail: "mailto:das.6@iitj.ac.in",
       github: "https://github.com/shreya0505",
     },
