@@ -33,7 +33,7 @@ background:#efefef;
 height:50%;
 border-radius:0 0 5px 5px;
 position: relative;
-z-index: 9999;
+z-index: 99;
 }
 .profile-card-3 .card-content::before {
   content: '';
@@ -57,7 +57,7 @@ box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
 border: 2px solid rgba(255, 255, 255, 1);
 -webkit-transform: translate(-50%, 0%);
 transform: translate(-50%, 0%);
-z-index:99999;
+z-index:999;
 }
 .profile-card-3 h2 {
 margin: 0 0 5px;

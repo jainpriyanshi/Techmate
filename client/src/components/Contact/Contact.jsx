@@ -6,7 +6,7 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Container from '@material-ui/core/Container';
 import Typography from  '@material-ui/core/Typography';
 import hello from '../Images/hello.jpg';
-import avatar from '../Images/avatar.jpg';
+import cc from '../Images/cc.jpg';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import './Contact.css';
 import dev1 from "../Images/dev1.jpeg"
@@ -157,7 +157,7 @@ function ProductCategories(props) {
            <div class="col-lg-4">
            <div class="card profile-card-3">
                <div class="background-block">
-                   <img src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="profile-sample1" class="background"/>
+                   <img src={cc} alt="profile-sample1" class="background"/>
                </div>
                <div class="profile-thumb-block">
                    <img src={t.url} alt="profile-image" class="profile"/>
