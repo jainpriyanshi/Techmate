@@ -181,8 +181,25 @@ const ValidateLoginInput = function validateLoginInput(data) {
         return res.status(400).json({ email: "Email not found  or otp is incorrect" });
       } 
       else {
-        console.log("verified succesfully")
-        return res.status(200).json({ verify: "verfied"});
+        const payload = {
+          id: user.id,
+          name: user.name,
+          email: user.email
+        };
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          {
+            expiresIn: 31556926
+          },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          }
+         
+        );
       }
     });
   });

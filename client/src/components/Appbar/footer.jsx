@@ -5,6 +5,13 @@ import './footer1.css'
 import CountUp from "react-countup"
 import axios from "axios"
 
+function scrollToTop() {
+  console.log("top");
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
 class Footer extends Component {
   constructor() {
     super();
@@ -29,9 +36,9 @@ componentDidMount() {
             <h6>About</h6>
             <p class="text-justify">
               TechMate is a budding <strong> community of girls pursuing Computer Science. </strong> 
-              We aim to bring together girls from colleges all over the world ,to share experiences ,
-              collaborate on projects , mentor others and find support that is scarce for us.
-               We Also provide a common forum where you can discuss your queries. Support us , Be part 
+              We aim to bring together girls from colleges all over the world, to share experiences,
+              collaborate on projects, mentor others and find support that is scarce for us.
+               We Also provide a common forum where you can discuss your queries. Support us, Be part 
                of our initiative by representing your college. <Link to ="/help"> Represent your college</Link>
             </p>
           </div>
@@ -40,14 +47,14 @@ componentDidMount() {
           <div class="col-xs-6 col-md-3">
             <h6>Quick Links</h6>
             <ul class="footer-links">
-              <li><Link to ="/">Home</Link></li>
-              <li><Link to ="/forum">Forum</Link></li>
-              <li><Link to ="/team">Team</Link></li>
-               <li><Link to ="/register">Sign Up</Link></li>
-               <li><Link to ="/project">Project</Link></li>
-               <li><Link to ="/help">Help</Link></li>
+              <li><Link to ="/" onClick={scrollToTop}>Home</Link></li>
+              <li><Link to ="/forum" onClick={scrollToTop}>Forum</Link></li>
+              <li><Link to ="/team" onClick={scrollToTop}>Team</Link></li>
+               <li><Link to ="/register" onClick={scrollToTop}>Sign Up</Link></li>
+               <li><Link to ="/project" onClick={scrollToTop}>Project</Link></li>
+               <li><Link to ="/help" onClick={scrollToTop}>Help</Link></li>
             </ul>
-          </div>
+          </div>  
           </div>
           <hr/>
           </div>
@@ -61,9 +68,6 @@ componentDidMount() {
               <strong> total visits:  <CountUp end={this.state.cnt} duration={5} /> </strong>
             </p>
           </div>
-         
-
-         
         </div>
       </div>
         </AppBar>

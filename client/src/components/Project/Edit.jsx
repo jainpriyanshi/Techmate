@@ -54,6 +54,7 @@ class EditProject extends Component {
           role: "",
         }],
         open : false,
+        state: "",
         openerror: false,
         errors: {},
         menu1: null,
@@ -190,7 +191,7 @@ class EditProject extends Component {
           value={this.state.contactmail}
           error={errors.contactmail}  
           id="contactmail"
-          type="text"
+          type="email"
           className={classnames("", {
             invalid: errors.contactmail
           })}
@@ -244,37 +245,37 @@ class EditProject extends Component {
             <div>
                {this.state.team.map((option, index) => {
                   return (
-                  <Grid item key="index">
-                  <div class="input-root">
-                  <Tooltip title="Edit Team">    
-                      <TextField
-                      label="Team Member"
-                      halfWidth
-                      onChange={this._handleTeamChange}
-                      value={this.state.team[index].name}
-                      id={index}
-                      type="text"
-                      style={{ width: "30%",marginTop:"20px", marginBottom:"20px"}}
-                      />
-                  </Tooltip>
-                  <TextField
-                      label="Role(Mentor/Mentee)"
-                      halfWidth
-                      value={this.state.team[index].role}
-                      onChange={this._handleRoleChange}
-                      id={index}
-                      type="text"
-                      style={{ width: "30%",marginTop:"20px", marginBottom:"20px"}}
-                      />
-                  
-                  <Tooltip title="Delete Team">
-                    <IconButton aria-label="delete" onClick={() => this._deleteTeamMember(index)}
-                      visible="flase" style={{size:"10%", marginTop:"20px", marginBottom:"20px"}}>
-                        <Delete />
-                      </IconButton>
-                  </Tooltip>
-                  </div>
-                  </Grid>
+                    <Grid item key="index">
+                    <div class="input-root">
+                    <Tooltip title="Edit Team">    
+                        <TextField
+                        label="Team Member"
+                        halfWidth
+                        onChange={this._handleTeamChange}
+                        value={this.state.team[index].name}
+                        id={index}
+                        type="text"
+                        style={{ width: "30%",marginTop:"20px", marginBottom:"20px",marginLeft:"20px"}}
+                        />
+                    </Tooltip>
+                    <TextField
+                        label="Role(Mentor/Mentee)"
+                        halfWidth
+                        value={this.state.team[index].role}
+                        onChange={this._handleRoleChange}
+                        id={index}
+                        type="text"
+                        style={{ width: "40%",marginTop:"20px", marginBottom:"20px",marginLeft:"20px"}}
+                        />
+                    
+                    <Tooltip title="Delete Team">
+                      <IconButton aria-label="delete" onClick={() => this._deleteTeamMember(index)}
+                        visible="flase" style={{size:"10%", marginTop:"22px", marginBottom:"20px",marginLeft:"20px"}}>
+                          <Delete />
+                        </IconButton>
+                    </Tooltip>
+                    </div>
+                    </Grid>
                   );
                 })}
                 
@@ -302,7 +303,7 @@ class EditProject extends Component {
                  <div className="field"> 
                  <TextField
                   required
-                  label="Status"
+                  label="Status Of the project"
                   fullWidth
                   value={this.state.state}
                   error={errors.state}  

@@ -7,6 +7,13 @@ import classnames from "classnames";
 import {  TextField } from '@material-ui/core';
 import { LockOpen} from '@material-ui/icons';
 import './Auth.css';
+import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar'
+
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 var sectionStyle = {
   height: "120vh",
@@ -22,7 +29,8 @@ class Generate extends Component {
     super();
     this.state = {
       email: "",
-      errors: {}
+      errors: {},
+      open: false,
     };
   }
   componentDidMount() { 
@@ -30,14 +38,26 @@ class Generate extends Component {
       this.props.history.push("/project");
     }
   }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
       });
     }
+    else {
+      this.setState({
+        errors: {} ,
+        open: true
+      });
+    }
   }
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({open: false});
+  };
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -49,8 +69,8 @@ class Generate extends Component {
     const newUser = {
       email: this.state.email,
     };
-
     this.props.GenerateOtp(newUser, this.props.history);
+
   };
 
   render() {
@@ -102,6 +122,11 @@ class Generate extends Component {
             </p>
             <Link to="/login">Login</Link>
           </form>
+          <Snackbar style={{width: "100%"}}open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
+            <Alert onClose={this.handleClose} severity="success">
+               A link has been sent to your registered email.
+            </Alert>
+          </Snackbar>
         </div>  
       </div>
     </div>

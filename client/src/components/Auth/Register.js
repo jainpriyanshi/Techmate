@@ -7,6 +7,12 @@ import classnames from "classnames";
 import {  TextField } from '@material-ui/core';
 import { AccountCircle} from '@material-ui/icons';
 import './Auth.css';
+import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar'
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 var sectionStyle = {
   height: "170vh",
@@ -26,7 +32,8 @@ class Register extends Component {
       email: "",
       password: "",
       password2: "",
-      errors: {}
+      errors: {},
+      open: false,
     };
   }
   componentDidMount() {
@@ -35,12 +42,27 @@ class Register extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps.errors)
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
       });
     }
+    else {
+      this.setState({
+        errors: {},
+        open: true,
+      });
+    }
   }
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({open: false});
+  };
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -152,6 +174,11 @@ class Register extends Component {
                 <Link to="/generate">Forgot password</Link>
             </p>
           </form>
+          <Snackbar style={{width: "100%"}}open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
+            <Alert onClose={this.handleClose} severity="success">
+               A verification link has been sent to your registered email.
+            </Alert>
+          </Snackbar>
         </div>
       </div>
     </div>        

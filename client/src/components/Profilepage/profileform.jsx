@@ -35,7 +35,7 @@
           github: "",
           skills: "",
           achievement: [],
-          open : false
+          open : false,
       };
     }
     handleClose = (event, reason) => {
@@ -118,6 +118,7 @@
         <div style={{ marginTop : "70px"}}>
         <span style={{marginLeft: "10px"}}>    <Link to ="/" style={{color: "grey"}}> Home </Link> / <Link to ="/myprofile" style={{color: "grey"}}> Myprofile</Link> / <Link to ="/profile/me/update"> Edit</Link></span>
             <ParticlesBg color="#050d45"  num={90} type="cobweb" bg={true}   position="absolute" />
+            <Alert style={{width: "70%" , marginLeft: "15%" , marginTop: "4px", opacity: "0.8" }}  severity="info"><div >Update Your Profile! </div></Alert>
             <div class="container">
                   <div  class="inner">
                   <h3> <AccountCircle  style={{ fontSize: 50 }}/> <b>Your Profile </b></h3>

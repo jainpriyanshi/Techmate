@@ -7,7 +7,12 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 export const registerUser = (userData, history) => dispatch => {
   axios
     .post("users/register", userData)
-    .then(res => history.push("/login"))
+    .then(res =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: null
+      })
+    )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -29,7 +34,18 @@ export const proposeProject = (userData, history) => dispatch => {
 export const verifyUser = (userData, history) => dispatch => {
   axios
     .post("users/verify", userData)
-    .then(res => history.push("/login"))
+    .then(res => {
+      console.log(res);
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      // Set token to Auth header
+      setAuthToken(token);
+      // Decode token to get user data
+      const decoded = jwt_decode(token);
+      // Set current user
+      dispatch(setCurrentUser(decoded));
+      history.push("/profile/me/update");
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -40,7 +56,12 @@ export const verifyUser = (userData, history) => dispatch => {
 export const GenerateOtp = (userData, history) => dispatch => {
   axios
     .post("/users/generate", userData)
-    .then(res => history.push("/update"))
+    .then(res =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: null
+      })
+    )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
