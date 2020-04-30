@@ -255,6 +255,95 @@ const ValidateLoginInput = function validateLoginInput(data) {
       }
     });
   });
+  router.post("/facebook", (req, res) => {
+    Member.findOne({ email: req.body.email}).then(user => {
+      if (user) {
+        bcrypt.compare(req.body.password, user.password).then(isMatch => {
+          if (isMatch) {
+            const payload = {
+              id: user.id,
+              name: user.name,
+              email: user.email
+            };
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              {
+                expiresIn: 31556926
+              },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer " + token
+                });
+              }
+            );
+          } else {
+            return res.status(400).json({ email: "This email is already registered" });
+          }
+        });
+      } 
+      else {
+        var otp = require('random-int')(1000, 10000);
+        const newUser = new Member({
+          name: req.body.name,
+          email: req.body.email,
+          password: req.body.password,
+          otp: otp.toString(),
+          isVerified: true
+        });
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+            newUser
+              .save()
+              .then(user => {
+                const payload = {
+                  id: user.id,
+                  name: user.name,
+                  email: user.email
+                };
+                console.log(payload);
+                jwt.sign(
+                  payload,
+                  keys.secretOrKey,
+                  {
+                    expiresIn: 31556926
+                  },
+                  (err, token) => {
+                    res.json({
+                      success: true,
+                      token: "Bearer " + token
+                    });
+                  }
+                );
+              })
+              .catch(err => console.log(err));
+          });
+        });
+      }
+    });
+  });
+  router.post("/generate",(req,res)=>{
+    const { errors, isValid } = ValidateForgotInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    var otp = require('random-int')(1000, 10000);
+    var update = {otp: otp}
+    Member.findOneAndUpdate({ email: req.body.email},update).then(user => {
+      if (!user) {
+      return res.status(400).json({ email: " otp is incorrect" });
+      }
+      else
+      {
+        console.log(otp);
+        var mail = require('../validations/update').mailverify(req.body.email,otp);
+        return res.status(200).json({ send : "done"});
+      }
+    });
+  });
   router.post("/update", (req, res) => {
     const { errors, isValid } = ValidateChangeInput(req.body);
     if (!isValid) {
@@ -313,10 +402,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
                 token: "Bearer " + token
               });
             }
-           
           );
-          console.log(user.email);
-          console.log("login ");
         } else {
           return res.status(400).json({ passwordincorrect: "Password incorrect" });
         }

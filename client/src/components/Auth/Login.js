@@ -4,10 +4,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
-
+import FacebookLogin from 'react-facebook-login';
 import {TextField } from '@material-ui/core';
 import { AccountCircle} from '@material-ui/icons';
 import './Auth.css';
+import { FacebookUserLogin } from "../../actions/authActions";
 
 var sectionStyle = {
   height: "125vh",
@@ -45,6 +46,15 @@ class Login extends Component {
       errors: nextProps.errors
       });
     }
+  }
+  responseFacebook = response => {
+    console.log(response);
+    const userData = {
+      email: response.email,
+      password: response.id,
+      name: response.name
+    };
+    this.props.FacebookUserLogin(userData);
   }
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -123,8 +133,17 @@ class Login extends Component {
             >
               Login
             </button>
+          <div style={{marginTop: "1rem" , backgroundColor: "#3b5998" , textColor: "white"}}>
+            <FacebookLogin
+            appId={process.env.APPID}
+            autoLoad={false}
+            fields="name,email"
+            callback={this.responseFacebook}
+            cssClass="btn btn-lg btn-fb btn-block "
+           />
+          </div>
           <br />
-          < br/ >
+          <br/>
             <p className="text-secondary">
             Don't have an account? <Link to="/register">Register</Link>
             </p>
@@ -141,6 +160,7 @@ class Login extends Component {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  FacebookUserLogin: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -152,5 +172,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 mapStateToProps,
-{ loginUser }
+{ loginUser , FacebookUserLogin },
 )(Login);

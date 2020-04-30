@@ -9,6 +9,8 @@ import { AccountCircle} from '@material-ui/icons';
 import './Auth.css';
 import MuiAlert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar'
+import FacebookLogin from 'react-facebook-login';
+import { FacebookUserLogin } from "../../actions/authActions";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -42,7 +44,6 @@ class Register extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.errors)
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -56,6 +57,16 @@ class Register extends Component {
     }
   }
 
+  responseFacebook = (response) => {
+    console.log(response);
+    const userData = {
+      email: response.email,
+      password: response.id,
+      name: response.name
+    };
+    this.props.FacebookUserLogin(userData);
+  }
+  
   handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -166,6 +177,15 @@ class Register extends Component {
               marginTop: "1rem"
             }}>Register</button>
               <br></br>
+              <div style={{marginTop: "1rem" , backgroundColor: "#3b5998" , textColor: "white"}}>
+                <FacebookLogin
+                appId={process.env.APPID}
+                autoLoad={false}
+                fields="name,email"
+                callback={this.responseFacebook}
+                cssClass="btn btn-lg btn-fb btn-block "
+              />
+              </div>
               <br></br>
             <p className="text-secondary">
               Already have an account? <Link to="/login">Login</Link>
@@ -188,6 +208,7 @@ class Register extends Component {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
+  FacebookUserLogin: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -199,5 +220,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
+  { registerUser, FacebookUserLogin }
 )(withRouter(Register));
