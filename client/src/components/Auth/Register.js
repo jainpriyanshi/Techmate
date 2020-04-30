@@ -64,7 +64,7 @@ class Register extends Component {
       password: response.id,
       name: response.name
     };
-    this.props.FacebookUserLogin(userData);
+    this.props.FacebookUserLogin(userData,this.props.history);
   }
   
   handleClose = (event, reason) => {
@@ -176,10 +176,9 @@ class Register extends Component {
               letterSpacing: "1.5px",
               marginTop: "1rem"
             }}>Register</button>
-              <br></br>
               <div style={{marginTop: "1rem" , backgroundColor: "#3b5998" , textColor: "white"}}>
                 <FacebookLogin
-                appId={process.env.APPID}
+                appId="1639297312884139"
                 autoLoad={false}
                 fields="name,email"
                 callback={this.responseFacebook}

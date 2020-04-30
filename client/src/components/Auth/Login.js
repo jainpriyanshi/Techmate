@@ -54,7 +54,7 @@ class Login extends Component {
       password: response.id,
       name: response.name
     };
-    this.props.FacebookUserLogin(userData);
+    this.props.FacebookUserLogin(userData,this.props.history);
   }
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -135,7 +135,7 @@ class Login extends Component {
             </button>
           <div style={{marginTop: "1rem" , backgroundColor: "#3b5998" , textColor: "white"}}>
             <FacebookLogin
-            appId={process.env.APPID}
+            appId="1639297312884139"
             autoLoad={false}
             fields="name,email"
             callback={this.responseFacebook}

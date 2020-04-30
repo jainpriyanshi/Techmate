@@ -80,7 +80,7 @@ export const updatepass = (userData, history) => dispatch => {
       })
     );
 };
-export const FacebookUserLogin = userData => dispatch => {
+export const FacebookUserLogin = (userData,history) => dispatch => {
   axios
     .post("/users/facebook", userData)
     .then(res => {
@@ -95,6 +95,7 @@ export const FacebookUserLogin = userData => dispatch => {
       const decoded = jwt_decode(token);
       // Set current user
       dispatch(setCurrentUser(decoded));
+      history.push("/profile/me/update");
     })
     .catch(err =>
       dispatch({
