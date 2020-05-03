@@ -39,7 +39,7 @@
     "slate-react": "^0.57.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start", 
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -48,6 +48,7 @@
     "extends": "react-app"
   },
   "proxy": "http://localhost:3000",
+  "homepage":".",
   "browserslist": {
     "production": [
       ">0.2%",
