@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {Link} from "react-router-dom";
 import axios from "axios"
-import P1 from'../Images/p1.png';
+import P1 from'../Images/woman.png';
 import MailIcon from '@material-ui/icons/Mail';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import './profile.css'
