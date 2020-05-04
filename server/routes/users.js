@@ -181,6 +181,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
         return res.status(400).json({ email: "Email not found  or otp is incorrect" });
       } 
       else {
+        var mail = require('../validations/welcome').mailverify();
         const payload = {
           id: user.id,
           name: user.name,
@@ -304,7 +305,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
                   name: user.name,
                   email: user.email
                 };
-                console.log(payload);
+                var mail = require('../validations/welcome').mailverify();
                 jwt.sign(
                   payload,
                   keys.secretOrKey,

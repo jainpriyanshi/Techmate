@@ -3,19 +3,20 @@ var {email,pass} = require('../config/mail');
 
 module.exports.mailQuery = (name,mail,query)=>{
     var transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        secure: true ,
+        host: 'us2.smtp.mailhostbox.com',
+        port: 25,
+        secure: false,
         auth: {
-            type: "login",
             user: email,
             pass: pass
-        }
+        },
+        tls: { secureProtocol: "TLSv1_method" }
     });
     var mail = {
         from: email,
-        to: "noreplymailfortest@gmail.com",
+        to: "techmate262405@gmail.com",
         subject: "Query",
-         text: `name: ${name}\nEmail: ${mail}\n query: ${query}` 
+         text: `name: ${name}\nEmail: ${mail}\nquery: ${query}\nTeam TechMate \nHappy Coding!!` 
     };
     transporter.sendMail(mail,function(err,info){
         if(err){
