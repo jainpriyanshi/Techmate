@@ -18,7 +18,7 @@
     "install": "^0.13.0",
     "is-empty": "^1.2.0",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.18.1",
+    "moment": "^2.25.2",
     "particles-bg": "^2.5.0",
     "react": "^16.13.1",
     "react-count-animation": "^1.1.3",
