@@ -81,6 +81,11 @@ class Login extends Component {
                   errors.emailnotverified && <span>. Check your Email for verification link</span>
                 }
                 </span>
+                <span className="text-danger" style={{padding:"10px 3px"}}>
+                {
+                   <span> {errors.server} </span>
+                }
+                </span>
               <div className="field">
                 <TextField
                   required
@@ -133,15 +138,6 @@ class Login extends Component {
             >
               Login
             </button>
-          <div style={{marginTop: "1rem" , backgroundColor: "#3b5998" , textColor: "white"}}>
-            <FacebookLogin
-            appId="1639297312884139"
-            autoLoad={false}
-            fields="name,email"
-            callback={this.responseFacebook}
-            cssClass="btn btn-lg btn-fb btn-block "
-           />
-          </div>
           <br />
           <br/>
             <p className="text-secondary">

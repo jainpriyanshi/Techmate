@@ -98,8 +98,8 @@ class Navbar extends Component {
               <div style={{letterSpacing:"1.5px", display: "flex"}}>
               <img style={{float:"left", width:"50px" , height: "50px", padding: "1% 1%"}}src={Woman} alt="Techmate" />
                 <div>
-                  <h6 style={{ float:"left",  marginLeft:"auto" ,marginTop: "5px",  marginBottom: "0px"}}> {user.name} </h6>
-                   <p style={{color: "grey" , fontFamily: "roboto" , marginTop: "0px"}}> {user.college }</p>
+                  <h6 style={{   marginLeft:"auto" ,marginTop: "5px", marginBottom: "0px", fontSize: "12px"}}> {user.name} </h6>
+                   <p style={{color: "grey" , fontFamily: "roboto" , marginTop: "0px" , fontSize: "11px"}}> {user.college }</p>
                 </div>
                </div>
             </Paper>

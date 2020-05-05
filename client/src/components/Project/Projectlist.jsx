@@ -162,6 +162,7 @@ class Projectlist extends Component {
                                 <Avatar style={{color: "black"}}>
                                 </Avatar>
                                 }
+                                
                                 title={data.proposedby}
                             />
                             <div style={{ display: "flex"}}>
@@ -186,7 +187,7 @@ class Projectlist extends Component {
                         <div class="flip-card-back">
                         <Card>
                                 <Avatar style={{float: "left"}}/>
-                                  <Link to = {`/profile/${data.proposedid}`} style={{marginLeft: "5px", color: "black", float: "left"}}>
+                                  <Link to = {`/profile/${data.proposedid}`} style={{marginLeft: "5px", color: "blue", float: "left"}}>
                                   {data.proposedby}
                                   </Link>
                                   {this.props.auth.user.id===data.proposedid ?
@@ -200,10 +201,11 @@ class Projectlist extends Component {
                                       <MailIcon />
                                   </a>
                             <CardContent>
-                                <h6 style={{marginTop: "20px"}}> Idea </h6>
+                                <h6 style={{marginTop: "30px"}}> Idea </h6>
                                 <Typography variant="body2" color="textSecondary" component="p">
                                   {data.idea}
                                 </Typography>
+                                < hr />
                                 <h6> Team </h6>
                                 {table}
                             </CardContent>
@@ -281,7 +283,7 @@ class Projectlist extends Component {
                         <div class="flip-card-back">
                         <Card>
                                 <Avatar style={{float: "left"}}/>
-                                  <Link to = {`/profile/${data.proposedid}`} style={{marginLeft: "5px", color: "black", float: "left"}}>
+                                  <Link to = {`/profile/${data.proposedid}`} style={{marginLeft: "5px", color: "blue", float: "left"}}>
                                   {data.proposedby}
                                   </Link>
                                   {this.props.auth.user.id===data.proposedid ?
@@ -295,10 +297,11 @@ class Projectlist extends Component {
                                       <MailIcon />
                                   </a>
                             <CardContent>
-                                <h6 style={{marginTop: "20px"}}> Idea </h6>
+                                <h6 style={{marginTop: "30px"}}> Idea </h6>
                                 <Typography variant="body2" color="textSecondary" component="p">
                                   {data.idea}
                                 </Typography>
+                                < hr />
                                 <h6> Team </h6>
                                 {table}
                             </CardContent>
@@ -376,7 +379,7 @@ class Projectlist extends Component {
                         <div class="flip-card-back">
                         <Card>
                                 <Avatar style={{float: "left"}}/>
-                                  <Link to = {`/profile/${data.proposedid}`} style={{marginLeft: "5px", color: "black", float: "left"}}>
+                                  <Link to = {`/profile/${data.proposedid}`} style={{marginLeft: "5px", color: "blue", float: "left"}}>
                                   {data.proposedby}
                                   </Link>
                                   {this.props.auth.user.id===data.proposedid ?
@@ -390,10 +393,11 @@ class Projectlist extends Component {
                                       <MailIcon />
                                   </a>
                             <CardContent>
-                                <h6 style={{marginTop: "20px"}}> Idea </h6>
+                                <h6 style={{marginTop: "30px"}}> Idea </h6>
                                 <Typography variant="body2" color="textSecondary" component="p">
                                   {data.idea}
                                 </Typography>
+                                < hr />
                                 <h6> Team </h6>
                                 {table}
                             </CardContent>
