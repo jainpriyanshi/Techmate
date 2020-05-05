@@ -16,7 +16,7 @@ module.exports.mailQuery = (name,mail,query)=>{
         from: email,
         to: "techmate262405@gmail.com",
         subject: "Query",
-         text: `name: ${name}\nEmail: ${mail}\nquery: ${query}\nTeam TechMate \nHappy Coding!!` 
+         text: `name: ${name}\nEmail: ${mail}\nquery: ${query}\n\nTeam TechMate \nHappy Coding!!` 
     };
     transporter.sendMail(mail,function(err,info){
         if(err){

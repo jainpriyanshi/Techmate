@@ -5,7 +5,7 @@ const User = mongoose.model("users");
 const opts = {};
 
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.SECRET || "pass";
+opts.secretOrKey =  "pass";
 module.exports = passport => {
   passport.use(
     new JwtStrategy(opts, (jwt_payload, done) => {

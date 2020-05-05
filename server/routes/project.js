@@ -110,12 +110,13 @@ const ValidateProjectRegister = function validateProjectRegister(data) {
         });
         newProject
             .save()
-            .then(res.send("done"))
+            .then(res.send("done") , require('../validations/project').mailverify(req.body.proposedby,req.body.title,req.body.topic))
             .catch(err => console.log(err));
     });
 
     router.get('/getdata', function(req, res){
       Project.find({}).then(docs => {
+      docs.reverse();
       res.send(docs);
     })
   });

@@ -181,7 +181,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
         return res.status(400).json({ email: "Email not found  or otp is incorrect" });
       } 
       else {
-        var mail = require('../validations/welcome').mailverify();
+        var mail = require('../validations/welcome').mailverify(req.email);
         const payload = {
           id: user.id,
           name: user.name,
@@ -295,7 +295,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
         });
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
+            if (err) {console.log(err); return res.status(400).json({ server: "Internal server error" });};
             newUser.password = hash;
             newUser
               .save()
@@ -305,7 +305,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
                   name: user.name,
                   email: user.email
                 };
-                var mail = require('../validations/welcome').mailverify();
+                var mail = require('../validations/welcome').mailverify(req.email);
                 jwt.sign(
                   payload,
                   keys.secretOrKey,
@@ -320,7 +320,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
                   }
                 );
               })
-              .catch(err => console.log(err));
+              .catch(err => {console.log(err); return res.status(400).json({ server: "Internal server error" });});
           });
         });
       }
@@ -411,7 +411,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
     });
   });
   router.get('/getdata', function(req, res){
-      Member.find({}).then(docs => {
+      Member.find({},{otp: 0,password: 0}).collation({locale: "en" }).sort({name: 1}).then(docs => {
       res.send(docs);
     })
     
@@ -449,7 +449,6 @@ const ValidateLoginInput = function validateLoginInput(data) {
          cont=docs.cnt;
          Count.findOneAndUpdate({},{cnt: cont+1})
          .then(res.send({cnt: cont+1}))
-          
        }
        else
        {
@@ -459,10 +458,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
          New.save()
          .then( res.send({cnt: 1}));
        }
-    })                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-
-   
+    })  
   });
-
   module.exports = router;
-                                                                                                                                                                                                                                                                                                              
+ 
