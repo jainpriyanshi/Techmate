@@ -181,7 +181,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
         return res.status(400).json({ email: "Email not found  or otp is incorrect" });
       } 
       else {
-        var mail = require('../validations/welcome').mailverify(req.email);
+        console.log("verified") 
         const payload = {
           id: user.id,
           name: user.name,
@@ -201,6 +201,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
           }
          
         );
+        var mail = require('../validations/welcome').mailverify(user.email);
       }
     });
   });
