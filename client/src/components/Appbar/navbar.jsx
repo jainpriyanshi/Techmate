@@ -36,6 +36,7 @@ class Navbar extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
+    window.location.reload(false);
   };
   state = {
     right: false,
