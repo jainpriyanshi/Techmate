@@ -305,7 +305,7 @@ const ValidateLoginInput = function validateLoginInput(data) {
                   name: user.name,
                   email: user.email
                 };
-                var mail = require('../validations/welcome').mailverify(req.email);
+                var mail = require('../validations/welcome').mailverify(user.email);
                 jwt.sign(
                   payload,
                   keys.secretOrKey,

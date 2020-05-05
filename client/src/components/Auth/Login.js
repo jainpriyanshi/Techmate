@@ -11,7 +11,7 @@ import './Auth.css';
 import { FacebookUserLogin } from "../../actions/authActions";
 
 var sectionStyle = {
-  height: "125vh",
+  height: "130vh",
  background: `url(${process.env.PUBLIC_URL}/bg1.jpg)` ,
  backgroundPosition: 'center',
  backgroundSize: 'cover',
@@ -138,7 +138,15 @@ class Login extends Component {
             >
               Login
             </button>
-          <br />
+          <div style={{marginTop: "1rem" , backgroundColor: "#3b5998" , textColor: "white"}}>
+            <FacebookLogin
+            appId="1639297312884139"
+            autoLoad={false}
+            fields="name,email"
+            callback={this.responseFacebook}
+            cssClass="btn btn-lg btn-fb btn-block "
+           />
+          </div>
           <br/>
             <p className="text-secondary">
             Don't have an account? <Link to="/register">Register</Link>

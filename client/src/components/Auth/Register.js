@@ -176,6 +176,16 @@ class Register extends Component {
               letterSpacing: "1.5px",
               marginTop: "1rem"
             }}>Register</button>
+
+             <div style={{marginTop: "1rem" , backgroundColor: "#3b5998" , textColor: "white"}}>
+            <FacebookLogin
+            appId="1639297312884139"
+            autoLoad={false}
+            fields="name,email"
+            callback={this.responseFacebook}
+            cssClass="btn btn-lg btn-fb btn-block "
+           />
+          </div>
               <br></br>
             <p className="text-secondary">
               Already have an account? <Link to="/login">Login</Link>

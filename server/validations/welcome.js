@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 var {email,pass} = require('../config/mail');
 
-module.exports.mailverify = (to)=>{
+module.exports.mailverify = ()=>{
     var transporter = nodemailer.createTransport({
         host: 'us2.smtp.mailhostbox.com',
         port: 25,

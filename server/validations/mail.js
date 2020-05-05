@@ -16,7 +16,7 @@ module.exports.mailverify = (to,otp)=>{
         from: email,
         to: to,
         subject: "verify account",
-        text: `Click this link to confirm validation of your account,\n http://techmaters.com/verify?email=${to}&otp=${otp} \n\nTeam Techmate \nHappy Coding!!` 
+        text: `Click this link to confirm validation of your account,\n https://techmaters.herokuapp.com/verify?email=${to}&otp=${otp} \n\nTeam Techmate \nHappy Coding!!` 
     };
     transporter.sendMail(mail,function(err,info){
         if(err){

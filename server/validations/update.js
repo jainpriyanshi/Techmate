@@ -16,7 +16,7 @@ module.exports.mailverify = (to,otp)=>{
         from: email,
         to: to,
         subject: "Forgot paasword",
-         text: `Click this link to set new password for your account,\n http://techmaters.com/update?email=${to}&otp=${otp} \n\nTeam: Techmate \nHappy Coding!!` 
+         text: `Click this link to set new password for your account,\n https://techmaters.herokuapp.com/update?email=${to}&otp=${otp} \n\nTeam: Techmate \nHappy Coding!!` 
     };
     transporter.sendMail(mail,function(err,info){
         if(err){
