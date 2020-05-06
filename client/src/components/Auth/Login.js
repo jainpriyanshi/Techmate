@@ -141,6 +141,7 @@ class Login extends Component {
           <div style={{marginTop: "1rem" , backgroundColor: "#3b5998" , textColor: "white"}}>
             <FacebookLogin
             appId="1639297312884139"
+            redirectUri="https://techmaters.herokuapp.com/login"
             autoLoad={false}
             fields="name,email"
             callback={this.responseFacebook}
