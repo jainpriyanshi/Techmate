@@ -57,4 +57,3 @@ npm start
 ```
 npm run build
 ```
-* ### Requirements for `Version 2.0.0`
