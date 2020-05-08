@@ -64,25 +64,20 @@ const PostSchema = new Schema({
             type: String,
             required: true
           },
-          
           date: {
             type: Date,
             default: Date.now
           },
-
           likes:{
             type: Number,
             default:0,
           }
         }
       ],
-
       date: {
         type: Date,
         default: Date.now
       }
-
-    
 });
 
 module.exports = Post = mongoose.model("posts",PostSchema);

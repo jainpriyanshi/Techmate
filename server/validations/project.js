@@ -28,7 +28,7 @@ module.exports.mailverify = (by,title,topic)=>{
         bcc: mailList,
         subject: "New Project",
         text: `I am glad to inform you that a new Project has been added by ${by} under the category ${topic} with title ${title}.\n
-Checkout more projects on https:/techmaters.herokuapp.com/project \n\nTeam Techmate \nHappy Coding!!` 
+Checkout more projects on https://techmaters.herokuapp.com/project \n\nTeam Techmate \nHappy Coding!!` 
     };
     transporter.sendMail(mail,function(err,info){
         if(err){
