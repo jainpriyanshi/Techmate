@@ -1,7 +1,17 @@
 import axios from "axios";
 import {GET_FORUM, GET_POST,GET_ERRORS, ADD_COMMENT, GET_CATEGORY, DELETE_POST, LIKE, DELETE_COMMENT, LIKE_COMMENT, LIKE_FORUM, USER_POST } from "./types";
+import setAuthToken from "../utils/setAuthToken";
+
+const tokensetter = () =>
+{
+  if (localStorage.jwtToken) {
+    const token = localStorage.jwtToken;
+    setAuthToken(token);
+  }
+}
 
 export const getForum = () => async dispatch => {
+    tokensetter();
     try {
       const res = await axios.get('/forum');
   
@@ -21,6 +31,7 @@ export const getForum = () => async dispatch => {
 
 
   export const getUserPost = () => async dispatch => {
+    tokensetter();
     try {
       const res = await axios.get('/forum/userpost');
   
@@ -40,6 +51,7 @@ export const getForum = () => async dispatch => {
 
 
   export const getPost = (id) => async dispatch => {
+    tokensetter();
     try {
       const res = await axios.get(`/forum/showpost/${id}`);
       console.log(res.data);
@@ -59,6 +71,7 @@ export const getForum = () => async dispatch => {
   }
 
   export const getCategory = ( {category}) => async dispatch => {
+    tokensetter();
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -86,7 +99,7 @@ export const getForum = () => async dispatch => {
 
 
   export const deletePost = (id) => async dispatch => {
-    
+    tokensetter();
     try {
       console.log(id);
       const res = await axios.delete(`/forum/deletepost/${id}`);
@@ -106,6 +119,7 @@ export const getForum = () => async dispatch => {
   }
 
   export const addComment = (id, {comment}) => async dispatch => {
+    tokensetter();
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -132,6 +146,7 @@ export const getForum = () => async dispatch => {
 
 
   export const like = (id) => async dispatch => {
+    tokensetter();
     try {
       console.log(id);
       const res = await axios.post(`/forum/like/${id}`);
@@ -152,6 +167,7 @@ export const getForum = () => async dispatch => {
 
 
   export const likeForum = (id) => async dispatch => {
+    tokensetter();
     try {
       
       const res = await axios.post(`/forum/likeforum/${id}`);
@@ -172,6 +188,7 @@ export const getForum = () => async dispatch => {
 
 
   export const deleteComment = (id, cid) => async dispatch => {
+    tokensetter();
     try {
       console.log(id);
       const res = await axios.delete(`/forum/deletecomment/${id}/${cid}`);
@@ -192,6 +209,7 @@ export const getForum = () => async dispatch => {
 
 
   export const replyComment = (id, cid, {comment}) => async dispatch => {
+    tokensetter();
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -220,6 +238,7 @@ export const getForum = () => async dispatch => {
 
 
   export const likeComment = (id, cid) => async dispatch => {    
+    tokensetter();
     try {
       console.log(id);
       const res = await axios.post(`/forum/likecomment/${id}/${cid}`);
