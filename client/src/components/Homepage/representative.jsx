@@ -18,6 +18,11 @@ function ProductCategories(props) {
         college:'Jaypee Institute of Information Technology'
     },
     {
+      name: ' Mahak',
+      college: 'Indian Institute of Technology Roorkee'
+
+    },
+    {
         name: 'Anjali Deep',
         college:'IIT MANDI'
     },
