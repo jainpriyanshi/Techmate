@@ -1,6 +1,6 @@
 # Techmate
  ### A webApp built on MERN stack
-> Fork this repo to contribute to the project
+> Fork this repo to contribute to the project | [Website](https://techmaters.herokuapp.com)
 ## Requirements for `Version 2.0.0`
   > Integrating Chat features on this website \
   > Adding Blogs to the website \
